@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-layout="top" data-spot="std">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZZ ECO · 全球电池回收运营中心</title>
+<style>
+/* ============ 设计令牌（苹果系统色系） ============ */
+:root{
+  --bg:#fbfbfd; --panel:#ffffff; --panel-2:#f5f5f7;
+  --text:#1d1d1f; --muted:#6e6e73; --muted-2:#86868b; --line:rgba(0,0,0,.09);
+  --blue:#0071e3; --purple:#5e5ce6; --pink:#ff375f; --orange:#ff9f0a;
+  --green:#30d158; --cyan:#40c8e0; --indigo:#7d7aff; --teal:#30b0c7;
+  --primary:var(--blue); --primary-soft:rgba(0,113,227,.10); --primary-soft-2:rgba(0,113,227,.28);
+  --up:#ff375f; --down:#30d158;
+  --shadow-s:0 2px 10px rgba(0,0,0,.05);
+  --shadow-m:0 10px 34px rgba(0,0,0,.10);
+  --shadow-l:0 34px 70px rgba(0,0,0,.16);
+  --r:22px; --r-m:14px; --r-s:10px;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-back:cubic-bezier(.34,1.56,.64,1);
+  --t-theme:.4s var(--ease-out);
+  --nav-h:52px;
+}
+html[data-theme="dark"]{
+  --bg:#000000; --panel:#1d1d1f; --panel-2:#161617;
+  --text:#f5f5f7; --muted:#86868b; --muted-2:#6e6e73; --line:rgba(255,255,255,.12);
+  --blue:#0a84ff; --purple:#7d7aff; --pink:#ff453a; --orange:#ff9f0a;
+  --green:#30d158; --cyan:#64d2ff; --indigo:#5e5ce6; --teal:#40c8e0;
+  --primary:var(--blue); --primary-soft:rgba(10,132,255,.18); --primary-soft-2:rgba(10,132,255,.4);
+  --shadow-s:0 2px 10px rgba(0,0,0,.5);
+  --shadow-m:0 10px 34px rgba(0,0,0,.6);
+  --shadow-l:0 34px 70px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;font-size:14px;
+  transition:background var(--t-theme),color var(--t-theme)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--primary-soft-2)}
+
+/* ============ 背景彩色光球 ============ */
+.aurora{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.aurora i{position:absolute;display:block;border-radius:50%;filter:blur(100px);opacity:.42;
+  animation:drift 22s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:520px;height:520px;background:var(--blue);left:-8%;top:-14%;animation-delay:0s}
+.aurora i:nth-child(2){width:460px;height:460px;background:var(--purple);right:-6%;top:6%;animation-delay:-4s}
+.aurora i:nth-child(3){width:420px;height:420px;background:var(--pink);left:26%;bottom:-20%;animation-delay:-9s}
+.aurora i:nth-child(4){width:380px;height:380px;background:var(--cyan);right:12%;bottom:-12%;animation-delay:-14s}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(60px,-50px,0) scale(1.18)}}
+html[data-theme="dark"] .aurora i{opacity:.3}
+
+/* ============ 顶部毛玻璃导航（苹果风） ============ */
+.navbar{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:60;display:flex;align-items:center;gap:6px;
+  padding:0 22px;background:rgba(251,251,253,.72);backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line);
+  transition:background var(--t-theme),border-color var(--t-theme)}
+html[data-theme="dark"] .navbar{background:rgba(22,22,23,.72)}
+.brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:600;letter-spacing:-.3px;margin-right:14px;flex:none}
+.brand .mark{width:22px;height:22px;border-radius:7px;flex:none;
+  background:linear-gradient(135deg,var(--blue),var(--purple) 55%,var(--pink));
+  box-shadow:0 3px 10px rgba(94,92,230,.4)}
+.navlist{display:flex;gap:2px;flex:1;min-width:0;overflow:hidden}
+.nv{position:relative;padding:6px 13px;border-radius:11px;font-size:13px;color:var(--muted);white-space:nowrap;
+  transition:color .2s var(--ease-out),background .2s var(--ease-out),transform .34s var(--ease-back)}
+.nv:hover{color:var(--text);background:var(--primary-soft)}
+.nv.on{color:var(--text);font-weight:600}
+.nv .ic{display:inline-block;width:13px;height:13px;margin-right:6px;vertical-align:-2px;border-radius:4px;
+  background:linear-gradient(135deg,var(--blue),var(--purple))}
+.nav-right{display:flex;align-items:center;gap:10px;flex:none}
+.sbox{position:relative}
+.sbox input{width:190px;height:30px;padding:0 12px 0 30px;border-radius:15px;border:1px solid var(--line);
+  background:var(--panel-2);color:var(--text);font-size:12.5px;outline:none;
+  transition:width .34s var(--ease-back),box-shadow .24s var(--ease-out),background .2s}
+.sbox input:focus{width:250px;box-shadow:0 0 0 3px var(--primary-soft);background:var(--panel)}
+.sbox svg{position:absolute;left:10px;top:8px;width:13px;height:13px;stroke:var(--muted);fill:none;stroke-width:2}
+.sugg{position:absolute;top:38px;right:0;width:290px;background:rgba(255,255,255,.86);z-index:70;
+  backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:var(--r-m);box-shadow:var(--shadow-m);
+  padding:6px;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .2s,transform .24s var(--ease-out)}
+html[data-theme="dark"] .sugg{background:rgba(29,29,31,.88)}
+.sugg.show{opacity:1;transform:none;pointer-events:auto}
+.sugg .t{font-size:10.5px;color:var(--muted-2);padding:6px 8px 4px;font-weight:600;letter-spacing:.4px;text-transform:uppercase}
+.sugg .it{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:9px;font-size:12.5px;transition:background .16s}
+.sugg .it:hover{background:var(--primary-soft)}
+.iconbtn{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--panel-2);
+  transition:background .2s,transform .3s var(--ease-back)}
+.iconbtn:hover{background:var(--primary-soft);transform:scale(1.12)}
+.iconbtn svg{width:15px;height:15px;stroke:var(--text);fill:none;stroke-width:1.8}
+
+/* 通栏下落面板 */
+.mega{position:fixed;top:var(--nav-h);left:0;right:0;z-index:55;overflow:hidden;max-height:0;
+  background:rgba(251,251,253,.86);backdrop-filter:saturate(180%) blur(24px);
+  border-bottom:1px solid var(--line);transition:max-height .38s var(--ease-out),opacity .26s;opacity:0}
+html[data-theme="dark"] .mega{background:rgba(22,22,23,.86)}
+.mega.open{max-height:340px;opacity:1}
+.mega-in{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:22px;max-width:1240px;margin:0 auto}
+.mc{padding:14px;border-radius:var(--r-m);transition:background .22s,transform .34s var(--ease-back)}
+.mc:hover{background:var(--panel);transform:translateY(-3px);box-shadow:var(--shadow-s)}
+.mc .mi{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;margin-bottom:9px;color:#fff}
+.mc .mi svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:1.8}
+.mc b{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+.mc span{font-size:11.5px;color:var(--muted);line-height:1.45}
+
+/* ============ 侧边栏（布局二） ============ */
+.sidebar{position:fixed;top:var(--nav-h);left:0;bottom:0;width:238px;z-index:50;padding:14px 12px;overflow-y:auto;
+  background:rgba(251,251,253,.6);backdrop-filter:blur(20px);border-right:1px solid var(--line);display:none}
+html[data-layout="sidebar"] .sidebar{display:block}
+html[data-theme="dark"] .sidebar{background:rgba(22,22,23,.6)}
+.smenu{position:relative}
+.hl{position:absolute;left:0;right:0;top:0;height:38px;pointer-events:none;transform:translateY(0);
+  transition:transform .35s var(--ease-back)}
+.hl .pill{height:100%;border-radius:11px;background:var(--primary-soft);border:1px solid var(--primary-soft-2);
+  transition:width .35s var(--ease-back),height .35s var(--ease-back)}
+.hl.stretch .pill{animation:squish .35s var(--ease-out)}
+@keyframes squish{0%{transform:scaleY(1)}45%{transform:scaleY(1.14)}100%{transform:scaleY(1)}}
+.srow{position:relative;display:flex;align-items:center;gap:10px;height:38px;padding:0 12px;border-radius:11px;
+  font-size:13px;color:var(--muted);cursor:pointer;z-index:1;
+  transition:color .2s,transform .34s var(--ease-back),background .2s}
+.srow.on{color:var(--text);font-weight:600}
+.srow .ic{width:16px;height:16px;border-radius:5px;flex:none}
+.srow .ar{margin-left:auto;font-size:10px;transition:transform .28s var(--ease-out);color:var(--muted-2)}
+.grp.open .ar{transform:rotate(90deg)}
+.grp.open .srow{color:var(--text)}
+.badge{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--pink);color:#fff;
+  font-size:10.5px;font-weight:600;display:grid;place-items:center;margin-left:auto;
+  transition:transform .22s var(--ease-back),opacity .22s}
+.badge.gone{transform:scale(0);opacity:0}
+.dotp{width:7px;height:7px;border-radius:50%;background:var(--orange);margin-left:auto;position:relative;flex:none}
+.dotp::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--orange);
+  animation:breathe 2s infinite}
+@keyframes breathe{0%{transform:scale(.6);opacity:.9}70%{transform:scale(2);opacity:0}100%{opacity:0}}
+.subs{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s var(--ease-out)}
+.grp.open .subs{grid-template-rows:1fr}
+.subs>.in{overflow:hidden;position:relative;padding-left:22px}
+.subs>.in::before{content:"";position:absolute;left:12px;top:4px;bottom:6px;width:1px;background:var(--line);
+  transform:scaleY(0);transform-origin:top;transition:transform .3s var(--ease-out)}
+.grp.open .subs>.in::before{transform:scaleY(1)}
+.srow.sub{height:32px;font-size:12.5px}
+.grp.open .srow.sub{animation:slidein .34s var(--ease-out) both}
+@keyframes slidein{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+
+/* ============ 底部停靠栏（布局三） ============ */
+.dock{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:58;display:none;
+  padding:8px 10px;border-radius:20px;gap:4px;align-items:flex-end;
+  background:rgba(251,251,253,.76);backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:var(--shadow-m)}
+html[data-layout="dock"] .dock{display:flex}
+html[data-theme="dark"] .dock{background:rgba(29,29,31,.8)}
+.di{position:relative;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
+  transition:transform .28s var(--ease-back),margin .28s var(--ease-back)}
+.di .ic{width:26px;height:26px;border-radius:8px}
+.di .nm{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:3px 8px;font-size:11px;
+  white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s,transform .22s var(--ease-out);box-shadow:var(--shadow-s)}
+.di:hover .nm{opacity:1;transform:translateX(-50%) translateY(0)}
+.di.on::after{content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);
+  width:4px;height:4px;border-radius:50%;background:var(--text)}
+
+/* ============ 内容区 ============ */
+.content{position:relative;z-index:1;padding:calc(var(--nav-h) + 26px) 22px 60px;max-width:1240px;margin:0 auto;min-height:100vh}
+html[data-layout="sidebar"] .content{margin-left:238px;max-width:none}
+html[data-layout="dock"] .content{padding-bottom:110px}
+.page{animation:pageIn .42s var(--ease-out)}
+@keyframes pageIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.leaving{animation:pageOut .2s var(--ease-out) forwards!important}
+@keyframes pageOut{to{opacity:0;transform:translateX(-28px)}}
+
+/* Hero（苹果式大标题） */
+.hero{margin:14px 0 30px;animation:heroIn .7s var(--ease-out) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero .eyebrow{font-size:13px;font-weight:600;color:var(--blue);letter-spacing:.2px;margin-bottom:8px}
+.hero h1{margin:0;font-size:clamp(34px,5.2vw,58px);font-weight:700;letter-spacing:-1.8px;line-height:1.05;
+  background:linear-gradient(94deg,var(--blue),var(--purple) 34%,var(--pink) 66%,var(--orange));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{margin:12px 0 0;font-size:19px;color:var(--muted);font-weight:400;letter-spacing:-.2px;max-width:640px;line-height:1.45}
+.hero .cta{margin-top:20px;display:flex;gap:10px}
+.btn-capsule{padding:10px 22px;border-radius:980px;background:var(--blue);color:#fff;font-size:14px;font-weight:500;
+  transition:transform .28s var(--ease-back),box-shadow .28s var(--ease-out),background .2s}
+.btn-capsule:hover{transform:scale(1.045);box-shadow:0 10px 26px rgba(0,113,227,.36)}
+.btn-capsule:active{transform:scale(.97)}
+.btn-ghost{padding:10px 22px;border-radius:980px;border:1px solid var(--line);color:var(--text);font-size:14px;
+  transition:transform .28s var(--ease-back),background .2s}
+.btn-ghost:hover{transform:scale(1.045);background:var(--panel-2)}
+
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:4px 0 20px;flex-wrap:wrap}
+.ph h2{margin:0;font-size:28px;font-weight:700;letter-spacing:-.8px}
+.ph p{margin:4px 0 0;color:var(--muted);font-size:13.5px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{height:30px;padding:0 14px;border-radius:980px;border:1px solid var(--line);background:var(--panel);
+  color:var(--muted);font-size:12.5px;transition:all .22s var(--ease-out)}
+.chip:hover{border-color:var(--primary-soft-2);color:var(--text);transform:scale(1.04)}
+.chip.on{background:var(--text);border-color:var(--text);color:var(--bg);font-weight:500}
+
+/* ============ 卡片 ============ */
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:1.55fr 1fr}
+.g21{grid-template-columns:1fr 1.55fr}
+@media(max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g3,.g2,.g21{grid-template-columns:1fr}}
+@media(max-width:640px){.g4{grid-template-columns:1fr}}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px;box-shadow:var(--shadow-s);transform-origin:50% 62%;overflow:hidden;
+  transition:background var(--t-theme),border-color .3s var(--ease-out),box-shadow .4s var(--ease-out),
+             opacity .28s var(--ease-out),filter .28s var(--ease-out),transform .45s var(--ease-back)}
+.card h3{margin:0;font-size:14.5px;font-weight:600;letter-spacing:-.2px}
+.card .sub{margin:3px 0 0;color:var(--muted);font-size:11.5px}
+
+/* ---- 悬停聚光 · 骤然光亮 ---- */
+.content.spot .card{opacity:.16;filter:saturate(.05) brightness(.94);transform:scale(.955)}
+.content.spot .card.lit{opacity:1;filter:none;transform:scale(1.035) translateY(-8px);z-index:5;
+  box-shadow:var(--shadow-l),0 0 0 1px var(--primary-soft-2)}
+.content.spot .card.lit::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.55),transparent 60%);
+  mix-blend-mode:overlay}
+html[data-theme="dark"] .content.spot .card.lit::before{background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.22),transparent 60%)}
+.content.spot .card.lit::after{content:"";position:absolute;top:0;left:8%;right:8%;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--blue),var(--purple),var(--pink),transparent);
+  background-size:240% 100%;animation:sweep .8s var(--ease-out)}
+@keyframes sweep{from{background-position:-130% 0}to{background-position:130% 0}}
+/* 骤然：进入瞬间闪一下 */
+.card.ignite{animation:ignite .45s var(--ease-out)}
+@keyframes ignite{0%{filter:brightness(1) saturate(1)}28%{filter:brightness(1.55) saturate(1.35)}100%{filter:brightness(1) saturate(1)}}
+html[data-spot="soft"] .content.spot .card{opacity:.58;filter:saturate(.7);transform:scale(.99)}
+html[data-spot="soft"] .content.spot .card.lit{transform:scale(1.014) translateY(-3px)}
+html[data-spot="hard"] .content.spot .card{opacity:.1;filter:saturate(0);transform:scale(.94)}
+html[data-spot="hard"] .content.spot .card.lit{transform:scale(1.045) translateY(-11px)}
+html[data-spot="off"] .content.spot .card{opacity:1;filter:none;transform:none}
+html[data-spot="off"] .content.spot .card.lit{transform:translateY(-2px)}
+
+/* 同级聚光 */
+[data-peer]{transition:opacity .3s var(--ease-out),filter .3s var(--ease-out),
+  transform .36s var(--ease-back),background .2s var(--ease-out),color .2s var(--ease-out)}
+[data-peers].spot [data-peer]{opacity:.26;filter:saturate(.2)}
+[data-peers].spot [data-peer].lit{opacity:1;filter:none}
+html[data-spot="soft"] [data-peers].spot [data-peer]{opacity:.58;filter:saturate(.7)}
+html[data-spot="off"] [data-peers].spot [data-peer]{opacity:1;filter:none}
+#navbar.spot .nv.lit{color:var(--text);background:var(--primary-soft);transform:translateY(-2px)}
+#mega.spot .mc.lit{background:var(--panel);transform:translateY(-3px) scale(1.03);box-shadow:var(--shadow-s)}
+[data-peers].spot .bar-row[data-peer]:not(.lit){transform:scale(.985)}
+.bar-row.lit{transform:scale(1.035)}
+.bar-row.lit .bf{filter:brightness(1.18) saturate(1.25)}
+.bar-row.lit .v{font-weight:700}
+circle[data-peer]{transform-box:fill-box;transform-origin:center}
+[data-peers].spot circle[data-peer]{opacity:.18;filter:saturate(.2)}
+[data-peers].spot circle[data-peer].lit{opacity:1;filter:none;transform:scale(1.06)}
+[data-peers].spot .fi.lit,[data-peers].spot .td.lit{background:var(--primary-soft);transform:translateX(3px)}
+#sidebar.spot .srow.lit{background:var(--primary-soft);transform:translateX(4px)}
+
+/* 入场错开 */
+.card.enter{animation:cardIn .58s var(--ease-out) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px) scale(.965)}to{opacity:1;transform:none}}
+
+/* ============ KPI ============ */
+.kpi{overflow:hidden}
+.kpi .top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.kpi .ic{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;flex:none;color:#fff;
+  box-shadow:0 5px 14px rgba(0,0,0,.14)}
+.kpi .ic svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.9}
+.kpi .lb{font-size:12px;color:var(--muted);font-weight:500}
+.kpi .val{font-size:36px;font-weight:700;letter-spacing:-1.4px;font-variant-numeric:tabular-nums;
+  display:flex;align-items:baseline;gap:4px;transition:filter .22s var(--ease-out),color .22s}
+.kpi .val.rolling{filter:blur(.6px);color:var(--blue)}
+.kpi .val small{font-size:15px;font-weight:500;color:var(--muted)}
+.kpi .dl{font-size:12px;display:flex;align-items:center;gap:4px;color:var(--muted);margin-top:6px}
+.kpi .dl b{font-weight:600}
+.kpi .spark{margin-top:12px;height:32px}
+.spark polyline{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.1s var(--ease-out) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ============ 图表 ============ */
+.cbox{position:relative}
+.cbox svg{display:block;width:100%;height:auto;overflow:visible}
+.lc .ln{stroke-dasharray:1800;stroke-dashoffset:1800;animation:draw 1.4s var(--ease-out) forwards}
+.lc .ar{animation:fadeUp .85s .2s var(--ease-out) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.lc circle{transform-box:fill-box;transform-origin:center;transition:r .2s var(--ease-back);
+  animation:popIn .45s var(--ease-back) both}
+@keyframes popIn{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+.tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow-m);padding:9px 12px;font-size:12px;opacity:0;transform:translate(-50%,-118%);
+  white-space:nowrap;z-index:6;transition:opacity .16s,left .18s var(--ease-out),top .18s var(--ease-out)}
+.tip.show{opacity:1}
+.tip b{font-size:14px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:12px}
+.legend i{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:6px}
+.bar-row{display:grid;grid-template-columns:78px 1fr 54px;align-items:center;gap:12px;margin-bottom:11px;font-size:12px}
+.bt{height:9px;border-radius:6px;background:var(--panel-2);overflow:hidden}
+.bf{height:100%;border-radius:6px;width:0;transition:width .8s var(--ease-out)}
+.donut-wrap{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.dg-row{display:flex;align-items:center;gap:9px;margin-bottom:10px;font-size:12px;padding:3px 8px;margin-left:-8px;border-radius:9px}
+.dg-row i{width:9px;height:9px;border-radius:3px;flex:none}
+.dg-row span{flex:1;color:var(--muted)}
+.dg-row b{font-variant-numeric:tabular-nums}
+
+/* ============ 表格 ============ */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-weight:600;color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);
+  cursor:pointer;font-size:11.5px;white-space:nowrap;transition:color .18s}
+th:hover{color:var(--text)}
+th .ar{opacity:.4;margin-left:3px;font-size:9px}
+td{padding:11px 10px;border-bottom:1px solid var(--line)}
+tbody tr{transition:background .18s}
+tbody tr:hover{background:var(--primary-soft)}
+td.num{font-variant-numeric:tabular-nums;color:var(--muted)}
+.tag{display:inline-block;padding:3px 9px;border-radius:980px;font-size:11px;font-weight:500}
+.tag.g{background:rgba(48,209,88,.15);color:#1a8f3c}
+.tag.o{background:rgba(255,159,10,.16);color:#a86a00}
+.tag.r{background:rgba(255,55,95,.14);color:#d12043}
+.tag.b{background:var(--primary-soft);color:var(--blue)}
+
+/* ============ 列表 ============ */
+.fi,.td{display:flex;align-items:center;gap:11px;padding:8px 9px;margin:0 -9px;border-radius:11px;font-size:12.5px}
+.fi+.fi,.td+.td{margin-top:2px}
+.pip{width:8px;height:8px;border-radius:50%;flex:none;position:relative}
+.pip::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:pipRing 1.8s infinite}
+@keyframes pipRing{0%{transform:scale(1);opacity:.6}100%{transform:scale(3.2);opacity:0}}
+.fi .t2{margin-left:auto;color:var(--muted-2);font-size:11px;flex:none}
+.fi.new{animation:slidein .3s var(--ease-out) both}
+
+/* ============ 控件（uiverse 手法） ============ */
+.sw{position:relative;display:inline-block;width:50px;height:28px;flex:none}
+.sw input{opacity:0;width:0;height:0}
+.sw-tr{position:absolute;inset:0;border-radius:980px;background:var(--panel-2);border:1px solid var(--line);
+  cursor:pointer;transition:background .3s var(--ease-out)}
+.sw-tr::before{content:"";position:absolute;width:22px;height:22px;border-radius:50%;left:2px;top:2px;background:#fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.22);transition:transform .3s var(--ease-back)}
+.sw input:checked ~ .sw-tr{background:var(--green);border-color:transparent}
+.sw input:checked ~ .sw-tr::before{transform:translateX(22px)}
+.sw input:active ~ .sw-tr::before{width:26px}
+.sw3{position:relative;display:inline-block;width:58px;height:32px;flex:none}
+.sw3 input{opacity:0;width:0;height:0}
+.sw3 .tr{position:absolute;inset:0;border-radius:980px;background:#f3a9a9;transition:background .4s var(--ease-out)}
+.sw3 .kn{position:absolute;width:24px;height:24px;left:4px;top:4px;transition:transform .4s var(--ease-back);pointer-events:none}
+.sw3 .kn i{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;transition:transform .4s var(--ease-out)}
+.sw3 .kn .f{background:var(--pink)}
+.sw3 .kn .b{background:var(--green);transform:rotateY(180deg)}
+.sw3 input:checked ~ .tr{background:#a8dcb4}
+.sw3 input:checked ~ .kn{transform:translateX(26px)}
+.sw3 input:checked ~ .kn .b{transform:rotateY(0)}
+.sw3 input:checked ~ .kn .f{transform:rotateY(-180deg)}
+.rgw{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.rg{-webkit-appearance:none;appearance:none;flex:1;min-width:0;height:6px;border-radius:6px;outline:none;cursor:pointer;
+  background:linear-gradient(90deg,var(--blue) 0 var(--p,50%),var(--panel-2) var(--p,50%) 100%)}
+.rg::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;border-radius:50%;background:#fff;
+  border:2px solid var(--blue);box-shadow:0 2px 7px rgba(0,113,227,.4);transition:transform .18s var(--ease-back)}
+.rg:hover::-webkit-slider-thumb{transform:scale(1.13)}
+.rg:active::-webkit-slider-thumb{transform:scale(1.24)}
+.rg::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:#fff;border:2px solid var(--blue)}
+.rgo{min-width:38px;height:26px;line-height:26px;text-align:center;border-radius:9px;background:var(--primary-soft);
+  color:var(--blue);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;flex:none}
+.cbx,.rdo{display:inline-flex;align-items:center;gap:9px;cursor:pointer;font-size:12.5px;user-select:none;margin-right:16px}
+.cbx input,.rdo input{position:absolute;opacity:0;width:0;height:0}
+.cbx .bx{width:19px;height:19px;border-radius:6px;border:1.5px solid var(--line);background:var(--panel);
+  display:grid;place-items:center;transition:background .22s,border-color .22s}
+.cbx .bx svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:32;stroke-dashoffset:32;transition:stroke-dashoffset .32s var(--ease-out)}
+.cbx input:checked ~ .bx{background:var(--blue);border-color:var(--blue)}
+.cbx input:checked ~ .bx svg{stroke-dashoffset:0}
+.rdo .dt{width:19px;height:19px;border-radius:50%;border:1.5px solid var(--line);position:relative;transition:border-color .22s}
+.rdo .dt::after{content:"";position:absolute;inset:3.5px;border-radius:50%;background:var(--blue);
+  transform:scale(0);transition:transform .26s var(--ease-back)}
+.rdo input:checked ~ .dt{border-color:var(--blue)}
+.rdo input:checked ~ .dt::after{transform:scale(1)}
+.fld{position:relative;margin-bottom:14px}
+.fld input{width:100%;height:46px;padding:16px 13px 6px;border:1px solid var(--line);border-radius:12px;
+  background:var(--panel);color:var(--text);font-size:13.5px;outline:none;
+  transition:border-color .2s,box-shadow .2s}
+.fld input:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--primary-soft)}
+.fld label{position:absolute;left:14px;top:14px;color:var(--muted);font-size:13.5px;pointer-events:none;transition:all .2s var(--ease-out)}
+.fld input:focus + label,.fld input:not(:placeholder-shown) + label{top:6px;font-size:10.5px;color:var(--blue)}
+.seg{display:inline-flex;padding:3px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line);position:relative}
+.seg button{position:relative;z-index:1;padding:6px 15px;border-radius:9px;font-size:12.5px;color:var(--muted);transition:color .2s}
+.seg button.on{color:var(--text);font-weight:600}
+.seg .th{position:absolute;top:3px;bottom:3px;left:0;border-radius:9px;background:var(--panel);box-shadow:var(--shadow-s);
+  transition:transform .3s var(--ease-back),width .3s var(--ease-back)}
+.dots{display:inline-flex;gap:5px;align-items:center}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:bounce .9s infinite}
+.dots i:nth-child(2){animation-delay:.15s}
+.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-7px);opacity:1}}
+.ring{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--panel-2);border-top-color:var(--blue);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn3d{padding:10px 20px;border-radius:12px;color:#fff;font-size:13px;font-weight:500;background:var(--blue);
+  box-shadow:0 4px 0 rgba(0,80,160,.85),0 8px 18px rgba(0,113,227,.3);
+  transition:transform .16s var(--ease-out),box-shadow .16s var(--ease-out)}
+.btn3d:hover{transform:translateY(-1px);box-shadow:0 5px 0 rgba(0,80,160,.85),0 12px 24px rgba(0,113,227,.38)}
+.btn3d:active{transform:translateY(4px);box-shadow:0 0 0 rgba(0,80,160,.85),0 2px 6px rgba(0,113,227,.25)}
+.expand{display:grid;grid-template-rows:0fr;transition:grid-template-rows .36s var(--ease-out)}
+.expand.open{grid-template-rows:1fr}
+.expand>.in{overflow:hidden}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.set-row:last-child{border-bottom:none}
+.set-row .tt b{display:block;font-size:13px;font-weight:500}
+.set-row .tt span{font-size:11.5px;color:var(--muted)}
+
+/* ============ 骨架屏 / 空状态 ============ */
+.sk{height:12px;border-radius:7px;background:linear-gradient(90deg,var(--panel-2) 25%,var(--panel) 37%,var(--panel-2) 63%);
+  background-size:400% 100%;animation:shim 1.3s ease-in-out infinite;margin-bottom:10px}
+@keyframes shim{0%{background-position:100% 0}100%{background-position:0 0}}
+.empty{text-align:center;padding:44px 20px;animation:fadeUp .5s var(--ease-out) both}
+.empty .em{font-size:40px;margin-bottom:10px}
+.empty b{display:block;font-size:15px;margin-bottom:5px}
+.empty span{font-size:12.5px;color:var(--muted)}
+
+/* ============ 命令面板 ============ */
+.cmd{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;
+  background:rgba(0,0,0,.4);backdrop-filter:blur(6px);animation:fadeIn .2s var(--ease-out)}
+.cmd.open{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.cmd-b{width:min(640px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow-l);overflow:hidden;animation:cmdIn .26s var(--ease-back)}
+@keyframes cmdIn{from{opacity:0;transform:scale(.96) translateY(-10px)}to{opacity:1;transform:none}}
+.cmd-b input{width:100%;height:54px;padding:0 18px;border:none;background:none;color:var(--text);font-size:16px;outline:none;
+  border-bottom:1px solid var(--line)}
+.cmd-l{max-height:340px;overflow-y:auto;padding:6px}
+.cmd-i{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:11px;font-size:13.5px;transition:background .14s}
+.cmd-i.sel{background:var(--primary-soft)}
+.cmd-i .ic{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:none;color:#fff}
+.cmd-i .ic svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:1.9}
+.cmd-i span{color:var(--muted-2);font-size:11.5px;margin-left:auto}
+.cmd-i mark{background:var(--primary-soft-2);color:inherit;border-radius:3px;padding:0 1px}
+.cmd-f{padding:8px 14px;border-top:1px solid var(--line);font-size:11px;color:var(--muted-2);display:flex;gap:14px}
+
+/* ============ toast / 快捷键 / 气泡 ============ */
+.toast{position:fixed;right:22px;bottom:22px;z-index:95;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow-m);padding:12px 18px;font-size:13px;opacity:0;
+  transform:translateX(24px) scale(.96);pointer-events:none;transition:opacity .28s var(--ease-out),transform .28s var(--ease-out)}
+.toast.show{opacity:1;transform:none}
+.hint{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(10px);z-index:96;
+  background:var(--text);color:var(--bg);padding:9px 18px;border-radius:980px;font-size:13px;font-weight:500;
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .28s var(--ease-back)}
+.hint.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.help{position:fixed;inset:0;z-index:92;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.44);backdrop-filter:blur(6px)}
+.help.open{display:flex}
+.help-b{width:min(560px,92vw);background:var(--panel);border-radius:20px;padding:26px;box-shadow:var(--shadow-l);
+  animation:cmdIn .3s var(--ease-back)}
+.help-b h3{margin:0 0 16px;font-size:19px;font-weight:700;letter-spacing:-.4px}
+.kbd{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.kbd:last-child{border:none}
+.kbd kbd{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:11.5px;font-family:inherit}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="aurora"><i></i><i></i><i></i><i></i></div>
+
+<header class="navbar" id="navbar">
+  <div class="brand"><span class="mark"></span>ZZ ECO</div>
+  <nav class="navlist" id="navlist" data-peers></nav>
+  <div class="nav-right">
+    <div class="sbox">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="si" placeholder="搜索页面…" autocomplete="off">
+      <div class="sugg" id="sugg"></div>
+    </div>
+    <button class="iconbtn" id="themeBtn" title="切换主题"></button>
+    <button class="iconbtn" id="cmdBtn" title="命令面板 ⌘K"></button>
+  </div>
+</header>
+
+<div class="mega" id="mega" data-peers><div class="mega-in" id="megaIn"></div></div>
+<aside class="sidebar" id="sidebar"><div class="smenu" id="smenu" data-peers><div class="hl" id="hl"><div class="pill"></div></div></div></aside>
+<div class="dock" id="dock"></div>
+
+<main class="content" id="content"></main>
+
+<div class="cmd" id="cmd"><div class="cmd-b">
+  <input id="cmdIn" placeholder="搜索页面与操作…" autocomplete="off">
+  <div class="cmd-l" id="cmdList"></div>
+  <div class="cmd-f"><span>↑↓ 选择</span><span>↵ 打开</span><span>esc 关闭</span></div>
+</div></div>
+
+<div class="help" id="help"><div class="help-b"><h3>键盘快捷键</h3><div id="helpList"></div></div></div>
+<div class="hint" id="hint"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const C={blue:'var(--blue)',purple:'var(--purple)',pink:'var(--pink)',orange:'var(--orange)',
+  green:'var(--green)',cyan:'var(--cyan)',indigo:'var(--indigo)',teal:'var(--teal)'};
+const P={grid:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+ truck:'<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+ ship:'<path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5"/>',
+ shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
+ users:'<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3.5 3.5 0 010 6.5"/>',
+ bell:'<path d="M6 9a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 004 0"/>',
+ chart:'<path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/>',
+ gear:'<circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+ bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+ leaf:'<path d="M4 12a8 8 0 0113.7-5.6L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 01-13.7 5.6L4 15"/><path d="M4 20v-5h5"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ trend:'<path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>'};
+function ico(n,w){return '<svg viewBox="0 0 24 24" style="width:'+(w||16)+'px;height:'+(w||16)+'px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round">'+(P[n]||P.grid)+'</svg>'}
+
+const MENU=[
+ {id:'overview',name:'运营总览',c:'blue',icon:'grid',desc:'核心指标、实时动态与待办全景'},
+ {id:'shipment',name:'货物跟踪',c:'purple',icon:'truck',badge:7,dot:true,desc:'在途箱量、到港预报与异常',
+  sub:[{id:'shipment:transit',name:'在途货物'},{id:'shipment:port',name:'到港预报'},{id:'shipment:alert',name:'异常处理'}]},
+ {id:'capacity',name:'运力舱位',c:'cyan',icon:'ship',desc:'运价走势、舱位利用率与船期',
+  sub:[{id:'capacity:rate',name:'运价趋势'},{id:'capacity:space',name:'舱位利用率'}]},
+ {id:'compliance',name:'合规中心',c:'green',icon:'shield',desc:'欧盟 EPR、PIC 申报与电池护照',
+  sub:[{id:'compliance:epr',name:'欧盟 EPR'},{id:'compliance:pic',name:'PIC 申报'},{id:'compliance:pass',name:'电池护照'}]},
+ {id:'customer',name:'客户管理',c:'orange',icon:'users',desc:'客户列表、合同台账与报价记录',
+  sub:[{id:'customer:list',name:'客户列表'},{id:'customer:quote',name:'报价记录'}]},
+ {id:'alert',name:'告警中心',c:'pink',icon:'bell',badge:3,dot:true,desc:'全部告警、处理进度与规则',
+  sub:[{id:'alert:all',name:'全部告警'},{id:'alert:todo',name:'未处理'}]},
+ {id:'report',name:'数据报表',c:'indigo',icon:'chart',desc:'货量、成本、时效与月度汇报',
+  sub:[{id:'report:vol',name:'货量分析'},{id:'report:cost',name:'成本分析'}]},
+ {id:'settings',name:'偏好设置',c:'teal',icon:'gear',desc:'界面偏好、动效强度与导出',
+  sub:[{id:'settings:ui',name:'界面偏好'},{id:'settings:exp',name:'导出与集成'}]}
+];
+const FLAT=[];MENU.forEach(m=>{FLAT.push(m);(m.sub||[]).forEach(s=>FLAT.push(Object.assign({parent:m.id,c:m.c},s)))});
+const findItem=id=>FLAT.find(x=>x.id===id)||MENU[0];
+const rootOf=id=>id.split(':')[0];
+
+const S={active:'overview',range:'30d',theme:'light',layout:'top',spot:'std',cleared:new Set(),open:null};
+try{const t=localStorage.getItem('zz2.theme');if(t)S.theme=t;
+    const s=localStorage.getItem('zz2.spot');if(s)S.spot=s;
+    const l=localStorage.getItem('zz2.layout');if(l)S.layout=l}catch(e){}
+document.documentElement.dataset.theme=S.theme;
+document.documentElement.dataset.spot=S.spot;
+document.documentElement.dataset.layout=S.layout;
+
+/* ============ 数据 ============ */
+const KPI=[
+ {lb:'在途票数',c:'blue',k:'sh',u:'票',dl:[6.2,'较昨日'],sp:[42,48,45,52,58,55,62,68,66,74,79,84]},
+ {lb:'准班率',c:'green',k:'ot',u:'%',dl:[-1.4,'较上周'],sp:[88,90,89,91,92,91,90,92,93,92,91,91]},
+ {lb:'TEU 货量',c:'purple',k:'tu',u:'TEU',dl:[9.8,'较上月'],sp:[820,880,910,960,1020,1080,1120,1180,1210,1260,1300,1362]},
+ {lb:'EPR 合规率',c:'orange',k:'ep',u:'%',dl:[2.1,'较上周'],sp:[76,78,80,79,82,84,83,85,86,87,87,88]}
+];
+const KDATA={'7d':[312,92.4,342,86.5],'30d':[1284,91.2,1362,88.0],'90d':[3968,89.6,4210,84.2]};
+const KLAST={};
+const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+const SHIPS=[['CMAU8817','磷酸铁锂电池模组','深圳 → 鹿特丹','10-24','在途','b'],['MSKU4420','废旧锂电池（UN3480）','宁波 → 汉堡','10-21','查验中','o'],
+ ['TGHU6631','电池黑粉（含镍钴）','上海 → 安特卫普','10-19','文件待补','r'],['CSNU2288','储能柜 40HQ','青岛 → 洛杉矶','10-28','在途','b'],
+ ['OOLU7715','铅酸电池（UN2794）','厦门 → 热那亚','10-18','查验中','o'],['HLXU3390','锂电正极材料','深圳 → 巴生','10-26','在途','b'],
+ ['MRKU5502','电池电解液（UN3264）','上海 → 汉堡','10-22','文件待补','r'],['APLU9947','动力电池包（UN3171）','天津 → 长滩','10-30','在途','b']];
+const BARS=[['鹿特丹',92,'blue'],['汉堡',84,'purple'],['安特卫普',71,'cyan'],['洛杉矶',63,'green'],['热那亚',48,'orange'],['长滩',35,'pink']];
+const FEED=[['b','新增订舱 CMAU8817 · 鹿特丹','10-13 09:42'],['o','MSKU4420 汉堡港查验中','10-13 09:15'],
+ ['r','TGHU6631 PIC 申报缺附件','10-13 08:50'],['g','CSNU2288 已放行','10-13 08:12'],['b','10 月欧洲线舱位已开售','10-13 07:38']];
+const TODOS=[['p1','补传 TGHU6631 的 PIC 附件','今天 18:00'],['p2','确认 11 月汉堡线运价','明天'],['p3','更新欧盟 EPR 台账至 9 月','10-18'],['p4','回访 B 客户电池粉需求','10-20']];
+
+/* ============ 组件函数 ============ */
+function kpiCard(k,i){
+  return '<div class="card kpi" data-peer><div class="top">'+
+    '<div class="ic" style="background:linear-gradient(135deg,'+C[k.c]+',rgba(0,0,0,.15))">'+ico(['bolt','clock','ship','shield'][i],17)+'</div>'+
+    '<div><div class="lb">'+k.lb+'</div></div></div>'+
+    '<div class="val" data-val="'+i+'" style="color:'+C[k.c]+'">0<small>'+k.u+'</small></div>'+
+    '<div class="dl"><span style="color:'+(k.dl[0]>=0?'var(--up)':'var(--down)')+'">'+(k.dl[0]>=0?'▲':'▼')+' '+Math.abs(k.dl[0])+'%</span><span>'+k.dl[1]+'</span></div>'+
+    '<div class="spark">'+spark(k.sp,C[k.c])+'</div></div>';
+}
+function spark(d,c){
+  const W=200,H=32,mn=Math.min(...d),mx=Math.max(...d);
+  const X=i=>i/(d.length-1)*W, Y=v=>H-((v-mn)/((mx-mn)||1)*(H-6)+3);
+  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:100%">'+
+    '<polyline points="'+d.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' ')+'" stroke="'+c+'"/></svg>';
+}
+let gid=0;
+function lineChart(d,c1,c2,labels){
+  const W=760,H=240,mn=Math.min(...d)*.86,mx=Math.max(...d)*1.06;
+  const X=i=>i/(d.length-1)*W,Y=v=>H-((v-mn)/((mx-mn)||1)*H*.8+H*.1);
+  const id='g'+(++gid),pts=d.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1));
+  return '<div class="cbox" data-box><svg viewBox="0 0 '+W+' '+H+'" class="lc">'+
+   '<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1">'+
+   '<stop offset="0%" stop-color="'+c1+'" stop-opacity=".34"/><stop offset="100%" stop-color="'+c1+'" stop-opacity="0"/></linearGradient></defs>'+
+   [.25,.5,.75].map(r=>'<line x1="0" y1="'+(H*r)+'" x2="'+W+'" y2="'+(H*r)+'" stroke="var(--line)" stroke-width="1"/>').join('')+
+   '<path class="ar" d="M0,'+H+' L'+pts.join(' L')+' L'+W+','+H+' Z" fill="url(#'+id+')"/>'+
+   '<polyline class="ln" points="'+pts.join(' ')+'" fill="none" stroke="'+c1+'" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'+
+   d.map((v,i)=>'<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="3.4" fill="var(--panel)" stroke="'+c1+'" stroke-width="2.2" data-pt="'+i+'" data-v="'+v+'" style="animation-delay:'+(350+i*60)+'ms"/>').join('')+
+   '<line class="cross" x1="0" y1="0" x2="0" y2="'+H+'" stroke="'+c1+'" stroke-width="1" stroke-dasharray="3 3" opacity="0"/></svg>'+
+   '<div class="tip"></div></div>';
+}
+function donut(items){
+  const total=items.reduce((a,b)=>a+b.v,0);let acc=0;const R=58,Cc=2*Math.PI*R;
+  const segs=items.map((it,i)=>{
+    const len=it.v/total*Cc;
+    const o='<circle cx="70" cy="70" r="'+R+'" fill="none" stroke="'+it.c+'" stroke-width="17" data-peer data-sync="dn'+i+'" '+
+      'stroke-dasharray="'+len.toFixed(1)+' '+(Cc-len).toFixed(1)+'" stroke-dashoffset="'+(-acc).toFixed(1)+'" '+
+      'transform="rotate(-90 70 70)" style="stroke-dasharray:0 '+Cc+';transition:stroke-dasharray .9s var(--ease-out)"/>';
+    acc+=len;return o;
+  }).join('');
+  return '<div class="donut-wrap" data-peers><svg viewBox="0 0 140 140" style="width:150px;height:150px;flex:none">'+segs+'</svg>'+
+   '<div style="flex:1;min-width:150px">'+items.map((it,i)=>
+     '<div class="dg-row" data-peer data-sync="dn'+i+'"><i style="background:'+it.c+'"></i><span>'+it.n+'</span><b>'+it.v+'%</b></div>').join('')+
+   '</div></div>';
+}
+function bars(list){
+  return '<div data-peers>'+list.map(b=>
+    '<div class="bar-row" data-peer><span>'+b[0]+'</span><div class="bt"><div class="bf" data-w="'+b[1]+'" '+
+    'style="background:linear-gradient(90deg,'+C[b[2]]+',rgba(0,0,0,.12))"></div></div><span class="v">'+b[1]+'%</span></div>').join('')+'</div>';
+}
+function feed(){
+  return '<div data-peers>'+FEED.map(f=>'<div class="fi" data-peer><span class="pip" style="background:'+
+    ({b:'var(--blue)',o:'var(--orange)',r:'var(--pink)',g:'var(--green)'})[f[0]]+'"></span><span>'+f[1]+'</span><span class="t2">'+f[2]+'</span></div>').join('')+'</div>';
+}
+function todos(){
+  return '<div data-peers>'+TODOS.map(t=>'<div class="td" data-peer>'+ico('clock',15)+'<span style="flex:1">'+t[1]+'</span>'+
+    '<span style="color:var(--muted-2);font-size:11px">'+t[2]+'</span></div>').join('')+'</div>';
+}
+function table(rows){
+  return '<table><thead><tr>'+[['booking','订舱号'],['desc','货描 / 品类'],['route','航线'],['eta','ETD'],['st','状态']]
+    .map(h=>'<th data-k="'+h[0]+'">'+h[1]+'<span class="ar">↕</span></th>').join('')+'</tr></thead><tbody>'+
+    rows.map(r=>'<tr><td style="font-weight:600">'+r[0]+'</td><td>'+r[1]+'</td><td style="color:var(--muted)">'+r[2]+'</td>'+
+      '<td class="num">'+r[3]+'</td><td><span class="tag '+r[5]+'">'+r[4]+'</span></td></tr>').join('')+'</tbody></table>';
+}
+function skeleton(){
+  return '<div class="grid g4">'+[0,0,0,0].map(()=>'<div class="card"><div class="sk" style="width:52%"></div><div class="sk" style="width:74%;height:26px"></div><div class="sk" style="width:40%"></div></div>').join('')+'</div>'+
+   '<div class="grid g2" style="margin-top:18px"><div class="card"><div class="sk" style="height:200px"></div></div><div class="card"><div class="sk" style="height:200px"></div></div></div>';
+}
+function ph(meta,root){
+  if(root==='overview')return '<div class="hero"><div class="eyebrow">全球电池回收运营</div>'+
+    '<h1>让每一批电池<br>都走得清楚、合规、准时</h1>'+
+    '<p>实时掌握在途箱量、准班率与欧盟 EPR 合规进度。数据每 30 秒自动刷新。</p>'+
+    '<div class="cta"><button class="btn-capsule" data-go="shipment">查看在途货物</button>'+
+    '<button class="btn-ghost" data-go="compliance">合规台账</button></div></div>';
+  return '<div class="ph"><div><h2>'+meta.name+'</h2><p>'+(meta.desc||'')+'</p></div>'+
+    '<div class="chips">'+['7d|近 7 天','30d|近 30 天','90d|本季度'].map(r=>{const[v,l]=r.split('|');
+      return '<button class="chip'+(S.range===v?' on':'')+'" data-range="'+v+'">'+l+'</button>'}).join('')+'</div></div>';
+}
+
+/* ============ 页面 ============ */
+const PAGES={
+ overview:()=>'<div class="grid g4">'+KPI.map(kpiCard).join('')+'</div>'+
+  '<div class="grid g2" style="margin-top:18px">'+
+   '<div class="card"><h3>货量趋势</h3><p class="sub">近 12 周 TEU 走势 · 悬停查看明细</p>'+
+     lineChart([820,880,910,960,1020,1080,1120,1180,1210,1260,1300,1362],C.blue,C.purple)+
+     '<div class="legend"><span><i style="background:'+C.blue+'"></i>TEU 货量</span><span><i style="background:'+C.purple+'"></i>环比基准</span></div></div>'+
+   '<div class="card"><h3>合规构成</h3><p class="sub">悬停扇区，图例同步高亮</p>'+
+     donut([{n:'已合规',v:88,c:C.green},{n:'处理中',v:7,c:C.orange},{n:'超期风险',v:5,c:C.pink}])+'</div>'+
+  '</div>'+
+  '<div class="grid g2" style="margin-top:18px">'+
+   '<div class="card"><h3>实时动态</h3><p class="sub">每 11 秒插入新条目</p>'+feed()+
+     '<div style="margin-top:14px"><button class="chip" data-fold>展开全部记录 ↓</button>'+
+     '<div class="expand" id="foldAll"><div class="in"><div style="padding-top:12px;color:var(--muted);font-size:12px;line-height:1.7">'+
+     '10-12 21:04 · 鹿特丹港拥堵预警解除<br>10-12 19:31 · 汉堡线 11 月运价上调 8%<br>10-12 16:08 · B 客户追加 40HQ × 3<br>10-12 11:22 · 电池护照模板更新至 v2.3<br>10-11 09:40 · 安特卫普查验平均时长 +0.6 天</div></div></div></div></div>'+
+   '<div class="card"><h3>待办</h3><p class="sub">按优先级排序</p>'+todos()+
+     '<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)">共 '+TODOS.length+' 项 · 2 项今日到期</div></div>'+
+  '</div>'+
+  '<div class="card" style="margin-top:18px"><h3>主要目的港舱位利用</h3><p class="sub">悬停某一行，其余自动变暗</p>'+bars(BARS)+'</div>',
+
+ shipment:sub=>'<div class="grid g4">'+KPI.map(kpiCard).join('')+'</div>'+
+  '<div class="card" style="margin-top:18px"><h3>货物明细</h3><p class="sub">共 '+SHIPS.length+' 条 · 点击表头排序</p>'+
+    table(sub==='alert'?SHIPS.filter(r=>r[5]!=='b'):sub==='port'?SHIPS.slice().sort((a,b)=>a[3]<b[3]?-1:1):SHIPS)+'</div>'+
+  '<div class="grid g2" style="margin-top:18px"><div class="card"><h3>到港预报</h3><p class="sub">未来 14 天</p>'+bars(BARS)+'</div>'+
+   '<div class="card"><h3>异常处理进度</h3><p class="sub">悬停查看构成</p>'+
+    donut([{n:'已解决',v:64,c:C.green},{n:'处理中',v:24,c:C.blue},{n:'待分配',v:12,c:C.orange}])+'</div></div>',
+
+ capacity:()=>'<div class="grid g4">'+KPI.map(kpiCard).join('')+'</div>'+
+  '<div class="grid g2" style="margin-top:18px">'+
+   '<div class="card"><h3>运价趋势</h3><p class="sub">欧洲线 USD/40HQ</p>'+
+     lineChart([2450,2520,2480,2610,2740,2690,2820,2960,3080,3010,3140,3280],C.purple,C.pink)+'</div>'+
+   '<div class="card"><h3>舱位利用率</h3><p class="sub">按航线</p>'+bars([['欧洲线',88,'blue'],['美西线',76,'purple'],['美东线',69,'cyan'],['东南亚',54,'green'],['中东线',41,'orange']])+'</div></div>'+
+  '<div class="card" style="margin-top:18px"><h3>船期表</h3><p class="sub">近 7 天开船计划</p>'+table(SHIPS.slice(0,6))+'</div>',
+
+ compliance:()=>'<div class="grid g4">'+KPI.map(kpiCard).join('')+'</div>'+
+  '<div class="grid g2" style="margin-top:18px">'+
+   '<div class="card"><h3>合规构成</h3><p class="sub">EU 2023/1542 电池护照校验</p>'+
+     donut([{n:'已合规',v:88,c:C.green},{n:'处理中',v:7,c:C.orange},{n:'超期风险',v:5,c:C.pink}])+
+     '<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)">'+
+     '本期校验 412 批次，通过 363 批，超期 21 批需在 10-20 前补交。</div></div>'+
+   '<div class="card"><h3>各口岸合规率</h3><p class="sub">悬停查看对比</p>'+bars([['鹿特丹',96,'green'],['汉堡',93,'blue'],['安特卫普',88,'cyan'],['热那亚',81,'orange'],['长滩',74,'pink']])+'</div></div>'+
+  '<div class="card" style="margin-top:18px"><h3>PIC 申报台账</h3><p class="sub">点击表头排序</p>'+table(SHIPS.filter(r=>r[5]!=='b'))+'</div>',
+
+ customer:()=>'<div class="grid g4">'+KPI.map(kpiCard).join('')+'</div>'+
+  '<div class="card" style="margin-top:18px"><h3>客户列表</h3><p class="sub">共 6 家 · 点击表头排序</p>'+
+   '<table><thead><tr><th data-k="n">客户<span class="ar">↕</span></th><th data-k="v">货量<span class="ar">↕</span></th>'+
+   '<th data-k="r">主营航线<span class="ar">↕</span></th><th data-k="s">合作状态<span class="ar">↕</span></th></tr></thead><tbody>'+
+   [['A 客户 · 欧洲回收集团','486 TEU','欧洲 / 地中海','<span class="tag g">深度合作</span>'],
+    ['B 客户 · 东南亚电池厂','312 TEU','东南亚 / 印巴','<span class="tag b">稳定</span>'],
+    ['C 客户 · 北美储能','204 TEU','美西 / 美东','<span class="tag o">洽谈中</span>'],
+    ['D 客户 · 中东贸易','158 TEU','中东 / 红海','<span class="tag b">稳定</span>'],
+    ['E 客户 · 日韩材料','96 TEU','日韩 / 近洋','<span class="tag o">待激活</span>'],
+    ['F 客户 · 南美矿业','62 TEU','南美西','<span class="tag r">流失预警</span>']]
+    .map(r=>'<tr><td style="font-weight:600">'+r[0]+'</td><td class="num">'+r[1]+'</td><td style="color:var(--muted)">'+r[2]+'</td><td>'+r[3]+'</td></tr>').join('')+'</tbody></table></div>'+
+  '<div class="grid g2" style="margin-top:18px"><div class="card"><h3>客户货量分布</h3><p class="sub">悬停扇区</p>'+
+   donut([{n:'A 客户',v:36,c:C.blue},{n:'B 客户',v:23,c:C.purple},{n:'C 客户',v:15,c:C.cyan},{n:'其他',v:26,c:C.orange}])+'</div>'+
+   '<div class="card"><h3>报价记录</h3><p class="sub">最近 5 条</p>'+feed()+'</div></div>',
+
+ alert:()=>'<div class="grid g4">'+KPI.map(kpiCard).join('')+'</div>'+
+  '<div class="grid g2" style="margin-top:18px">'+
+   '<div class="card"><h3>未处理告警</h3><p class="sub">按紧急度排序</p>'+feed()+'</div>'+
+   '<div class="card"><h3>告警类型构成</h3><p class="sub">悬停联动</p>'+
+    donut([{n:'文件缺失',v:42,c:C.pink},{n:'查验滞留',v:31,c:C.orange},{n:'舱位紧张',v:18,c:C.blue},{n:'合规超期',v:9,c:C.green}])+'</div></div>'+
+  '<div class="card" style="margin-top:18px"><h3>全部告警</h3><p class="sub">点击表头排序</p>'+table(SHIPS.filter(r=>r[5]!=='b'))+'</div>',
+
+ report:()=>'<div class="grid g4">'+KPI.map(kpiCard).join('')+'</div>'+
+  '<div class="grid g2" style="margin-top:18px">'+
+   '<div class="card"><h3>货量分析</h3><p class="sub">近 12 周 TEU</p>'+lineChart([820,880,910,960,1020,1080,1120,1180,1210,1260,1300,1362],C.indigo,C.blue)+'</div>'+
+   '<div class="card"><h3>成本分析</h3><p class="sub">USD/TEU</p>'+lineChart([412,405,398,392,388,381,375,372,368,364,359,352],C.green,C.teal)+'</div></div>'+
+  '<div class="card" style="margin-top:18px"><h3>导出报表</h3><p class="sub">导出格式随当前筛选条件同步</p>'+
+   '<div class="chips" style="margin-top:12px">'+['导出 PNG','导出 PDF','导出 Excel'].map((t,i)=>
+     '<button class="chip'+(i===0?' on':'')+'" data-exp="'+t+'">'+t+'</button>').join('')+'</div></div>',
+
+ settings:()=>'<div class="grid g21">'+
+  '<div class="card"><h3>界面偏好</h3><p class="sub">立即生效并存到本地</p>'+
+   [['自动刷新数据','每 30 秒拉取实时看板数据',1],['新消息桌面通知','告警与查验实时弹窗',1],['紧凑模式','压缩卡片间距，一屏看更多',0],['减少动效','关闭弹性动画与徽标滚动',0]]
+    .map(r=>'<div class="set-row"><div class="tt"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>'+
+      '<label class="sw"><input type="checkbox"'+(r[2]?' checked':'')+'><span class="sw-tr"></span></label></div>').join('')+
+   '<div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)">'+
+   '<div style="font-size:12px;color:var(--muted);margin-bottom:10px">刷新间隔（秒）</div>'+
+   '<div class="rgw"><input type="range" class="rg" min="10" max="120" value="30"><output class="rgo">30</output></div>'+
+   '<div class="rgw"><input type="range" class="rg" min="0" max="100" value="72"><output class="rgo">72</output></div></div></div>'+
+  '<div class="card"><h3>布局与外观</h3><p class="sub">本页动效来自 dashboard-ui-craft</p>'+
+   '<div class="set-row"><div class="tt"><b>导航布局</b><span>顶部导航 / 侧边栏 / 底部停靠栏</span></div>'+
+    '<div class="chips">'+['top|顶部','sidebar|侧边栏','dock|停靠栏'].map(l=>{const[v,t]=l.split('|');
+      return '<button class="chip'+(S.layout===v?' on':'')+'" data-layout="'+v+'">'+t+'</button>'}).join('')+'</div></div>'+
+   '<div class="set-row"><div class="tt"><b>悬停聚光</b><span>悬停时卡片骤然光亮、其余变暗</span></div>'+
+    '<div class="chips">'+['off|关闭','soft|微弱','std|标准','hard|强烈'].map(l=>{const[v,t]=l.split('|');
+      return '<button class="chip'+(S.spot===v?' on':'')+'" data-spot="'+v+'">'+t+'</button>'}).join('')+'</div></div>'+
+   '<div class="set-row"><div class="tt"><b>明暗主题</b><span>毛玻璃随主题同步</span></div>'+
+    '<div class="chips">'+['light|浅色','dark|深色'].map(l=>{const[v,t]=l.split('|');
+      return '<button class="chip'+(S.theme===v?' on':'')+'" data-theme="'+v+'">'+t+'</button>'}).join('')+'</div></div>'+
+   '<div class="set-row"><div class="tt"><b>数据范围</b><span>影响全部指标卡</span></div>'+
+    '<div class="seg" id="seg2"><span class="th"></span>'+['7d','30d','90d'].map(v=>
+      '<button class="'+(S.range===v?'on':'')+'" data-range="'+v+'">'+({'7d':'7 天','30d':'30 天','90d':'季度'})[v]+'</button>').join('')+'</div></div>'+
+   '<div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)">'+
+   '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">导出内容</div>'+
+   '<label class="cbx"><input type="checkbox" checked><span class="bx"><svg viewBox="0 0 24 24"><path d="M4 12.5 L9.5 18 L20 6.5"/></svg></span>含图表</label>'+
+   '<label class="cbx"><input type="checkbox" checked><span class="bx"><svg viewBox="0 0 24 24"><path d="M4 12.5 L9.5 18 L20 6.5"/></svg></span>含明细</label>'+
+   '<label class="rdo"><input type="radio" name="f" checked><span class="dt"></span>PNG</label>'+
+   '<label class="rdo"><input type="radio" name="f"><span class="dt"></span>PDF</label>'+
+   '<div style="margin-top:16px"><button class="btn3d" data-exp="立即导出">立即导出</button></div></div></div></div>'
+};
+
+/* ============ 渲染 ============ */
+function renderNav(){
+  $('#navlist').innerHTML=MENU.map(m=>'<button class="nv'+(rootOf(S.active)===m.id?' on':'')+'" data-row="'+m.id+'" data-peer>'+
+    '<span class="ic" style="background:linear-gradient(135deg,'+C[m.c]+',rgba(0,0,0,.15))"></span>'+m.name+'</button>').join('');
+  $('#smenu').innerHTML='<div class="hl" id="hl"><div class="pill"></div></div>'+MENU.map(m=>
+    '<div class="grp'+(m.sub?' has':'')+'" data-id="'+m.id+'">'+
+     '<div class="srow'+(rootOf(S.active)===m.id?' on':'')+'" data-row="'+m.id+'" data-peer>'+
+      '<span class="ic" style="background:linear-gradient(135deg,'+C[m.c]+',rgba(0,0,0,.15))"></span>'+m.name+
+      (m.badge&&!S.cleared.has(m.id)?'<span class="badge" data-badge="'+m.id+'">'+m.badge+'</span>':'')+
+      (m.dot&&!S.cleared.has(m.id)?'<span class="dotp"></span>':'')+
+      (m.sub?'<span class="ar">›</span>':'')+'</div>'+
+     (m.sub?'<div class="subs"><div class="in">'+m.sub.map(s=>
+        '<div class="srow sub'+(S.active===s.id?' on':'')+'" data-row="'+s.id+'" data-peer>'+s.name+'</div>').join('')+'</div></div>':'')+
+    '</div>').join('');
+  $('#dock').innerHTML=MENU.map(m=>'<div class="di'+(rootOf(S.active)===m.id?' on':'')+'" data-row="'+m.id+'">'+
+    '<span class="ic" style="background:linear-gradient(135deg,'+C[m.c]+',rgba(0,0,0,.15));display:block;width:26px;height:26px;border-radius:8px"></span>'+
+    '<span class="nm">'+m.name+'</span></div>').join('');
+}
+function moveHL(){
+  const hl=$('#hl');if(!hl||S.layout!=='sidebar')return;
+  const row=document.querySelector('#smenu .srow.on')||document.querySelector('#smenu .srow');
+  if(!row)return;
+  const nav=$('#smenu'),nr=nav.getBoundingClientRect(),rr=row.getBoundingClientRect();
+  hl.classList.add('stretch');setTimeout(()=>hl.classList.remove('stretch'),360);
+  hl.style.transform='translateY('+(rr.top-nr.top+nav.scrollTop)+'px)';
+  hl.firstElementChild.style.width=rr.width+'px';
+  hl.firstElementChild.style.height=rr.height+'px';
+}
+function syncNav(){
+  $$('.nv').forEach(b=>b.classList.toggle('on',rootOf(S.active)===b.dataset.row));
+  $$('.srow').forEach(b=>b.classList.toggle('on',b.dataset.row===S.active));
+  $$('.di').forEach(b=>b.classList.toggle('on',rootOf(S.active)===b.dataset.row));
+  moveHL();
+}
+function renderPage(){
+  const c=$('#content'),meta=findItem(S.active),root=rootOf(S.active),sub=S.active.split(':')[1]||'';
+  c.innerHTML='<div id="phead">'+ph(meta,root)+'</div><div id="skWrap">'+skeleton()+'</div>';
+  bindChips(c);
+  setTimeout(()=>{
+    const html=(PAGES[root]||PAGES.overview)(sub);
+    const olds=[...c.querySelectorAll('#skWrap')];
+    olds.forEach(n=>n.classList.add('leaving'));
+    setTimeout(()=>{
+      olds.forEach(n=>n.remove());
+      const body=document.createElement('div');body.className='page';body.innerHTML=html;
+      c.appendChild(body);afterRender(root,sub);stagger(body);
+    },olds.length?190:0);
+  },240);
+}
+function bindChips(scope){
+  scope.querySelectorAll('[data-range]').forEach(b=>b.addEventListener('click',()=>{
+    S.range=b.dataset.range;renderPage();toast('时间范围 · '+({ '7d':'近 7 天','30d':'近 30 天','90d':'本季度'})[b.dataset.range]);}));
+}
+function stagger(root){
+  [...root.querySelectorAll('.card')].forEach((el,i)=>{
+    el.classList.add('enter');el.style.animationDelay=(Math.min(i,12)*45)+'ms';
+    el.addEventListener('animationend',()=>{el.classList.remove('enter');el.style.animationDelay=''},{once:true});
+  });
+}
+function afterRender(root,sub){
+  countUp();
+  $$('[data-box]').forEach(bindChart);
+  const dn=document.querySelector('.donut-wrap');if(dn)requestAnimationFrame(()=>{
+    dn.querySelectorAll('circle[data-peer]').forEach(c=>{c.style.strokeDasharray=c.getAttribute('stroke-dasharray')});});
+  requestAnimationFrame(()=>$$('.bf[data-w]').forEach(f=>{
+    const w=f.dataset.w;f.style.width='0';requestAnimationFrame(()=>f.style.width=w+'%')}));
+  $$('th[data-k]').forEach(th=>th.addEventListener('click',()=>{
+    const tb=th.closest('table').querySelector('tbody');if(!tb)return;
+    const rows=[...tb.querySelectorAll('tr')],i=[...th.parentNode.children].indexOf(th);
+    const cur=Number(!th.dataset.dir||th.dataset.dir==='1')?-1:1;th.dataset.dir=cur;
+    rows.sort((a,b)=>{const x=a.children[i].textContent,y=b.children[i].textContent;return(x>y?1:x<y?-1:0)*cur});
+    rows.forEach((r,n)=>{tb.appendChild(r);r.style.animation='slidein .25s var(--ease-out) both';r.style.animationDelay=(n*22)+'ms'});
+  }));
+  $$('[data-exp]').forEach(b=>b.addEventListener('click',()=>{
+    if(b.classList.contains('chip'))b.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('on')),b.classList.add('on');
+    toast('正在'+b.dataset.exp+'…');setTimeout(()=>toast(b.dataset.exp+'完成，已生成下载链接'),900)}));
+  $$('[data-fold]').forEach(b=>b.addEventListener('click',()=>{
+    const box=document.getElementById('foldAll');if(!box)return;
+    box.classList.toggle('open');b.textContent=box.classList.contains('open')?'收起 ↑':'展开全部记录 ↓'}));
+  $$('button[data-layout]').forEach(b=>b.addEventListener('click',()=>setLayout(b.dataset.layout)));
+  $$('button[data-theme]').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.theme)));
+  $$('button[data-spot]').forEach(b=>b.addEventListener('click',()=>{
+    b.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));b.classList.add('on');setSpot(b.dataset.spot)}));
+  bindRange();bindSeg();
+}
+function bindRange(){
+  $$('.rg').forEach(r=>{const o=r.parentElement.querySelector('.rgo');if(!o)return;
+    const sy=()=>{const p=(r.value-r.min)/(r.max-r.min)*100;r.style.setProperty('--p',p.toFixed(1)+'%');o.textContent=r.value};
+    r.addEventListener('input',sy);sy()});
+}
+function bindSeg(){
+  const sg=document.getElementById('seg2');if(!sg)return;
+  const mv=()=>{const on=sg.querySelector('button.on'),th=sg.querySelector('.th');if(!on||!th)return;
+    th.style.width=on.offsetWidth+'px';th.style.transform='translateX('+(on.offsetLeft-3)+'px)'};
+  sg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    sg.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');mv();
+    S.range=b.dataset.range;renderPage();toast('数据范围 · '+b.textContent)}));
+  requestAnimationFrame(mv);
+}
+function countUp(){
+  const set=KDATA[S.range]||KDATA['30d'];
+  $$('[data-val]').forEach(el=>{
+    const i=+el.dataset.val,tgt=set[i],dec=tgt%1?1:0;
+    const prev=(KLAST[i]===undefined?0:KLAST[i]);
+    const unit=el.querySelector('small').outerHTML,t0=performance.now(),dur=950;
+    el.classList.add('rolling');el.dataset.done='0';
+    const fin=()=>{el.dataset.done='1';el.classList.remove('rolling');
+      el.innerHTML=(dec?tgt.toFixed(1):fmt(tgt))+unit;KLAST[i]=tgt};
+    (function step(t){
+      if(el.dataset.done==='1')return;
+      const p=Math.max(0,Math.min(1,(t-t0)/dur)),e=1-Math.pow(1-p,4),v=prev+(tgt-prev)*e;
+      el.innerHTML=(dec?v.toFixed(1):fmt(v))+unit;
+      if(p<1)requestAnimationFrame(step);else fin();
+    })(t0);
+    setTimeout(()=>{if(el.dataset.done!=='1')fin()},dur+150);
+  });
+}
+function bindChart(box){
+  const svg=box.querySelector('svg');if(!svg)return;
+  const cross=svg.querySelector('.cross'),pts=[...svg.querySelectorAll('circle[data-pt]')],tip=box.querySelector('.tip');
+  if(!cross||!pts.length||!tip)return;
+  svg.addEventListener('mousemove',e=>{
+    const r=svg.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*760;
+    let best=0,bd=1e9;
+    pts.forEach((p,i)=>{const d=Math.abs(+p.getAttribute('cx')-x);if(d<bd){bd=d;best=i}});
+    const p=pts[best],cx=+p.getAttribute('cx'),cy=+p.getAttribute('cy');
+    cross.setAttribute('x1',cx);cross.setAttribute('x2',cx);cross.setAttribute('opacity','.5');
+    pts.forEach((q,j)=>q.setAttribute('r',j===best?5.6:3.4));
+    tip.classList.add('show');
+    tip.innerHTML='<div class="k">第 '+(best+1)+' 周</div><b>'+fmt(+p.dataset.v)+'</b>';
+    tip.style.left=(cx/760*r.width)+'px';tip.style.top=(cy/240*r.height)+'px';
+  });
+  svg.addEventListener('mouseleave',()=>{cross.setAttribute('opacity','0');pts.forEach(q=>q.setAttribute('r',3.4));tip.classList.remove('show')});
+}
+
+/* ============ 悬停聚光 ============ */
+const ct=$('#content');
+function clearSpot(){ct.classList.remove('spot');ct.querySelectorAll('.card.lit').forEach(x=>{x.classList.remove('lit');x.classList.remove('ignite')})}
+ct.addEventListener('mouseover',e=>{
+  if(S.spot==='off')return;
+  const card=e.target.closest('.card');
+  if(!card){clearSpot();return}
+  if(card.classList.contains('lit'))return;
+  clearSpot();
+  ct.classList.add('spot');
+  ct.querySelectorAll('.card').forEach(x=>x.classList.toggle('lit',x===card));
+  card.classList.add('ignite');
+  card.addEventListener('animationend',function h(){card.classList.remove('ignite');card.removeEventListener('animationend',h)});
+});
+ct.addEventListener('mouseleave',clearSpot);
+ct.addEventListener('mousemove',e=>{
+  const lit=ct.querySelector('.card.lit');if(!lit)return;
+  const r=lit.getBoundingClientRect();
+  lit.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+  lit.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+},{passive:true});
+let curLit=[],curG=[];
+function clearPeers(){curLit.forEach(n=>n.classList.remove('lit'));curG.forEach(g=>{if(g)g.classList.remove('spot')});curLit=[];curG=[]}
+document.addEventListener('mouseover',e=>{
+  const el=e.target.closest('[data-peer]');
+  if(!el){clearPeers();return}
+  if(el.classList.contains('lit'))return;
+  if(S.spot==='off')return;
+  clearPeers();
+  const sy=el.dataset.sync;
+  const nodes=sy?[...document.querySelectorAll('[data-sync="'+sy+'"]')]:[el];
+  const gs=new Set();
+  nodes.forEach(n=>{n.classList.add('lit');gs.add(n.closest('[data-peers]')||n.parentElement)});
+  gs.forEach(g=>{if(g){g.dataset.peers='';g.classList.add('spot')}});
+  curLit=nodes;curG=[...gs];
+});
+document.addEventListener('mouseleave',clearPeers);
+
+/* ============ 导航交互 ============ */
+function setActive(id){
+  const li=findItem(id);if(!li)return;
+  if(S.layout==='sidebar'&&li.parent){
+    const g=document.querySelector('.grp[data-id="'+li.parent+'"]');
+    if(g&&!g.classList.contains('open')){$$('.grp.open').forEach(x=>x.classList.remove('open'));g.classList.add('open')}
+  }
+  S.active=id;
+  if(li.badge&&!S.cleared.has(id)){
+    S.cleared.add(id);
+    $$('[data-badge="'+id+'"]').forEach(b=>{b.classList.add('gone');setTimeout(()=>b.remove(),240)});
+  }
+  syncNav();renderPage();
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-row],[data-go]');
+  if(t){setActive(t.dataset.row||t.dataset.go);closeMega();return}
+  const nv=e.target.closest('.nv');if(nv)return;
+  closeMega();
+});
+/* 顶部通栏面板 */
+let megaT;
+function openMega(id){
+  const m=MENU.find(x=>x.id===id);if(!m)return;
+  const list=(m.sub||[{name:m.name}]).concat([{name:'周度复盘'},{name:'数据明细'},{name:'导出视图'}]).slice(0,4);
+  $('#megaIn').innerHTML=list.map(p=>'<div class="mc" data-peer data-go="'+m.id+'">'+
+    '<div class="mi" style="background:linear-gradient(135deg,'+C[m.c]+',rgba(0,0,0,.18))">'+ico(m.icon||'grid',16)+'</div>'+
+    '<b>'+p.name+'</b><span>'+(m.desc||'查看'+p.name+'相关数据')+'</span></div>').join('');
+  $('#mega').classList.add('open');
+}
+function closeMega(){const m=$('#mega');if(m){m.classList.remove('open');m.classList.remove('spot')}}
+$('#navlist').addEventListener('mouseover',e=>{
+  const nv=e.target.closest('.nv');if(!nv)return;
+  clearTimeout(megaT);megaT=setTimeout(()=>openMega(nv.dataset.row),90);
+});
+$('#navlist').addEventListener('mouseleave',()=>{clearTimeout(megaT);megaT=setTimeout(closeMega,220)});
+$('#mega').addEventListener('mouseleave',()=>{megaT=setTimeout(closeMega,200)});
+$('#mega').addEventListener('mouseenter',()=>clearTimeout(megaT));
+
+/* 底部停靠栏：距离衰减放大 */
+$('#dock').addEventListener('mousemove',e=>{
+  $$('#dock .di').forEach(d=>{
+    const r=d.getBoundingClientRect(),cx=r.left+r.width/2;
+    const dist=Math.abs(e.clientX-cx)/90;
+    const s=Math.max(1,1.42-dist*.42);
+    d.style.transform='scale('+s.toFixed(3)+')';
+    d.style.marginBottom=((s-1)*10).toFixed(1)+'px';
+  });
+});
+$('#dock').addEventListener('mouseleave',()=>$$('#dock .di').forEach(d=>{d.style.transform='';d.style.marginBottom=''}));
+
+/* ============ 主题 / 布局 / 聚光 ============ */
+function setTheme(t){
+  S.theme=t;document.documentElement.dataset.theme=t;
+  try{localStorage.setItem('zz2.theme',t)}catch(e){}
+  toast(t==='dark'?'深色主题':'浅色主题');
+}
+function setLayout(l){
+  S.layout=l;document.documentElement.dataset.layout=l;
+  try{localStorage.setItem('zz2.layout',l)}catch(e){}
+  if(l!=='sidebar')$$('.grp.open').forEach(g=>g.classList.remove('open'));
+  renderNav();setTimeout(()=>{syncNav();moveHL()},60);
+  toast('布局 · '+({top:'顶部导航',sidebar:'侧边栏',dock:'底部停靠栏'})[l]);
+}
+function setSpot(v){
+  S.spot=v;document.documentElement.dataset.spot=v;
+  try{localStorage.setItem('zz2.spot',v)}catch(e){}
+  if(v==='off')clearSpot();
+  toast('悬停聚光 · '+({off:'已关闭',soft:'微弱',std:'标准',hard:'强烈'})[v]);
+}
+$('#themeBtn').innerHTML='<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M5 5l1.7 1.7M17.3 17.3L19 19M19 5l-1.7 1.7M6.7 17.3L5 19"/></svg>';
+$('#cmdBtn').innerHTML='<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M4 7h16M4 12h16M4 17h10"/></svg>';
+$('#themeBtn').addEventListener('click',()=>setTheme(S.theme==='dark'?'light':'dark'));
+$('#cmdBtn').addEventListener('click',()=>openCmd());
+
+/* ============ 命令面板 ============ */
+const CMDS=FLAT.map(x=>({id:x.id,name:x.name,desc:x.desc||'前往该页面',c:x.c,run:()=>setActive(x.id)})).concat([
+ {id:'c-spot',name:'切换悬停聚光强度',desc:'在关闭 / 微弱 / 标准 / 强烈间循环',c:'purple',
+  run:()=>{const o=['off','soft','std','hard'];setSpot(o[(o.indexOf(S.spot)+1)%4])}},
+ {id:'c-theme',name:'切换明暗主题',desc:'毛玻璃同步跟随',c:'indigo',run:()=>setTheme(S.theme==='dark'?'light':'dark')},
+ {id:'c-layout',name:'切换导航布局',desc:'顶部 / 侧边栏 / 停靠栏',c:'cyan',
+  run:()=>{const o=['top','sidebar','dock'];setLayout(o[(o.indexOf(S.layout)+1)%3])}},
+ {id:'c-export',name:'导出当前视图',desc:'PNG / PDF / Excel',c:'green',run:()=>toast('已导出当前视图')},
+ {id:'c-help',name:'查看快捷键',desc:'列出全部键盘操作',c:'orange',run:()=>$('#help').classList.add('open')}
+]);
+let cmdSel=0,cmdList=[];
+function openCmd(){const p=$('#cmd');p.classList.add('open');$('#cmdIn').value='';renderCmd('');setTimeout(()=>$('#cmdIn').focus(),60)}
+function closeCmd(){$('#cmd').classList.remove('open')}
+function renderCmd(q){
+  cmdList=CMDS.filter(c=>!q||c.name.includes(q)||(c.desc||'').includes(q)).slice(0,40);
+  cmdSel=0;
+  $('#cmdList').innerHTML=cmdList.length?cmdList.map((c,i)=>
+    '<div class="cmd-i'+(i===0?' sel':'')+'" data-i="'+i+'">'+
+    '<span class="ic" style="background:linear-gradient(135deg,'+C[c.c]+',rgba(0,0,0,.18))">'+ico('bolt',13)+'</span>'+
+    hl(c.name,q)+'<span>'+c.desc+'</span></div>').join('')
+    :'<div style="padding:22px;text-align:center;color:var(--muted);font-size:13px">没有匹配项</div>';
+}
+function hl(t,q){if(!q)return t;const i=t.indexOf(q);return i<0?t:t.slice(0,i)+'<mark>'+t.slice(i,i+q.length)+'</mark>'+t.slice(i+q.length)}
+$('#cmdIn').addEventListener('input',e=>renderCmd(e.target.value.trim()));
+$('#cmdIn').addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+    e.preventDefault();if(!cmdList.length)return;
+    cmdSel=(cmdSel+(e.key==='ArrowDown'?1:-1)+cmdList.length)%cmdList.length;
+    $$('#cmdList .cmd-i').forEach((n,i)=>n.classList.toggle('sel',i===cmdSel));
+    const s=$$('#cmdList .cmd-i')[cmdSel];if(s)s.scrollIntoView({block:'nearest'});
+  }else if(e.key==='Enter'){if(cmdList[cmdSel]){closeCmd();cmdList[cmdSel].run()}}
+  else if(e.key==='Escape')closeCmd();
+});
+$('#cmd').addEventListener('click',e=>{if(e.target.id==='cmd')closeCmd()});
+$('#cmdList').addEventListener('click',e=>{const i=e.target.closest('[data-i]');if(i){closeCmd();cmdList[+i.dataset.i].run()}});
+
+/* ============ 搜索 ============ */
+const si=$('#si');
+si.addEventListener('focus',()=>renderSugg(si.value.trim()));
+si.addEventListener('input',()=>renderSugg(si.value.trim()));
+si.addEventListener('blur',()=>setTimeout(()=>$('#sugg').classList.remove('show'),200));
+function renderSugg(q){
+  const box=$('#sugg');
+  const list=q?FLAT.filter(x=>x.name.includes(q)||(x.desc||'').includes(q)).slice(0,6):['overview','shipment','alert'].map(findItem);
+  box.innerHTML='<div class="t">'+(q?'搜索结果':'最近查看')+'</div>'+
+    (list.length?list.map(x=>'<div class="it" data-go="'+x.id+'">'+
+      '<span class="ic" style="width:16px;height:16px;border-radius:5px;background:linear-gradient(135deg,'+C[x.c]+',rgba(0,0,0,.18))"></span>'+x.name+'</div>').join('')
+     :'<div class="it" style="color:var(--muted)">没有匹配项</div>');
+  box.classList.add('show');
+}
+
+/* ============ toast / 快捷键 ============ */
+let tt;
+function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2000)}
+let ht;
+function hint(m){const el=$('#hint');el.textContent=m;el.classList.add('show');clearTimeout(ht);ht=setTimeout(()=>el.classList.remove('show'),900)}
+$('#helpList').innerHTML=[['⌘K / Ctrl+K','打开命令面板'],['?','查看全部快捷键'],['/','聚焦搜索'],
+ ['g 然后 o','运营总览'],['g 然后 s','货物跟踪'],['g 然后 c','合规中心'],['g 然后 a','告警中心'],
+ ['t','切换明暗主题'],['⌘⇧L','循环切换布局'],['esc','关闭浮层']]
+ .map(r=>'<div class="kbd"><span>'+r[1]+'</span><kbd>'+r[0]+'</kbd></div>').join('');
+$('#help').addEventListener('click',e=>{if(e.target.id==='help')$('#help').classList.remove('open')});
+let gPending=false;
+document.addEventListener('keydown',e=>{
+  const typing=/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openCmd();return}
+  if((e.metaKey||e.ctrlKey)&&e.shiftKey&&e.key.toLowerCase()==='l'){e.preventDefault();
+    const o=['top','sidebar','dock'];setLayout(o[(o.indexOf(S.layout)+1)%3]);return}
+  if(e.key==='Escape'){closeCmd();$('#help').classList.remove('open');closeMega();return}
+  if(typing)return;
+  if(e.key==='?'){$('#help').classList.add('open');return}
+  if(e.key==='/'){e.preventDefault();si.focus();return}
+  if(e.key.toLowerCase()==='t'){setTheme(S.theme==='dark'?'light':'dark');return}
+  if(gPending){
+    gPending=false;
+    const map={o:'overview',s:'shipment',c:'compliance',a:'alert',r:'report',u:'capacity'};
+    if(map[e.key.toLowerCase()]){const id=map[e.key.toLowerCase()];hint(findItem(id).name);setActive(id)}
+    return;
+  }
+  if(e.key.toLowerCase()==='g'){gPending=true;setTimeout(()=>gPending=false,1200);hint('g…');return}
+});
+
+/* ============ 实时动态插入 ============ */
+setInterval(()=>{
+  const box=document.querySelector('[data-peers] .fi');if(!box)return;
+  const wrap=box.parentElement;if(!wrap)return;
+  const msgs=['新增订舱 · 鹿特丹','汉堡港查验完成','PIC 附件已补齐','舱位已确认','运价更新'];
+  const cols=['b','g','o','b','b'];
+  const i=Math.floor(Math.random()*msgs.length);
+  const d=document.createElement('div');
+  d.className='fi new';d.dataset.peer='';
+  d.innerHTML='<span class="pip" style="background:'+({b:'var(--blue)',o:'var(--orange)',g:'var(--green)'})[cols[i]]+'"></span>'+
+    '<span>'+msgs[i]+'</span><span class="t2">刚刚</span>';
+  wrap.insertBefore(d,wrap.firstChild);
+  while(wrap.children.length>6)wrap.lastChild.remove();
+},11000);
+
+/* ============ 启动 ============ */
+renderNav();syncNav();renderPage();
+window.addEventListener('resize',()=>{moveHL();const th=document.querySelector('#seg2 .th');if(th)bindSeg()});
+</script>
+</body>
+</html>
