@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-spot="std">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="锦源晟国际物流部2026年9-12月六项KPI工作Dashboard">
+  <title>锦源晟｜国际物流部 9-12月工作Dashboard</title>
+  <style>
+    :root{
+      /* 原PPT配色：深蓝主 + 金黄辅 */
+      --bg:#f4f6fa; --panel:#ffffff; --panel-2:#f7f9fd;
+      --text:#14213a; --muted:#6b7891; --line:#e3e8f0;
+      --navy:#0e3a78;
+      --primary:#1a56c4; --primary-2:#3f83f1; --primary-soft:#eaf1ff; --primary-soft-2:#cddffa;
+      --gold:#e79a06; --gold-2:#ffc93c; --gold-soft:#fff4da; --gold-line:#f3d391;
+      --up:#e0483d; --down:#17a673; --warn:#dd8a10; --info:#2f6fed;
+      --shadow-s:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.04);
+      --shadow-m:0 12px 28px rgba(26,86,196,.10),0 3px 8px rgba(16,24,40,.05);
+      --shadow-l:0 24px 48px rgba(16,24,40,.12);
+      --r-xl:24px; --r-l:16px; --r-m:12px; --r-s:8px;
+      --ease-out:cubic-bezier(.22,1,.36,1); --ease-back:cubic-bezier(.34,1.56,.64,1);
+      --t-theme:.32s var(--ease-out); --header-h:74px; --side-w:252px;
+    }
+    html[data-theme="dark"]{
+      --bg:#0e1520; --panel:#151e2b; --panel-2:#1a2534; --text:#e9f0fa; --muted:#94a3b8;
+      --line:#273447; --navy:#c3d7f7;
+      --primary:#70a3ff; --primary-2:#8bb5ff; --primary-soft:#1c2b46; --primary-soft-2:#2b4671;
+      --gold:#ffc247; --gold-2:#ffd978; --gold-soft:#3a2c12; --gold-line:#6a5322;
+      --shadow-s:0 1px 2px rgba(0,0,0,.4); --shadow-m:0 10px 28px rgba(0,0,0,.38); --shadow-l:0 24px 48px rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    html{scroll-behavior:smooth;scroll-padding-top:96px}
+    body{
+      margin:0; min-width:320px; font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+      color:var(--text); background:
+        radial-gradient(circle at 0 0,rgba(26,86,196,.08),transparent 28%),
+        radial-gradient(circle at 100% 14%,rgba(231,154,6,.09),transparent 25%),var(--bg);
+      -webkit-font-smoothing:antialiased; font-size:14px; line-height:1.6;
+      transition:background var(--t-theme),color var(--t-theme);
+    }
+    button,input{font:inherit}
+    button{border:0;color:inherit;cursor:pointer}
+    a{color:inherit}
+    .skip-link{position:fixed;left:12px;top:-80px;z-index:9999;padding:10px 14px;border-radius:10px;background:var(--primary);color:#fff;transition:top .2s var(--ease-out)}
+    .skip-link:focus{top:12px}
+    .shell{width:min(1480px,calc(100% - 32px));margin:0 auto}
+    .topbar{
+      position:sticky;top:0;z-index:60;height:var(--header-h);display:flex;align-items:center;
+      background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(18px) saturate(1.3);
+      border-bottom:1px solid color-mix(in srgb,var(--line) 82%,transparent);
+    }
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;width:min(1480px,calc(100% - 32px));margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-logo{flex:0 0 auto;display:grid;place-items:center;transition:transform .3s var(--ease-back)}
+    .brand-logo svg{display:block}
+    .brand:hover .brand-logo{transform:translateY(-2px) scale(1.03)}
+    .brand-copy{min-width:0}
+    .brand-copy strong{display:block;font-size:15px;line-height:1.2;letter-spacing:.02em}
+    .brand-copy span{display:block;color:var(--muted);font-size:11px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .top-actions{display:flex;align-items:center;gap:8px}
+    .icon-btn,.text-btn{height:38px;border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:0 12px;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow-s);transition:transform .22s var(--ease-back),border-color .2s var(--ease-out),background var(--t-theme)}
+    .icon-btn:hover,.text-btn:hover{transform:translateY(-2px);border-color:var(--primary-soft-2)}
+    .icon-btn{width:38px;padding:0;justify-content:center;font-size:17px}
+    .kbd{font-size:10px;color:var(--muted);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:var(--panel-2)}
+
+    .hero{padding:26px 0 18px}
+    .hero-panel{position:relative;overflow:hidden;padding:30px;border-radius:var(--r-xl);background:linear-gradient(126deg,#0e3a78 0%,#1a56c4 56%,#2f86d8 100%);color:#fff;box-shadow:0 28px 70px rgba(14,58,120,.26)}
+    .hero-panel::before{content:"";position:absolute;inset:-50% 42% -50% -12%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 61%);transform:rotate(-10deg)}
+    .hero-panel::after{content:"";position:absolute;right:-70px;top:-70px;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle,rgba(255,201,60,.42),transparent 62%)}
+    .hero-logo{position:absolute;right:-6px;bottom:-26px;width:250px;height:92px;filter:brightness(0) invert(1);opacity:.20;pointer-events:none;z-index:0}
+    html[data-theme="dark"] .hero-logo{opacity:.13}
+    .hero-panel .gold-rule{position:absolute;left:0;bottom:0;height:4px;width:100%;background:linear-gradient(90deg,var(--gold-2),var(--gold),transparent 72%)}
+    .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);gap:28px;align-items:end}
+    .eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2)}
+    .pulse{position:relative;width:8px;height:8px;border-radius:50%;background:var(--gold-2);box-shadow:0 0 0 5px rgba(255,201,60,.14)}
+    .pulse::after{content:"";position:absolute;inset:-2px;border:2px solid var(--gold-2);border-radius:50%;animation:breathe 2s infinite}
+    @keyframes breathe{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+    h1{font-size:clamp(28px,3.6vw,50px);line-height:1.08;letter-spacing:-.045em;margin:16px 0 12px;max-width:900px}
+    .hero-lead{max-width:840px;margin:0;color:rgba(255,255,255,.84);font-size:15px}
+    .hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .hero-chip{padding:7px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.10);font-size:11px;backdrop-filter:blur(8px)}
+    .hero-insight{border:1px solid rgba(255,201,60,.34);background:rgba(7,31,68,.32);border-radius:18px;padding:20px;backdrop-filter:blur(12px)}
+    .hero-insight .label{font-size:11px;color:var(--gold-2);letter-spacing:.08em}
+    .hero-insight strong{display:block;font-size:19px;line-height:1.45;margin:8px 0 10px}
+    .hero-insight p{margin:0;color:rgba(255,255,255,.72);font-size:12px}
+
+    .layout{display:grid;grid-template-columns:var(--side-w) minmax(0,1fr);gap:18px;align-items:start;padding-bottom:70px}
+    .sidebar{position:sticky;top:calc(var(--header-h) + 14px);display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - var(--header-h) - 28px);overflow:auto;padding-right:2px}
+    .side-block{padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--shadow-s)}
+    .side-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 8px}
+    .month-switch{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:14px}
+    .month-btn{padding:9px 2px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:2px;background:transparent;transition:transform .24s var(--ease-back),background .24s var(--ease-out),color .2s var(--ease-out),box-shadow .24s var(--ease-out)}
+    .month-btn b{font-size:12px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+    .month-btn span{font-size:9px;color:var(--muted);white-space:nowrap}
+    .month-btn:hover{transform:translateY(-2px)}
+    .month-btn.active{color:#fff;background:linear-gradient(145deg,var(--primary),var(--primary-2));box-shadow:0 10px 20px rgba(26,86,196,.22)}
+    .month-btn.active span{color:var(--gold-2)}
+    .month-btn.active::after{content:"";position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);width:26px;height:3px;border-radius:3px;background:var(--gold)}
+
+    .kpi-nav{display:flex;flex-direction:column;gap:6px}
+    .side-kpi{position:relative;display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:11px;background:transparent;text-align:left;transition:background .22s var(--ease-out),color .2s var(--ease-out),transform .22s var(--ease-back)}
+    .side-kpi::before{content:"";position:absolute;left:0;top:50%;width:3px;height:0;border-radius:3px;background:var(--gold);transform:translateY(-50%);transition:height .26s var(--ease-out)}
+    .side-kpi:hover{background:var(--panel-2);transform:translateX(2px)}
+    .side-kpi.active{background:var(--primary-soft);color:var(--primary)}
+    .side-kpi.active::before{height:60%}
+    .sk-no{flex:0 0 26px;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:var(--panel-2);border:1px solid var(--line);font-weight:800;font-size:10px;transition:background .22s var(--ease-out),color .22s var(--ease-out),border-color .22s var(--ease-out)}
+    .side-kpi.active .sk-no{color:#fff;background:var(--primary);border-color:var(--primary)}
+    .sk-text{min-width:0}
+    .sk-text strong{display:block;font-size:11px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .sk-text span{display:block;font-size:9px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .side-foot{font-size:10px;color:var(--muted);line-height:1.55}
+    .side-brand{display:flex;align-items:center;gap:9px;padding-bottom:9px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+    .side-brand svg{flex:0 0 auto}
+    .side-brand span{font-size:9px;color:var(--muted);line-height:1.4}
+    .side-tip{margin:0;font-size:10px;color:var(--muted);line-height:1.55}
+    .footer-inner{display:flex;align-items:center;justify-content:center;gap:14px}
+    .footer-logo{width:112px;height:41px;flex:0 0 auto;opacity:.92}
+
+    main{padding-top:6px;min-width:0}
+    .section{padding-top:24px;margin-top:-6px}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:0 0 14px}
+    .section-kicker{font-size:11px;color:var(--primary);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}
+    .section-head h2{font-size:clamp(21px,2.8vw,30px);line-height:1.2;letter-spacing:-.025em;margin:0}
+    .section-head p{max-width:660px;margin:0;color:var(--muted);font-size:12px;text-align:right}
+    .back-btn{padding:8px 11px;border-radius:9px;background:var(--panel);border:1px solid var(--line);font-size:11px;box-shadow:var(--shadow-s);transition:transform .22s var(--ease-back),border-color .2s}
+    .back-btn:hover{transform:translateY(-2px);border-color:var(--primary-soft-2)}
+
+    .grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+    .grid-main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:13px}
+    .card{position:relative;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-l);padding:17px;box-shadow:var(--shadow-s);overflow:hidden;transition:background var(--t-theme),border-color .3s var(--ease-out),box-shadow .34s var(--ease-out),opacity .3s var(--ease-out),filter .3s var(--ease-out),transform .44s var(--ease-back)}
+    .card:hover{box-shadow:var(--shadow-m)}
+    .card.enter{animation:cardIn .55s var(--ease-out) both}
+    @keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.972)}to{opacity:1;transform:none}}
+    @keyframes hdrIn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+    @keyframes sweep{from{background-position:-120% 0}to{background-position:120% 0}}
+    .section-head{animation:hdrIn .42s var(--ease-out)}
+    .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .card-label{font-size:11px;color:var(--muted);font-weight:600}
+    .card-title{font-size:15px;line-height:1.35;margin:4px 0 0;font-weight:750}
+    .status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:700;white-space:nowrap}
+    .status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+    .status.blue{color:var(--primary);background:var(--primary-soft)}
+    .status.gold{color:#8a5a00;background:var(--gold-soft)}
+    html[data-theme="dark"] .status.gold{color:var(--gold);background:var(--gold-soft)}
+    .status.amber{color:#b76b00;background:#fff4dc}
+    html[data-theme="dark"] .status.amber{color:#ffc260;background:#3c2e18}
+    .status.red{color:#d14a40;background:#ffedeb}
+    html[data-theme="dark"] .status.red{color:#ff857c;background:#3d2325}
+    .metric{font-variant-numeric:tabular-nums;font-size:28px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin:13px 0 5px}
+    .metric small{font-size:12px;color:var(--muted);letter-spacing:0;margin-left:4px;font-weight:650}
+    .submetric{color:var(--muted);font-size:11px}
+    .spark{margin-top:12px;height:30px;width:100%;overflow:visible}
+    .spark path{fill:none;stroke:var(--primary);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.1s var(--ease-out) forwards}
+    .spark .area{stroke:none;fill:url(#sparkFill1);opacity:.45;animation:fadeUp .85s .2s var(--ease-out) both}
+    @keyframes draw{to{stroke-dashoffset:0}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:.45;transform:none}}
+    .rolling{filter:blur(.5px);color:var(--primary)}
+
+    .kpi-button-card{padding:0;background:transparent;border:0;box-shadow:none;overflow:visible}
+    .kpi-jump{width:100%;height:100%;min-height:148px;padding:15px;border-radius:16px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow-s);text-align:left;display:flex;flex-direction:column;justify-content:space-between;transition:transform .36s var(--ease-back),box-shadow .3s var(--ease-out),border-color .2s var(--ease-out),background var(--t-theme)}
+    .kpi-jump:hover,.kpi-jump:focus-visible{transform:translateY(-5px) scale(1.015);box-shadow:var(--shadow-m);border-color:var(--gold-line);outline:none}
+    .kpi-jump .no{display:flex;align-items:center;justify-content:space-between;color:var(--primary);font-size:11px;font-weight:800}
+    .kpi-jump .arrow{width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:var(--primary-soft);transition:transform .28s var(--ease-back)}
+    .kpi-jump:hover .arrow{transform:translate(3px,-3px);background:var(--gold-soft);color:#8a5a00}
+    html[data-theme="dark"] .kpi-jump:hover .arrow{color:var(--gold)}
+    .kpi-jump h3{font-size:14px;line-height:1.35;margin:16px 0 7px}
+    .kpi-jump p{font-size:10px;color:var(--muted);margin:0}
+
+    .overview-banner{margin-top:13px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;padding:20px;background:linear-gradient(120deg,var(--panel),var(--gold-soft));border:1px solid var(--gold-line);border-radius:18px}
+    .overview-banner strong{display:block;font-size:17px;margin-bottom:5px}
+    .overview-banner p{margin:0;color:var(--muted);font-size:12px}
+    .stage-line{display:flex;align-items:center;gap:0}
+    .stage{min-width:88px;text-align:center;color:var(--muted);font-size:9px}
+    .stage::before{content:"";display:block;width:11px;height:11px;margin:0 auto 6px;border-radius:50%;background:var(--line);border:3px solid var(--panel);box-shadow:0 0 0 1px var(--line)}
+    .stage + .stage{position:relative}
+    .stage + .stage::after{content:"";position:absolute;right:50%;top:5px;width:100%;height:2px;background:var(--line);z-index:-1}
+    .stage.done::before{background:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+    .stage.now{color:var(--primary);font-weight:800}
+    .stage.now::before{background:var(--primary);box-shadow:0 0 0 4px var(--primary-soft)}
+
+    .kpi-section{border-top:1px solid var(--line);padding-top:30px;margin-top:32px}
+    .kpi-title-wrap{display:flex;align-items:center;gap:13px}
+    .kpi-badge{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:#fff;font-weight:850;background:linear-gradient(145deg,var(--primary),var(--gold));box-shadow:0 12px 24px rgba(26,86,196,.18)}
+    .mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}
+    .mini-stat{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+    .mini-stat b{display:block;font-size:18px;font-variant-numeric:tabular-nums;line-height:1.15}
+    .mini-stat span{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+    .list{list-style:none;margin:13px 0 0;padding:0}
+    .list li{position:relative;padding:8px 8px 8px 18px;border-bottom:1px dashed var(--line);font-size:12px}
+    .list li:last-child{border-bottom:0}
+    .list li::before{content:"";position:absolute;left:3px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--primary)}
+    .list.risk li::before{background:var(--warn)}
+    .list.plan li::before{background:var(--gold)}
+    .block-title{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;margin:0}
+    .block-title::before{content:"";width:4px;height:15px;border-radius:99px;background:var(--primary)}
+    .block-title.risk::before{background:var(--warn)}
+    .block-title.plan::before{background:var(--gold)}
+    .scope{margin:11px 0 0;color:var(--muted);font-size:11px}
+    .note{padding:12px 13px;border-left:3px solid var(--gold);border-radius:0 10px 10px 0;background:color-mix(in srgb,var(--gold) 12%,var(--panel));font-size:11px;color:var(--muted);margin-top:13px}
+
+    .supplier-list,.risk-list,.route-list{margin-top:13px}
+    .supplier,.risk-row,.route-row{display:grid;grid-template-columns:115px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 8px;border-radius:10px}
+    .supplier + .supplier,.risk-row + .risk-row,.route-row + .route-row{border-top:1px solid var(--line)}
+    .supplier b,.risk-row b,.route-row b{font-size:11px}
+    .supplier span,.risk-row span,.route-row span{font-size:10px;color:var(--muted)}
+    .supplier em,.risk-row em,.route-row em{font-style:normal;font-size:9px;padding:4px 7px;border-radius:7px;background:var(--panel-2);border:1px solid var(--line);white-space:nowrap}
+    .bar-row{display:grid;grid-template-columns:112px minmax(0,1fr) 38px;gap:10px;align-items:center;padding:8px;border-radius:9px}
+    .bar-row .k{font-size:10px;color:var(--muted)}
+    .bar-track{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+    .bar-fill{height:100%;border-radius:inherit;width:var(--w);background:linear-gradient(90deg,var(--primary),var(--gold));transition:width .8s var(--ease-out),filter .25s var(--ease-out)}
+    .bar-row .v{font-size:10px;text-align:right;font-variant-numeric:tabular-nums}
+
+    .project-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:13px}
+    .project{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+    .project .flag{font-size:9px;color:#8a5a00;font-weight:800;letter-spacing:.08em}
+    html[data-theme="dark"] .project .flag{color:var(--gold)}
+    .project b{display:block;font-size:11px;margin:5px 0 3px}
+    .project span{display:block;color:var(--muted);font-size:9px;line-height:1.45}
+    .europe-spotlight{background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 9%,var(--panel)),color-mix(in srgb,var(--gold) 10%,var(--panel)));border-color:var(--gold-line)}
+    .europe-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:13px}
+    .europe-project{padding:14px;border-radius:13px;background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line)}
+    .europe-project h4{margin:0 0 7px;font-size:12px}
+    .europe-project p{margin:0;color:var(--muted);font-size:10px}
+
+    .flow{display:flex;align-items:stretch;gap:7px;margin-top:14px;overflow:auto;padding-bottom:4px}
+    .flow-step{flex:1;min-width:120px;position:relative;padding:12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line)}
+    .flow-step:not(:last-child)::after{content:"›";position:absolute;right:-8px;top:50%;transform:translateY(-50%);z-index:2;width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:var(--primary);color:#fff;font-weight:800;font-size:11px}
+    .flow-step b{display:block;font-size:10px}
+    .flow-step span{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+
+    .cost-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:14px;padding:16px;border-radius:14px;background:linear-gradient(135deg,var(--primary-soft),var(--gold-soft));border:1px solid var(--gold-line)}
+    .cost-hero .price{font-size:36px;font-weight:850;letter-spacing:-.05em;color:var(--primary);font-variant-numeric:tabular-nums}
+    .cost-hero .price small{font-size:11px;color:var(--muted);letter-spacing:0}
+    .cost-hero .time{text-align:right}
+    .cost-hero .time b{display:block;font-size:22px}
+    .cost-hero .time span{font-size:9px;color:var(--muted)}
+
+    .risk-matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:13px}
+    .risk-cell{padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2)}
+    .risk-cell b{display:flex;align-items:center;gap:7px;font-size:11px}
+    .risk-dot{width:7px;height:7px;border-radius:50%;background:var(--warn)}
+    .risk-dot.red{background:var(--up)}
+    .risk-dot.blue{background:var(--primary)}
+    .risk-cell span{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+
+    .source-box{margin-top:34px;padding:18px;border-radius:16px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);font-size:11px}
+    .source-box strong{color:var(--text)}
+    .source-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
+    .pending{margin:7px 0 0;padding-left:18px}
+    footer{padding:22px 0 40px;color:var(--muted);font-size:10px;text-align:center}
+
+    /* 卡片聚光 */
+    .spot-grid.spot .card{opacity:.34;filter:saturate(.3);transform:scale(.972)}
+    .spot-grid.spot .card.lit{opacity:1;filter:none;transform:scale(1.028) translateY(-4px);border-color:var(--gold-line);z-index:2;box-shadow:0 24px 48px rgba(26,86,196,.20),0 0 0 1px var(--gold-line)}
+    html[data-theme="dark"] .spot-grid.spot .card.lit{box-shadow:0 24px 48px rgba(0,0,0,.55),0 0 0 1px var(--primary-soft-2)}
+    .spot-grid.spot .card.lit::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(231,154,6,.15),transparent 62%)}
+    .spot-grid.spot .card.lit::after{content:"";position:absolute;top:-1px;left:9%;right:9%;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);background-size:220% 100%;animation:sweep .85s var(--ease-out)}
+    html[data-spot="soft"] .spot-grid.spot .card{opacity:.60;filter:saturate(.72);transform:scale(.99)}
+    html[data-spot="soft"] .spot-grid.spot .card.lit{transform:scale(1.012) translateY(-2px)}
+    html[data-spot="hard"] .spot-grid.spot .card{opacity:.20;filter:saturate(.1);transform:scale(.955)}
+    html[data-spot="hard"] .spot-grid.spot .card.lit{transform:scale(1.042) translateY(-6px)}
+    html[data-spot="off"] .spot-grid.spot .card{opacity:1;filter:none;transform:none}
+    [data-peer]{transition:opacity .3s var(--ease-out),filter .3s var(--ease-out),transform .36s var(--ease-back),background .2s var(--ease-out),color .2s var(--ease-out)}
+    [data-peers].spot [data-peer]{opacity:.34;filter:saturate(.3)}
+    [data-peers].spot [data-peer].lit{opacity:1;filter:none}
+    html[data-spot="soft"] [data-peers].spot [data-peer]{opacity:.62;filter:saturate(.72)}
+    html[data-spot="hard"] [data-peers].spot [data-peer]{opacity:.20;filter:saturate(.1)}
+    html[data-spot="off"] [data-peers].spot [data-peer]{opacity:1;filter:none}
+    [data-peers].spot .bar-row[data-peer]:not(.lit){transform:scale(.985)}
+    .bar-row.lit{transform:scale(1.035)}
+    .bar-row.lit .bar-fill{filter:brightness(1.14) saturate(1.2)}
+    .supplier.lit,.risk-row.lit,.route-row.lit{background:var(--gold-soft);transform:translateX(3px)}
+    .side-kpi.lit{background:var(--panel-2)}
+    .month-btn.lit{background:var(--panel)}
+
+    .settings{position:fixed;right:18px;bottom:18px;z-index:70}
+    .settings-toggle{width:44px;height:44px;border-radius:14px;color:#fff;background:linear-gradient(145deg,var(--primary),var(--gold));box-shadow:0 14px 30px rgba(26,86,196,.28);transition:transform .25s var(--ease-back)}
+    .settings-toggle:hover{transform:translateY(-3px) rotate(6deg)}
+    .settings-panel{position:absolute;right:0;bottom:54px;width:240px;padding:15px;border-radius:15px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow-l);opacity:0;transform:translateY(9px) scale(.96);pointer-events:none;transition:opacity .2s var(--ease-out),transform .2s var(--ease-out)}
+    .settings.open .settings-panel{opacity:1;transform:none;pointer-events:auto}
+    .settings-panel h3{font-size:12px;margin:0 0 10px}
+    .settings-panel p{font-size:9px;color:var(--muted);margin:0 0 7px}
+    .chips{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+    .chip{padding:6px 3px;border-radius:8px;background:var(--panel-2);border:1px solid var(--line);font-size:9px;transition:background .2s,border-color .2s,transform .2s var(--ease-back)}
+    .chip:hover{transform:translateY(-1px)}
+    .chip.on{color:#8a5a00;background:var(--gold-soft);border-color:var(--gold-line);font-weight:800}
+    html[data-theme="dark"] .chip.on{color:var(--gold)}
+
+    .palette-overlay{position:fixed;inset:0;z-index:100;background:rgba(7,15,28,.42);backdrop-filter:blur(6px);display:grid;place-items:start center;padding-top:14vh;opacity:0;pointer-events:none;transition:opacity .2s var(--ease-out)}
+    .palette-overlay.open{opacity:1;pointer-events:auto}
+    .palette{width:min(560px,calc(100% - 28px));padding:13px;border-radius:17px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow-l);transform:scale(.96) translateY(-8px);transition:transform .2s var(--ease-out)}
+    .palette-overlay.open .palette{transform:none}
+    .palette input{width:100%;height:44px;border:1px solid var(--line);border-radius:11px;background:var(--panel-2);color:var(--text);padding:0 14px;outline:none}
+    .palette input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+    .cmd-list{margin-top:8px;max-height:330px;overflow:auto}
+    .cmd{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:10px;background:transparent;text-align:left}
+    .cmd:hover,.cmd.selected{background:var(--primary-soft);color:var(--primary)}
+    .cmd b{font-size:11px}.cmd span{font-size:9px;color:var(--muted)}
+    mark{color:#8a5a00;background:var(--gold-soft);border-radius:3px;padding:0 2px}
+    html[data-theme="dark"] mark{color:var(--gold)}
+
+    .toast{position:fixed;right:18px;top:88px;z-index:120;padding:10px 13px;border-radius:11px;color:#fff;background:#1d2a3d;box-shadow:var(--shadow-l);font-size:11px;opacity:0;transform:translateX(20px) scale(.96);pointer-events:none}
+    .toast.show{animation:toastIn .28s var(--ease-out) forwards}
+    .toast.out{animation:toastOut .24s var(--ease-out) forwards}
+    @keyframes toastIn{to{opacity:1;transform:none}}
+    @keyframes toastOut{from{opacity:1;transform:none}to{opacity:0;transform:translateX(20px) scale(.96)}}
+
+    @media (max-width:1180px){
+      .grid-6{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(2,1fr)}
+      html{scroll-padding-top:110px}.hero-grid{grid-template-columns:1fr}.hero-insight{max-width:620px}
+      .project-strip{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width:1020px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:static;max-height:none;overflow:visible;display:grid;grid-template-columns:1fr;gap:12px}
+      .kpi-nav{flex-direction:row;overflow:auto;padding-bottom:4px}
+      .side-kpi{flex:0 0 auto}.sk-text strong,.sk-text span{white-space:normal}
+    }
+    @media (max-width:820px){
+      .shell,.topbar-inner{width:min(100% - 22px,1480px)}
+      .hero{padding-top:16px}.hero-panel{padding:22px}.grid-3,.grid-2,.grid-main{grid-template-columns:1fr}
+      .grid-6{grid-template-columns:repeat(2,1fr)}.section-head{align-items:flex-start;flex-direction:column}.section-head p{text-align:left}
+      .source-grid,.europe-grid{grid-template-columns:1fr}.top-actions .text-btn{display:none}.project-strip{grid-template-columns:repeat(2,1fr)}
+      .stage-line{overflow:auto;padding:6px 0}.overview-banner{grid-template-columns:1fr}
+    }
+    @media (max-width:540px){
+      .grid-6,.grid-4{grid-template-columns:1fr}
+      .hero-panel{padding:18px}.hero-grid{gap:16px}.hero-chip{font-size:9px}
+      .mini-stats{grid-template-columns:1fr}.project-strip,.risk-matrix{grid-template-columns:1fr}
+      .supplier,.risk-row,.route-row{grid-template-columns:86px 1fr}.supplier em,.risk-row em,.route-row em{grid-column:2;justify-self:start}
+      .brand-copy span{display:none}.kpi-title-wrap{align-items:flex-start}.kpi-badge{flex:0 0 44px;width:44px;height:44px}
+    }
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+    @media print{
+      .topbar,.sidebar,.settings,.palette-overlay,.toast,.back-btn{display:none!important}
+      [data-month][hidden]{display:block!important}
+      body{background:#fff;color:#172033}.hero{padding-top:0}.hero-panel{box-shadow:none}.card{break-inside:avoid;box-shadow:none}.kpi-section{break-before:page}main{padding-bottom:0}
+    }
+  </style>
+</head>
+<body>
+  <!-- 锦源晟官方LOGO（矢量版，取自 www.shjayson.com /Public/Cn/images/com_logo01.svg） -->
+  <svg width="0" height="0" style="position:absolute;visibility:hidden" aria-hidden="true">
+    <symbol id="jy-logo" viewBox="0 0 141 52"><g>
+<path d="M68.4631 12.2617L69.8382 4.6003L72.409 4.33224L71.8581 7.20311C72.0631 7.1815 72.2766 7.16852 72.4987 7.16852H73.1862C73.72 7.16852 74.2196 7.1815 74.6936 7.20311C75.1677 7.22473 75.6844 7.25932 76.2481 7.30688L76.1584 9.32168C75.6118 9.27412 75.0951 9.24385 74.604 9.21791C74.1171 9.1963 73.5919 9.18332 73.0282 9.18332C72.7634 9.18332 72.4987 9.18765 72.2424 9.20062C71.9862 9.21359 71.7257 9.21791 71.4567 9.21791L70.8588 12.2617H68.4631ZM76.2139 29.3832C75.8723 29.4308 75.4837 29.461 75.0481 29.487C74.6125 29.5086 74.1641 29.5172 73.7072 29.5043C73.2503 29.4913 72.8147 29.4654 72.3962 29.4178C71.9777 29.3702 71.6104 29.3054 71.2859 29.2146C71.256 27.9175 71.2303 26.6291 71.209 25.3536C71.1876 24.0781 71.1748 22.7897 71.1748 21.4926V21.458C70.3165 21.458 69.4368 21.4926 68.5357 21.5618L68.4674 19.5773C68.9243 19.534 69.3813 19.4994 69.8297 19.4735C70.2823 19.4519 70.7264 19.4259 71.1706 19.4043C71.1706 18.0381 71.1919 16.6718 71.2389 15.3012L68.7749 15.405L68.6852 13.3556C69.9279 13.2864 71.1876 13.2518 72.4645 13.2518C73.1093 13.2518 73.7072 13.2562 74.2623 13.2691C74.8175 13.2821 75.4111 13.308 76.0474 13.3556L75.979 15.405L73.626 15.3012C73.6132 15.9844 73.6004 16.6675 73.5919 17.3506C73.5833 18.0337 73.5791 18.7169 73.5791 19.4C74.0061 19.4216 74.4417 19.4476 74.8773 19.4692C75.3128 19.4908 75.7698 19.5254 76.2395 19.5729L76.1285 21.5575C75.2104 21.4883 74.3606 21.4537 73.5791 21.4537V21.4883C73.5791 23.5161 73.6004 25.5568 73.6474 27.6062C73.767 27.6062 75.8808 27.5586 76.0004 27.537L76.2011 29.3832H76.2139ZM130.931 27.3814C131.597 27.0614 132.233 26.6939 132.839 26.2745C133.446 25.8551 134.031 25.3839 134.59 24.8607C133.48 22.9972 132.72 20.5847 132.306 17.6316H131.174C129.799 17.6316 128.437 17.6446 127.083 17.6662C125.729 17.6879 124.367 17.7224 122.992 17.77V18.6693C122.992 19.0844 122.983 19.4994 122.97 19.9145C122.958 20.3296 122.932 20.7446 122.902 21.1554C123.436 21.1338 123.978 21.1165 124.533 21.1035C125.089 21.0905 125.558 21.0862 125.943 21.0862C126.711 21.0862 127.471 21.1078 128.215 21.1554C128.962 21.2029 129.713 21.2332 130.465 21.2592C130.495 21.7347 130.516 22.206 130.533 22.673C130.546 23.1399 130.555 23.6328 130.555 24.1516C130.555 24.8996 130.538 25.639 130.499 26.361C130.461 27.0874 130.414 27.8224 130.358 28.5704C129.816 28.592 129.274 28.6093 128.731 28.6223C128.189 28.6352 127.651 28.6395 127.117 28.6395L124.854 28.605L124.896 26.6896C125.238 26.7112 125.58 26.7242 125.93 26.7242H128.091C128.104 26.4302 128.121 26.1275 128.133 25.8119C128.146 25.4963 128.155 25.1807 128.155 24.865V23.9355C128.155 23.6328 128.146 23.3215 128.133 23.0059C127.378 22.9843 126.511 22.967 125.528 22.954C124.546 22.941 123.611 22.9497 122.723 22.9713C122.59 24.0652 122.407 25.1245 122.18 26.1492C121.95 27.1738 121.681 28.1899 121.369 29.193L119.042 28.6785C119.708 26.5858 120.152 24.5105 120.374 22.4395C120.596 20.3728 120.647 18.1764 120.528 15.859C122.304 15.7466 124.072 15.6774 125.84 15.6558C127.608 15.6341 129.385 15.6212 131.174 15.6212H132.084C132.054 15.3661 132.037 15.1153 132.028 14.8689C132.019 14.6224 132.011 14.3717 131.994 14.1166H134.321C134.334 14.3717 134.351 14.6311 134.364 14.8862C134.377 15.1413 134.402 15.4007 134.432 15.6558H135.487C135.833 15.6558 136.187 15.6687 136.542 15.6904L136.251 14.2549H138.668L138.98 15.7595C139.275 15.7595 139.574 15.7639 139.877 15.7768C140.18 15.7898 140.479 15.7941 140.774 15.7941L140.663 17.8435C139.655 17.7959 138.66 17.7657 137.669 17.7397C136.678 17.7181 135.679 17.6922 134.676 17.6706C134.838 18.7601 135.06 19.7329 135.342 20.5847C135.624 21.4364 135.957 22.2276 136.341 22.954C137.272 21.7737 138.113 20.3771 138.869 18.7644L140.842 19.7848C139.911 21.8083 138.882 23.4988 137.759 24.8607C138.63 25.7687 139.71 26.508 140.996 27.0744L139.954 29.5951C138.417 28.8903 137.101 27.9564 136.004 26.7934C134.718 27.978 133.326 28.9249 131.836 29.6297L130.926 27.3857L130.931 27.3814ZM90.208 21.337C90.1781 20.5976 90.1482 19.8626 90.1183 19.1319C88.3162 19.0195 86.5312 18.9503 84.7718 18.9287V16.7064H87.2102C88.0216 16.7064 88.8415 16.6848 89.6742 16.6372C89.7169 14.9078 89.7425 13.174 89.7425 11.4402C89.7425 9.70648 89.7212 7.99866 89.6742 6.31245C87.633 6.1741 85.5917 6.10924 83.5504 6.10924H83.307L83.6615 4.57004H81.2658L80.89 6.14383C80.2964 6.16545 79.7156 6.19139 79.1391 6.21301C78.5626 6.23463 77.9861 6.26921 77.4096 6.31677C77.3925 6.93073 77.384 7.54468 77.3755 8.15863C77.3755 8.15863 82.2992 7.99433 83.5547 7.99433C84.8102 7.99433 86.0401 8.02892 87.2828 8.0981C87.2828 8.48722 87.2828 8.86338 87.2956 9.22656C87.2999 9.50759 87.3041 13.2648 87.2956 13.602C87.287 13.9739 87.2828 14.35 87.2828 14.7305C86.6465 14.7521 86.023 14.7651 85.4081 14.7651H81.6501C81.0309 14.7651 80.4074 14.7521 79.7882 14.7305L79.7669 12.439C81.0224 12.3914 82.2821 12.3785 83.5376 12.3871C84.3063 12.3958 85.0878 12.4217 85.8607 12.439V10.3377C85.7241 10.3377 85.5789 10.3377 85.4422 10.3377C84.823 10.3248 84.191 10.3204 83.5547 10.3204H81.6459C81.0266 10.3204 77.3498 10.4415 77.3498 10.4415C77.3498 10.8176 77.3413 11.1938 77.3413 11.57C77.3413 13.3253 77.3626 14.9121 77.4096 16.6459C78.221 16.6934 79.0366 16.715 79.848 16.715H82.312V18.9374C80.5099 18.9849 78.7121 19.0498 76.9228 19.1406C76.91 20.0053 76.8886 20.8744 76.8673 21.7391C76.8459 22.6038 76.8331 23.4728 76.8331 24.3376C76.8331 24.9775 76.8417 25.6087 76.8545 26.2356C76.8673 26.8625 76.8929 27.4851 76.9228 28.0991L79.3185 27.9953C79.2758 26.8323 79.2502 25.6822 79.2416 24.5451C79.2331 23.4037 79.2544 22.2536 79.2971 21.0949C79.801 21.0732 80.2964 21.0559 80.796 21.043C81.2914 21.03 81.7996 21.0257 82.3163 21.0257V29.7421H84.7803V21.0257C85.2842 21.0257 85.7839 21.03 86.2792 21.043C86.7746 21.0559 87.2785 21.0732 87.7995 21.0949C87.8123 21.5056 87.8251 21.9207 87.8337 22.3444C87.8422 22.7681 87.8465 23.1702 87.8465 23.5593C87.8465 23.9917 87.8465 24.4327 87.8337 24.8737C87.8251 25.319 87.8166 25.7557 87.7995 26.1881C87.4579 26.1881 86.1639 26.1751 85.8266 26.1535L85.7839 28.2375C85.7839 28.2375 89.213 28.2029 90.1311 28.1337C90.161 27.3598 90.1909 26.5945 90.2208 25.8422C90.2507 25.0899 90.2635 24.3289 90.2635 23.5507C90.2635 22.82 90.2464 22.085 90.2208 21.3456L90.208 21.337ZM95.909 19.7113L93.9147 29.7594H96.4214L98.3944 19.7113H95.909ZM98.5694 17.4198L96.904 11.5051H94.3973L96.0157 17.4198H98.5652H98.5694ZM98.7701 9.90104L97.0406 4.26306H94.5126L96.289 9.90104H98.7744H98.7701ZM104.074 21.7391L102.387 29.314H104.715L106.444 21.3499L104.074 21.7391ZM114.319 21.4537H111.991L113.435 29.314H115.741L114.323 21.4537H114.319ZM115.604 7.4755L115.694 5.39152C115.117 5.3699 114.468 5.33964 113.755 5.30505C113.038 5.27046 112.303 5.24884 111.547 5.23587C110.791 5.2229 110.053 5.21425 109.331 5.20128C108.605 5.18831 107.956 5.18399 107.379 5.18399C106.166 5.18399 104.898 5.21425 103.574 5.27046C102.251 5.32667 100.974 5.39152 99.7481 5.45638C99.7908 8.28401 99.7865 10.8004 99.7267 13.0097C99.6669 15.2191 99.5516 17.2555 99.3851 19.1103C99.2143 20.9695 98.9922 22.7032 98.7189 24.3246C98.4456 25.9416 98.1168 27.5586 97.7324 29.18L100.235 29.6253C100.94 26.7545 101.46 23.4901 101.806 19.8324C102.152 16.1746 102.272 12.0239 102.169 7.37173C103.967 7.23338 105.829 7.16852 107.759 7.16852L107.337 9.28709C106.611 9.30871 105.906 9.326 105.218 9.33897C104.531 9.35195 103.878 9.37789 103.254 9.42545C103.224 10.0697 103.207 10.8436 103.19 11.4792C103.19 11.4792 106.581 11.2976 107.2 11.2846C107.819 11.2716 108.468 11.2673 109.139 11.2673C109.809 11.2673 110.467 11.2716 111.103 11.2846C111.739 11.2976 112.286 11.3149 112.743 11.3365C112.756 11.717 112.769 12.0931 112.777 12.4649C112.781 12.7849 112.786 16.3346 112.777 16.6848C112.769 17.0393 112.76 17.3852 112.743 17.7268C112.299 17.7484 111.761 17.7657 111.124 17.7787C110.488 17.7916 109.835 17.7959 109.16 17.7959C108.485 17.7959 107.836 17.7916 107.208 17.7787C106.581 17.7657 106.043 17.7484 105.599 17.7268C105.586 17.3852 105.573 17.0393 105.564 16.6848C105.556 16.3302 105.552 15.9844 105.552 15.6428C106.098 15.5952 106.679 15.565 107.294 15.539C107.909 15.5174 108.524 15.5044 109.147 15.5044C109.771 15.5044 110.381 15.5174 110.992 15.539V13.5113C110.411 13.494 109.809 13.4853 109.194 13.4853C107.939 13.4853 103.147 13.7101 103.147 13.7101C103.147 13.9998 103.139 14.1728 103.139 14.4581C103.139 16.1097 103.177 17.8349 103.25 19.6378C103.959 19.707 104.719 19.7589 105.534 19.7935C106.346 19.828 107.196 19.8453 108.084 19.8453C108.114 21.1684 108.127 22.5 108.118 23.8447C108.11 25.1893 108.092 26.4994 108.063 27.7748H107.251C106.978 27.7748 106.7 27.7619 106.418 27.7402L106.239 29.621C106.948 29.6686 107.644 29.6772 108.323 29.6556C109.002 29.634 109.698 29.5734 110.407 29.4827C110.437 27.9305 110.467 26.3437 110.497 24.7137C110.527 23.0837 110.527 21.4624 110.497 19.841C111.338 19.841 112.149 19.8194 112.927 19.7718C113.704 19.7243 114.425 19.681 115.087 19.6335C115.13 18.7688 115.16 17.917 115.177 17.0869C115.19 16.2567 115.198 15.418 115.198 14.5749C115.198 13.7318 115.19 12.8497 115.177 11.9937C115.16 11.1376 115.134 10.2815 115.087 9.41248C114.319 9.36492 113.477 9.33465 112.559 9.30871C111.641 9.28709 110.697 9.27412 109.719 9.27412L110.142 7.15555C111.974 7.22473 113.793 7.3285 115.6 7.46253L115.604 7.4755ZM139.903 6.93073C139.864 6.22598 139.817 5.50826 139.757 4.77757C138.118 4.73001 136.491 4.69975 134.876 4.6738C133.266 4.65219 131.639 4.63922 129.995 4.63922C128.351 4.63922 126.724 4.65219 125.106 4.6738C123.487 4.69542 121.856 4.73001 120.216 4.77757C120.19 5.44773 120.161 6.10924 120.135 6.76211L130 6.65834L137.473 6.76211V11.3754C134.987 11.4446 132.498 11.4792 130 11.4792C128.757 11.4792 127.514 11.4748 126.272 11.4619C125.029 11.4489 123.786 11.423 122.543 11.3754L122.522 10.1432C126.993 10.061 131.473 10.0567 135.957 10.1215V8.15863C134.138 8.11539 132.318 8.08945 130.503 8.08945C127.864 8.08945 120.088 8.24943 120.088 8.24943C120.084 8.54343 120.079 8.84176 120.079 9.14009C120.079 9.87078 120.092 10.5366 120.114 11.2543C120.135 11.9721 120.178 12.6854 120.237 13.3902C121.877 13.4378 123.504 13.468 125.118 13.494C126.728 13.5156 128.355 13.5285 130 13.5285C131.644 13.5285 133.266 13.5156 134.881 13.494C136.491 13.4723 138.118 13.4378 139.762 13.3902C139.804 12.6854 139.851 11.9721 139.894 11.2543C139.937 10.5366 139.962 9.81457 139.962 9.08388C139.962 8.35319 139.945 7.63547 139.907 6.93073H139.903Z" fill="#1849B5"/>
+<path d="M69.1763 46.0031C69.377 46.1242 69.6289 46.2107 69.9364 46.2712C70.2439 46.3317 70.5343 46.362 70.8118 46.362C71.4908 46.362 72.0161 46.1674 72.3833 45.774C72.7506 45.3805 72.9385 44.8012 72.9385 44.0273V37.0057H70.6581V35.2633H75.2659V44.0273C75.2659 45.2595 74.9071 46.2453 74.1854 46.9846C73.4637 47.7239 72.5114 48.0958 71.3328 48.0958C70.3506 48.0958 69.6332 48.0309 69.1763 47.8969V46.0031Z" fill="#1849B5"/>
+<path d="M84.6565 35.2633L89.7084 47.9185H87.3597L86.0145 44.4596H80.5398L79.2032 47.9185H76.8545L81.9149 35.2633H84.6565ZM83.29 36.9063C83.1747 37.2522 83.0637 37.5764 82.9612 37.8748C82.8587 38.1731 82.7348 38.5017 82.5939 38.8649L81.0822 42.7993H85.4892L83.969 38.8735C83.7555 38.3331 83.5291 37.6802 83.2857 36.9063H83.29Z" fill="#1849B5"/>
+<path d="M95.6143 40.9488L98.8256 35.2633H101.26L96.746 42.7086V47.9185H94.4271V42.7086L89.9133 35.2633H92.4329L95.6058 40.9488H95.6143Z" fill="#1849B5"/>
+<path d="M111.389 44.3515C111.389 45.5621 110.975 46.4874 110.155 47.1316C109.331 47.7758 108.139 48.0957 106.581 48.0957C105.21 48.0957 104.129 47.819 103.344 47.2613C102.558 46.7035 102.045 45.8648 101.811 44.7363L103.984 44.3861C104.3 45.7567 105.201 46.4441 106.696 46.4441C108.323 46.4441 109.139 45.7869 109.139 44.4769C109.139 44.1007 109.057 43.7894 108.899 43.5516C108.737 43.3138 108.519 43.1106 108.237 42.9507C107.956 42.7907 107.623 42.6523 107.242 42.5399C106.862 42.4275 106.452 42.3151 106.017 42.194C104.966 41.913 104.202 41.619 103.732 41.312C103.262 41.005 102.899 40.6246 102.643 40.1619C102.391 39.6993 102.263 39.1243 102.263 38.4368C102.263 37.3775 102.643 36.5517 103.399 35.9594C104.155 35.3671 105.206 35.0687 106.555 35.0687C107.904 35.0687 108.84 35.3065 109.561 35.7821C110.283 36.2577 110.783 37.0057 111.056 38.0217L108.852 38.3893C108.562 37.2349 107.789 36.6555 106.534 36.6555C105.885 36.6555 105.389 36.8025 105.039 37.1008C104.689 37.3991 104.514 37.8099 104.514 38.3374C104.514 38.7006 104.591 39.0032 104.749 39.241C104.907 39.4788 105.141 39.682 105.457 39.855C105.773 40.0279 106.376 40.2441 107.277 40.5035C108.327 40.8105 109.079 41.0785 109.527 41.3077C109.976 41.5368 110.33 41.7963 110.595 42.0773C110.86 42.3583 111.056 42.6869 111.193 43.0544C111.329 43.4263 111.393 43.8586 111.393 44.3472L111.389 44.3515Z" fill="#1849B5"/>
+<path d="M125.964 41.5325C125.964 42.8685 125.704 44.0358 125.178 45.0303C124.657 46.029 123.906 46.7856 122.928 47.3131C121.95 47.8363 120.788 48.1 119.439 48.1C117.372 48.1 115.775 47.525 114.639 46.3706C113.503 45.2162 112.935 43.6078 112.935 41.5325C112.935 39.4571 113.507 37.8877 114.647 36.7635C115.788 35.6394 117.393 35.073 119.456 35.073C121.519 35.073 123.12 35.6437 124.256 36.7808C125.392 37.9179 125.96 39.5004 125.96 41.5325H125.964ZM123.577 41.5325C123.577 40.0235 123.222 38.8605 122.518 38.0433C121.813 37.2262 120.793 36.8154 119.46 36.8154C118.128 36.8154 117.069 37.2218 116.364 38.0303C115.66 38.8432 115.305 40.0062 115.305 41.5281C115.305 43.05 115.664 44.2347 116.377 45.0865C117.09 45.9382 118.115 46.3619 119.439 46.3619C120.763 46.3619 121.826 45.9512 122.526 45.1297C123.227 44.3082 123.577 43.1106 123.577 41.5281V41.5325Z" fill="#1849B5"/>
+<path d="M137.468 47.9185L130.619 37.6716C130.636 38.0607 130.657 38.4455 130.67 38.826C130.687 39.2064 130.696 39.5912 130.696 39.9804V47.9185H128.577V35.2633H131.366L138.293 45.5838C138.267 45.2552 138.246 44.892 138.224 44.4985C138.203 44.1051 138.194 43.6338 138.194 43.089V35.2676H140.321V47.9228H137.464L137.468 47.9185Z" fill="#1849B5"/>
+<path d="M45.7658 4.47061C43.669 3.10435 40.8633 3.96042 39.8598 6.26923L30.8962 30.8965L46.607 10.6577C48.2639 8.77259 47.8625 5.83254 45.7658 4.47061Z" fill="#FF7936"/>
+<path d="M52.2698 12.426C50.6854 10.6577 47.9182 10.7398 46.4407 12.599L31.7505 31.7353L51.5395 18.2845C53.5082 16.9745 53.8583 14.1901 52.274 12.426H52.2698Z" fill="#FF7936"/>
+<path d="M55.2804 21.8818C54.3323 19.9578 51.9068 19.3438 50.1772 20.5934L31.9768 33.4172L53.2306 26.7891C55.2547 26.1362 56.2284 23.8101 55.2804 21.8818Z" fill="#FF7936"/>
+<path d="M54.7421 31.0175C54.3194 29.1151 52.3208 28.0472 50.5315 28.7649L31.1653 35.4838L51.8895 34.8785C53.8112 34.7488 55.1649 32.9156 54.7421 31.0175Z" fill="#FF7936"/>
+<path d="M51.8427 38.506C51.9324 36.9711 50.6428 35.7173 49.131 35.8643L30.2815 37.0749L48.8449 40.8105C50.331 41.1348 51.7531 40.0409 51.8427 38.506Z" fill="#FF7936"/>
+<path d="M47.7047 44.0273C48.0762 42.7216 47.2093 41.3899 45.877 41.217L28.9619 38.6747L44.6812 45.4195C45.8983 45.9945 47.3332 45.333 47.7047 44.0273Z" fill="#FF7936"/>
+<path d="M43.02 47.7974C43.5709 46.7381 43.0541 45.4324 41.9353 45.0476L27.7917 39.816L40.1674 48.4589C41.1154 49.1723 42.4691 48.861 43.02 47.8017V47.7974Z" fill="#FF7936"/>
+<path d="M37.9725 50.2316C38.6429 49.4015 38.4252 48.1563 37.507 47.6158L25.9983 40.4343L35.3462 50.2921C36.0551 51.092 37.302 51.0661 37.9725 50.2316Z" fill="#FF7936"/>
+<path d="M32.8393 51.5719C33.5952 50.9709 33.6464 49.8295 32.9418 49.168L24.1875 40.5078L30.5077 51.0963C30.9774 51.9481 32.0835 52.1729 32.8393 51.5719Z" fill="#FF7936"/>
+<path d="M28.1249 51.8703C28.8936 51.5157 29.1712 50.5473 28.7015 49.8295L22.9578 40.577L26.2203 50.9753C26.4467 51.8011 27.352 52.2248 28.1207 51.8703H28.1249Z" fill="#FF7936"/>
+<path d="M23.7049 51.4206C24.4309 51.3082 24.8878 50.5688 24.6657 49.8598L22.0608 40.7759L22.3298 50.2186C22.3256 50.9623 22.9789 51.533 23.7006 51.4206H23.7049Z" fill="#FF7936"/>
+<path d="M20.0281 50.3656C20.6772 50.4564 21.2537 49.9376 21.2452 49.2718L21.2793 40.8062L19.1527 48.9821C18.9648 49.6177 19.379 50.2749 20.0281 50.3656Z" fill="#FF7936"/>
+<path d="M16.898 48.9388C17.4403 49.1723 18.0595 48.861 18.2005 48.2817L20.1905 40.9618L16.4581 47.5294C16.1464 48.0352 16.3556 48.701 16.898 48.9345V48.9388Z" fill="#FF7936"/>
+<path d="M9.88177 47.5294C11.9785 48.8957 14.7842 48.0396 15.7877 45.7308L24.7513 21.1035L9.0405 41.3423C7.38358 43.2274 7.785 46.1675 9.88177 47.5294Z" fill="#1849B5"/>
+<path d="M3.37358 39.574C4.95789 41.3423 7.72511 41.2602 9.20267 39.401L23.8928 20.2648L4.10381 33.7155C2.13516 35.0256 1.78499 37.81 3.36931 39.574H3.37358Z" fill="#1849B5"/>
+<path d="M0.36728 30.1183C1.31531 32.0423 3.7409 32.6562 5.47041 31.4067L23.6708 18.5829L2.41707 25.211C0.392903 25.8638 -0.580748 28.1899 0.36728 30.1183Z" fill="#1849B5"/>
+<path d="M0.901115 20.9824C1.32388 22.8848 3.32243 23.9527 5.11173 23.235L24.478 16.5161L3.75374 17.1214C1.83206 17.2511 0.478346 19.0843 0.901115 20.9824Z" fill="#1849B5"/>
+<path d="M3.80495 13.494C3.71527 15.0288 5.00493 16.2827 6.51665 16.1357L25.3662 14.9251L6.7985 11.1895C5.3124 10.8652 3.89036 11.9591 3.80068 13.494H3.80495Z" fill="#1849B5"/>
+<path d="M7.94285 7.97279C7.57132 9.27852 8.43822 10.6102 9.77058 10.7831L26.6856 13.3254L10.9663 6.57626C9.74923 6.00122 8.31437 6.66273 7.94285 7.96846V7.97279Z" fill="#1849B5"/>
+<path d="M12.6233 4.19821C12.0724 5.25749 12.5892 6.56322 13.708 6.94802L27.8516 12.1796L15.4759 3.53669C14.5279 2.8233 13.1742 3.1346 12.6233 4.19388V4.19821Z" fill="#1849B5"/>
+<path d="M17.6752 1.76832C17.0048 2.59845 17.2226 3.84365 18.1407 4.3841L29.6494 11.5656L20.3015 1.70779C19.5926 0.907924 18.3457 0.933865 17.6752 1.76832Z" fill="#1849B5"/>
+<path d="M22.8082 0.423745C22.0523 1.02473 22.0011 2.16616 22.7057 2.82767L31.46 11.4878L25.1398 0.899342C24.6701 0.0475913 23.5641 -0.177236 22.8082 0.423745Z" fill="#1849B5"/>
+<path d="M27.5227 0.125381C26.754 0.479917 26.4764 1.4484 26.9462 2.16612L32.6899 11.4186L29.4273 1.02037C29.201 0.194559 28.2956 -0.229154 27.527 0.125381H27.5227Z" fill="#1849B5"/>
+<path d="M31.9425 0.579358C31.2166 0.691771 30.7596 1.43111 30.9817 2.14018L33.5866 11.2241L33.3176 1.78132C33.3219 1.03766 32.6685 0.466944 31.9468 0.579358H31.9425Z" fill="#1849B5"/>
+<path d="M35.6194 1.63437C34.9703 1.54357 34.3938 2.0624 34.4023 2.72824L34.3682 11.1939L36.4948 3.01792C36.6827 2.38235 36.2685 1.72516 35.6194 1.63437Z" fill="#1849B5"/>
+<path d="M38.7495 3.06105C38.2072 2.82758 37.588 3.13888 37.447 3.71824L35.457 11.0381L39.1894 4.47055C39.5011 3.96468 39.2918 3.29885 38.7495 3.06537V3.06105Z" fill="#1849B5"/>
+</g>
+</symbol>
+  </svg>
+  <a class="skip-link" href="#content">跳到主要内容</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" aria-label="锦源晟国际物流部">
+        <span class="brand-logo"><svg viewBox="0 0 141 52" width="112" height="41" role="img" aria-label="锦源晟LOGO"><use href="#jy-logo"/></svg></span>
+        <div class="brand-copy"><strong>锦源晟 · 国际物流部</strong><span id="brandSub">September 2026 Performance Dashboard</span></div>
+      </div>
+      <div class="top-actions">
+        <button class="text-btn" id="commandBtn" aria-label="打开快速导航"><span>快速导航</span><span class="kbd">⌘ K</span></button>
+        <button class="icon-btn" id="themeBtn" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
+        <button class="icon-btn" id="printBtn" aria-label="打印或导出PDF" title="打印或导出PDF">⇩</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <section class="hero" id="top">
+      <div class="hero-panel">
+        <div class="hero-grid" data-hero="sep">
+          <div>
+            <div class="eyebrow"><span class="pulse"></span>Monthly Review · 2026.09 · 实绩</div>
+            <h1>国际物流部<br>九月工作 Dashboard</h1>
+            <p class="hero-lead">围绕六项KPI呈现九月完成情况、当前问题与十月重点。九月的主旋律已从“方案准备”转向“订舱、预申报、欧洲主体设立与业务资源落地”。</p>
+            <div class="hero-meta">
+              <span class="hero-chip">汇报人：卢剑辉</span>
+              <span class="hero-chip">统计期间：2026年9月</span>
+              <span class="hero-chip">六项KPI逐项展开</span>
+              <span class="hero-chip">财务收款事项已排除</span>
+            </div>
+          </div>
+          <aside class="hero-insight">
+            <div class="label">MANAGEMENT INSIGHT</div>
+            <strong>执行端明显前移，合规闭环与供应商边界仍是十月关键。</strong>
+            <p>重点关注石墨出口许可、三条预申报路径、欧洲多段路线责任，以及危险品单证一致性。</p>
+          </aside>
+        </div>
+        <div class="hero-grid" data-hero="oct" hidden>
+          <div>
+            <div class="eyebrow"><span class="pulse"></span>Monthly Plan · 2026.10 · 计划</div>
+            <h1>国际物流部<br>十月计划 Dashboard</h1>
+            <p class="hero-lead">十月以“闭环”为主：把九月的订舱、预申报、主体设立与资源接触，转成书面结论、可交付文件与明确责任。内容依据九月报告的十月计划整理。</p>
+            <div class="hero-meta">
+              <span class="hero-chip">目标月份：2026年10月</span>
+              <span class="hero-chip">六项KPI计划视图</span>
+              <span class="hero-chip">以交付件为判定口径</span>
+              <span class="hero-chip">数值目标待管理层确认</span>
+            </div>
+          </div>
+          <aside class="hero-insight">
+            <div class="label">MANAGEMENT INSIGHT</div>
+            <strong>十月的成败在于“书面化”。</strong>
+            <p>预申报结论、承运确认、许可文件、费用拆分与异常升级路径，都要从口头推进落到纸面。</p>
+          </aside>
+        </div>
+        <div class="hero-grid" data-hero="nov" hidden>
+          <div>
+            <div class="eyebrow"><span class="pulse"></span>Rolling Outlook · 2026.11 · 展望</div>
+            <h1>国际物流部<br>十一月展望 Dashboard</h1>
+            <p class="hero-lead">十一月是十月闭环后的运行期展望：机制按双节点运行，业务进入发运复盘与成本基线阶段，供应商关系从比选走向协议。</p>
+            <div class="hero-meta">
+              <span class="hero-chip">展望月份：2026年11月</span>
+              <span class="hero-chip">非既定事实</span>
+              <span class="hero-chip">需以十月结果校准</span>
+              <span class="hero-chip">供提前排布资源与节点</span>
+            </div>
+          </div>
+          <aside class="hero-insight">
+            <div class="label">MANAGEMENT INSIGHT</div>
+            <strong>展望按十月计划的顺延逻辑整理，尚未经确认。</strong>
+            <p>每一项都标注了前置条件：十月未闭环的事项，十一月无法自动推进。</p>
+          </aside>
+        </div>
+        <div class="hero-grid" data-hero="dec" hidden>
+          <div>
+            <div class="eyebrow"><span class="pulse"></span>Pending Source · 2026.12 · 待补充</div>
+            <h1>国际物流部<br>十二月工作 Dashboard</h1>
+            <p class="hero-lead">十二月视图的结构已按六项KPI预置完成，等待十二月工作报告PPT提供后自动填充：完成情况、当前问题、次月计划三段式展开。</p>
+            <div class="hero-meta">
+              <span class="hero-chip">目标月份：2026年12月</span>
+              <span class="hero-chip">六项KPI结构已预留</span>
+              <span class="hero-chip">等待报告源文件</span>
+              <span class="hero-chip">年度收口月</span>
+            </div>
+          </div>
+          <aside class="hero-insight">
+            <div class="label">HOW TO FILL</div>
+            <strong>把十二月报告PPT发来即可生成。</strong>
+            <p>看板会沿用同一套口径：只呈现报告中有明确数量或节点依据的内容，不虚构完成率，未闭环事项保留“待确认”。</p>
+          </aside>
+        </div>
+        <svg class="hero-logo" viewBox="0 0 141 52" aria-hidden="true"><use href="#jy-logo"/></svg>
+        <div class="gold-rule"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="shell">
+    <div class="layout">
+      <aside class="sidebar" id="sidebar" aria-label="月份与KPI导航">
+        <div class="side-block">
+          <p class="side-label">切换月份</p>
+          <div class="month-switch" id="monthSwitch" role="tablist" aria-label="月份切换">
+            <button class="month-btn active" data-month-btn="sep" role="tab" aria-selected="true"><b>9月</b><span>实绩</span></button>
+            <button class="month-btn" data-month-btn="oct" role="tab" aria-selected="false"><b>10月</b><span>计划</span></button>
+            <button class="month-btn" data-month-btn="nov" role="tab" aria-selected="false"><b>11月</b><span>展望</span></button>
+            <button class="month-btn" data-month-btn="dec" role="tab" aria-selected="false"><b>12月</b><span>待补充</span></button>
+          </div>
+        </div>
+        <div class="side-block">
+          <p class="side-label">六项KPI导航</p>
+          <nav class="kpi-nav" id="kpiNav" aria-label="六项KPI快速跳转">
+            <button class="side-kpi active" data-kpi="1"><span class="sk-no">01</span><span class="sk-text"><strong>架构与流程</strong><span class="sk-sub">正在完善</span></span></button>
+            <button class="side-kpi" data-kpi="2"><span class="sk-no">02</span><span class="sk-text"><strong>供应商与仓储</strong><span class="sk-sub">正在推进</span></span></button>
+            <button class="side-kpi" data-kpi="3"><span class="sk-no">03</span><span class="sk-text"><strong>端到端业务</strong><span class="sk-sub">重点推进</span></span></button>
+            <button class="side-kpi" data-kpi="4"><span class="sk-no">04</span><span class="sk-text"><strong>法规与合规</strong><span class="sk-sub">尚待闭环</span></span></button>
+            <button class="side-kpi" data-kpi="5"><span class="sk-no">05</span><span class="sk-text"><strong>成本与降本</strong><span class="sk-sub">正在比选</span></span></button>
+            <button class="side-kpi" data-kpi="6"><span class="sk-no">06</span><span class="sk-text"><strong>风险与时效</strong><span class="sk-sub">持续控制</span></span></button>
+          </nav>
+        </div>
+        <div class="side-block side-foot">
+          <div class="side-brand"><svg viewBox="0 0 141 52" width="96" height="35" role="img" aria-label="锦源晟LOGO"><use href="#jy-logo"/></svg><span>国际物流部<br>六项KPI管理看板</span></div>
+          <p class="side-tip">先选月份，再点KPI；滚动浏览时左侧导航自动跟随当前章节。⌘K 可快速定位。</p>
+        </div>
+      </aside>
+
+      <main class="content" id="content">
+
+  <!-- ============ 九月 ============ -->
+  <div class="month-panel" data-month="sep">
+    <section class="section" id="sep-overview" data-section="kpi-overview" aria-labelledby="sep-overview-title">
+      <div class="section-head">
+        <div><div class="section-kicker">KPI Navigator · 9月</div><h2 id="sep-overview-title">六项KPI，一键直达</h2></div>
+        <p>点击任一按钮，页面会平滑定位到该KPI展示区域；滚动浏览时，左侧导航会自动跟随当前章节。</p>
+      </div>
+      <div class="grid-6" data-peers>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="sep-kpi-1"><span class="no">KPI 01 <span class="arrow">↗</span></span><div><h3>部门架构搭建与流程体系</h3><p>人员、职责、授权与固定汇报机制</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="sep-kpi-2"><span class="no">KPI 02 <span class="arrow">↗</span></span><div><h3>海外供应商与仓储体系</h3><p>运输资源、服务边界与欧洲节点</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="sep-kpi-3"><span class="no">KPI 03 <span class="arrow">↗</span></span><div><h3>全球端到端业务落地执行</h3><p>泰国发运、欧洲项目与新增机会</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="sep-kpi-4"><span class="no">KPI 04 <span class="arrow">↗</span></span><div><h3>政策法规研判与跨境合规</h3><p>预申报、许可、EWC及货物属性</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="sep-kpi-5"><span class="no">KPI 05 <span class="arrow">↗</span></span><div><h3>物流成本管控与降本增效</h3><p>报价拆分、比选与异常费用预防</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="sep-kpi-6"><span class="no">KPI 06 <span class="arrow">↗</span></span><div><h3>规避风险、合规与时效</h3><p>危险品单证、船期与异常升级</p></div></button>
+        </article>
+      </div>
+
+      <div class="overview-banner">
+        <div><strong>九月已进入业务落地阶段</strong><p>七月搭基础，八月形成方案与合规路径，九月推进订舱、预申报、公司设立与资源落地，十月需要集中完成关键闭环。</p></div>
+        <div class="stage-line" aria-label="部门月度推进阶段">
+          <div class="stage done">7月<br>搭建基础</div><div class="stage done">8月<br>方案准备</div><div class="stage now">9月<br>落地执行</div><div class="stage">10月<br>闭环优化</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sep-pulse-title">
+      <div class="section-head"><div><div class="section-kicker">September Pulse</div><h2 id="sep-pulse-title">九月核心业务脉冲</h2></div><p>只列原报告中有明确数量或节点依据的数据，不对未闭环事项虚构完成率。</p></div>
+      <div class="grid-6 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">泰国铜粉</div><div class="card-title">待锁定船期与舱位</div></div><span class="status gold">推进中</span></div><div class="metric"><span data-counter="2">2</span><small>× 40HQ</small></div><div class="submetric">林查班 → 天津北疆码头</div><svg class="spark" viewBox="0 0 160 30" aria-hidden="true"><defs><linearGradient id="sparkFill1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f83f1" stop-opacity=".34"/><stop offset="1" stop-color="#3f83f1" stop-opacity="0"/></linearGradient></defs><path class="area" d="M2,28 L2,24 L27,22 L53,23 L78,17 L105,15 L132,9 L158,6 L158,28 Z"/><path d="M2,24 L27,22 L53,23 L78,17 L105,15 L132,9 L158,6"/></svg></article>
+        <article class="card"><div class="card-top"><div><div class="card-label">泰国石墨</div><div class="card-title">许可未完成不装运</div></div><span class="status amber">待许可</span></div><div class="metric"><span data-counter="1">1</span><small>× 40HQ</small></div><div class="submetric">出口许可仍是核心门槛</div></article>
+        <article class="card"><div class="card-top"><div><div class="card-label">锂电池运输</div><div class="card-title">危险品节点持续跟进</div></div><span class="status blue">执行中</span></div><div class="metric"><span data-counter="3">3</span><small>× 40HQ</small></div><div class="submetric">泰国 → 上海；MDGF与SI已推进</div></article>
+        <article class="card"><div class="card-top"><div><div class="card-label">ALTEO项目</div><div class="card-title">欧洲跨境项目</div></div><span class="status blue">申报初期</span></div><div class="metric"><span data-counter="5000">5,000</span><small>吨</small></div><div class="submetric">CARBONX、EWC与路线方案并行</div></article>
+        <article class="card"><div class="card-top"><div><div class="card-label">海关预申报</div><div class="card-title">三条路径并行验证</div></div><span class="status amber">待结论</span></div><div class="metric"><span data-counter="3">3</span><small>条路径</small></div><div class="submetric">中资环、陈总、新昊青</div></article>
+        <article class="card"><div class="card-top"><div><div class="card-label">首轮海运报价</div><div class="card-title">RCL直航方案</div></div><span class="status gold">已取得</span></div><div class="metric"><small>USD</small> <span data-counter="385">385</span></div><div class="submetric">/40HQ；预计运输14天，附加费另计</div></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="sep-kpi-1" data-section="kpi-1" aria-labelledby="sep-kpi1-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">01</div><div><div class="section-kicker">KPI 01 · 正在完善</div><h2 id="sep-kpi1-title">部门架构搭建与流程体系</h2></div></div>
+        <button class="back-btn" data-go="sep-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">SEPTEMBER DELIVERY</div><div class="card-title">人员配置开始形成，欧洲项目协作关系进入实操</div></div><span class="status blue">正在完善</span></div>
+          <div class="mini-stats"><div class="mini-stat"><b data-counter="2">2</b><span>九月新增成员</span></div><div class="mini-stat"><b>1 / 16</b><span>计划固定月度汇报日</span></div><div class="mini-stat"><b data-counter="4">4</b><span>拟建立文件目录类别</span></div></div>
+          <p class="scope">职责对应：卢剑辉统筹架构、岗位和流程；施粤康负责询价、订舱、单证与跟踪；刘虹东、张哲豪逐步参与欧洲项目。</p>
+          <ul class="list"><li>刘虹东、张哲豪陆续入职，欧洲项目人员配置开始形成。</li><li>明确张哲豪拟在公司变更完成后承担欧洲律动法定代表人职责。</li><li>施粤康具体推进泰国铜粉、石墨项目的询价、订舱与操作安排。</li><li>形成卢剑辉统筹、HANS推进、Zoli办理当地公司、张哲豪承接主体职责的协作关系。</li></ul>
+        </article>
+        <div class="grid-2">
+          <article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>新成员职责边界、授权事项与固定汇报内容仍需书面明确。</li><li>欧洲资料分散在邮件、合同和不同合作方之间。</li><li>正式分工细则与九月实际人员配置存在差异。</li></ul></article>
+          <article class="card"><h3 class="block-title plan">十月计划</h3><ul class="list plan"><li>完成欧洲项目岗位分工表和联系人清单。</li><li>建立公司注册、许可、物流、业务开发四类目录。</li><li>固化每月1日和16日物流情况总结。</li><li>明确项目责任及异常升级路径。</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="sep-kpi-2" data-section="kpi-2" aria-labelledby="sep-kpi2-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">02</div><div><div class="section-kicker">KPI 02 · 正在推进</div><h2 id="sep-kpi2-title">海外物流供应商与仓储体系</h2></div></div>
+        <button class="back-btn" data-go="sep-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">RESOURCE NETWORK</div><div class="card-title">欧洲及泰国运输资源已形成初步组合</div></div><span class="status blue">正在推进</span></div>
+          <div class="supplier-list" data-peers>
+            <div class="supplier" data-peer><b>MSK</b><span>ALTEO 5,000吨项目初步物流供应商范围</span><em>范围待明确</em></div>
+            <div class="supplier" data-peer><b>CTS Germany</b><span>SK On匈牙利项目ADR车辆及运输安排</span><em>危险品陆运</em></div>
+            <div class="supplier" data-peer><b>Kine-Reach</b><span>林查班至天津新港一般货物海运方案</span><em>货物适用待确认</em></div>
+            <div class="supplier" data-peer><b>Pacific Link</b><span>泰国至上海3个40HQ锂电池海运段操作</span><em>执行中</em></div>
+          </div>
+          <div class="note">九月主要成果集中在运输供应商，尚无新增海外仓储落地成果，不将“资源接触”表述为“仓储体系完成”。</div>
+        </article>
+        <article class="card">
+          <h3 class="block-title">欧洲路线节点</h3>
+          <div class="route-list" data-peers>
+            <div class="route-row" data-peer><b>Hungary</b><span>项目与公司主体起点</span><em>欧洲</em></div>
+            <div class="route-row" data-peer><b>Bremerhaven</b><span>欧洲海运衔接节点</span><em>转运</em></div>
+            <div class="route-row" data-peer><b>MYTPP</b><span>东南亚中转节点</span><em>中转</em></div>
+            <div class="route-row" data-peer><b>Gwangyang</b><span>韩国路线备选节点</span><em>目的区域</em></div>
+            <div class="route-row" data-peer><b>Busan</b><span>韩国目的节点</span><em>目的港</em></div>
+          </div>
+        </article>
+      </div>
+      <div class="grid-2 spot-grid" style="margin-top:13px">
+        <article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>MSK服务范围、路线节点、时效与责任边界待明确。</li><li>一般货物报价能否适用于铜粉、石墨，需船公司书面确认。</li><li>多段路线需明确每段承运人及货权交接方式。</li></ul></article>
+        <article class="card"><h3 class="block-title plan">十月计划</h3><ul class="list plan"><li>完成MSK、CTS Germany等供应商服务范围对比。</li><li>取得铜粉、石墨书面承运确认。</li><li>建立欧洲分段供应商与责任人清单。</li><li>补充危险品仓储、临时堆存与应急资源。</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="sep-kpi-3" data-section="kpi-3" aria-labelledby="sep-kpi3-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">03</div><div><div class="section-kicker">KPI 03 · 重点推进</div><h2 id="sep-kpi3-title">全球端到端业务落地执行</h2></div></div>
+        <button class="back-btn" data-go="sep-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-4 spot-grid">
+        <article class="card"><div class="card-label">铜粉</div><div class="metric"><span data-counter="2">2</span><small>× 40HQ</small></div><div class="submetric">泰国至天津；船期、舱位和操作安排待锁定</div></article>
+        <article class="card"><div class="card-label">石墨</div><div class="metric"><span data-counter="1">1</span><small>× 40HQ</small></div><div class="submetric">等待出口许可；与铜粉不同进度</div></article>
+        <article class="card"><div class="card-label">锂电池</div><div class="metric"><span data-counter="3">3</span><small>× 40HQ</small></div><div class="submetric">泰国至上海；危险品运输节点推进</div></article>
+        <article class="card"><div class="card-label">SK On匈牙利</div><div class="metric"><span data-counter="62">62</span><small>托</small></div><div class="submetric">17,856件UN3480电芯；ADR车辆安排中</div></article>
+      </div>
+      <article class="card" style="margin-top:13px">
+        <div class="card-top"><div><div class="card-label">PROJECT PORTFOLIO</div><div class="card-title">九月端到端项目组合</div></div><span class="status gold">5条工作线</span></div>
+        <div class="project-strip" data-peers>
+          <div class="project" data-peer><div class="flag">THAILAND</div><b>铜粉运输</b><span>2个40HQ，订舱准备与报价推进</span></div>
+          <div class="project" data-peer><div class="flag">THAILAND</div><b>石墨运输</b><span>1个40HQ，仍受出口许可约束</span></div>
+          <div class="project" data-peer><div class="flag">TH → CN</div><b>锂电池运输</b><span>3个40HQ，MDGF、标签、SI协同</span></div>
+          <div class="project" data-peer><div class="flag">CHINA</div><b>厦钨新能</b><span>待明确全链条或单环节服务边界</span></div>
+          <div class="project" data-peer><div class="flag">POLAND</div><b>Elewout黑粉</b><span>招标机会；初步条件Li约3.5%、FOB Poland</span></div>
+        </div>
+      </article>
+      <article class="card europe-spotlight" style="margin-top:13px">
+        <div class="card-top"><div><div class="card-label">EUROPE SPOTLIGHT</div><div class="card-title">欧洲业务专题｜仍归属于KPI 3</div></div><span class="status blue">重点专题</span></div>
+        <div class="europe-grid">
+          <div class="europe-project"><h4>ALTEO 5,000吨项目</h4><p>HANS组织初期申报；与CARBONX对接并组织EWC文件；MSK进入方案准备；路线覆盖匈牙利、Bremerhaven、MYTPP、Gwangyang、Busan。</p><div class="note">责任主体、批次安排、文件清单及多段运输责任仍需确认。</div></div>
+          <div class="europe-project"><h4>斯洛伐克项目与匈牙利Kft</h4><p>Zoli推进匈牙利Kft注册；计划约两周注册、约两个月完成股东及法定代表人变更；张哲豪拟承接欧洲律动法定代表人。</p><div class="note">斯洛伐克是业务方向，匈牙利Kft是经营主体，两者不能混为同一项目所在地。</div></div>
+        </div>
+      </article>
+      <div class="grid-2 spot-grid" style="margin-top:13px">
+        <article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>石墨柜未取得出口许可，不能按铜粉柜进度表述。</li><li>厦钨新能尚未明确运输、加工、冶炼或完整闭环需求。</li><li>Elewout缺少完整成分、EWC、包装、数量和交付窗口。</li><li>欧洲多段路线的时效、成本、货损责任尚未完成验证。</li></ul></article>
+        <article class="card"><h3 class="block-title plan">十月计划</h3><ul class="list plan"><li>锁定2个铜粉柜船期、舱位与操作安排。</li><li>根据许可结果决定石墨是否进入装运。</li><li>明确厦钨新能服务范围；取得Elewout招标文件。</li><li>完成欧洲责任分工、EWC及运输文件闭环。</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="sep-kpi-4" data-section="kpi-4" aria-labelledby="sep-kpi4-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">04</div><div><div class="section-kicker">KPI 04 · 尚待闭环</div><h2 id="sep-kpi4-title">进出口政策法规研判与跨境合规</h2></div></div>
+        <button class="back-btn" data-go="sep-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">COMPLIANCE PIPELINE</div><div class="card-title">三条预申报路径并行，项目资料进入闭环阶段</div></div><span class="status amber">尚待闭环</span></div>
+          <div class="flow" data-peers>
+            <div class="flow-step" data-peer><b>路径 01</b><span>中资环推进预申报</span></div>
+            <div class="flow-step" data-peer><b>路径 02</b><span>深圳供应商陈总；样品已交付</span></div>
+            <div class="flow-step" data-peer><b>路径 03</b><span>新昊青；样品已交付</span></div>
+            <div class="flow-step" data-peer><b>合并结论</b><span>主体、品名、HS编码待统一</span></div>
+          </div>
+          <div class="mini-stats"><div class="mini-stat"><b data-counter="3">3</b><span>预申报路径</span></div><div class="mini-stat"><b>3.5%</b><span>Elewout黑粉初步锂含量</span></div><div class="mini-stat"><b>EWC</b><span>ALTEO文件组织中</span></div></div>
+        </article>
+        <article class="card">
+          <h3 class="block-title risk">关键合规门槛</h3>
+          <div class="risk-list" data-peers>
+            <div class="risk-row" data-peer><b>预申报</b><span>尚无三条路径的书面结论</span><em>高优先</em></div>
+            <div class="risk-row" data-peer><b>石墨许可</b><span>出口许可、进口属性、承运口径需一致</span><em>阻断项</em></div>
+            <div class="risk-row" data-peer><b>ALTEO</b><span>EWC及欧洲跨境文件需闭环</span><em>推进中</em></div>
+            <div class="risk-row" data-peer><b>Elewout</b><span>成分、EWC和包装资料不完整</span><em>投标前置</em></div>
+          </div>
+        </article>
+      </div>
+      <div class="grid-2 spot-grid" style="margin-top:13px">
+        <article class="card"><h3 class="block-title">九月完成</h3><ul class="list"><li>三条海关预申报路径并行验证，样品已交付两方。</li><li>石墨维持“许可未完成不装运”原则。</li><li>ALTEO开始组织EWC Code及欧洲跨境运输文件。</li><li>Elewout已取得Li约3.5%、FOB Poland两项初步条件。</li></ul></article>
+        <article class="card"><h3 class="block-title plan">十月计划</h3><ul class="list plan"><li>汇总三条路径书面反馈并确定最终方案。</li><li>完成石墨申报、检测及许可文件清单。</li><li>核验ALTEO的EWC及跨境运输资料。</li><li>投标前完成Elewout货物属性与运输条件审查。</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="sep-kpi-5" data-section="kpi-5" aria-labelledby="sep-kpi5-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">05</div><div><div class="section-kicker">KPI 05 · 正在比选</div><h2 id="sep-kpi5-title">物流成本管控与降本增效</h2></div></div>
+        <button class="back-btn" data-go="sep-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">FIRST-ROUND QUOTE</div><div class="card-title">林查班至天津新港｜RCL直航一般货物方案</div></div><span class="status gold">首轮报价</span></div>
+          <div class="cost-hero"><div><div class="price"><small>USD</small> <span data-counter="385">385</span><small>/40HQ</small></div><div class="submetric">海运费；起运港与目的港费用另计</div></div><div class="time"><b data-counter="14">14</b><span>预计运输天数</span></div></div>
+          <div class="bar-row" data-peer><span class="k">书面报价覆盖</span><div class="bar-track"><div class="bar-fill" style="--w:34%"></div></div><span class="v">1 / 3</span></div>
+          <div class="bar-row" data-peer><span class="k">费用拆分完整度</span><div class="bar-track"><div class="bar-fill" style="--w:48%"></div></div><span class="v">待补</span></div>
+          <div class="bar-row" data-peer><span class="k">货物适用确认</span><div class="bar-track"><div class="bar-fill" style="--w:28%"></div></div><span class="v">待书面</span></div>
+          <div class="note">图中进度仅表达材料准备阶段，不是业务完成率。当前一般货物报价不自动适用于铜粉、石墨或危险品。</div>
+        </article>
+        <article class="card">
+          <h3 class="block-title risk">成本边界检查</h3>
+          <div class="risk-list" data-peers>
+            <div class="risk-row" data-peer><b>海运费</b><span>已取得USD 385/40HQ首轮报价</span><em>已知</em></div>
+            <div class="risk-row" data-peer><b>起运港费用</b><span>需与海运费分开比较</span><em>待拆分</em></div>
+            <div class="risk-row" data-peer><b>目的港费用</b><span>当前报价另计</span><em>待拆分</em></div>
+            <div class="risk-row" data-peer><b>特殊货附加费</b><span>铜粉、石墨及危险品条件未确认</span><em>风险项</em></div>
+            <div class="risk-row" data-peer><b>异常费用</b><span>取消、改期、Free Time需订舱前确认</span><em>控制项</em></div>
+          </div>
+        </article>
+      </div>
+      <div class="grid-2 spot-grid" style="margin-top:13px">
+        <article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>仅一份首轮报价，未达到常规2至3家书面比选要求。</li><li>危险品或特殊货附加费未确认。</li><li>欧洲多段中转路线尚未形成完整费用结构。</li></ul></article>
+        <article class="card"><h3 class="block-title plan">十月计划</h3><ul class="list plan"><li>补充备选供应商并统一口径比价。</li><li>分拆海运、两端、拖车和申报费用。</li><li>核对MSK欧洲路线各段费用与附加条件。</li><li>订舱前确认取消费、改期费和Free Time。</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="sep-kpi-6" data-section="kpi-6" aria-labelledby="sep-kpi6-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">06</div><div><div class="section-kicker">KPI 06 · 持续控制</div><h2 id="sep-kpi6-title">规避风险、保证合规与提升时效</h2></div></div>
+        <button class="back-btn" data-go="sep-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-4 spot-grid">
+        <article class="card"><div class="card-label">计划船期</div><div class="metric">9/16<small>原计划</small></div><div class="submetric">后调整至9月20日</div></article>
+        <article class="card"><div class="card-label">调整后船期</div><div class="metric">9/20<small>更新</small></div><div class="submetric">继续跟进订舱和装运节点</div></article>
+        <article class="card"><div class="card-label">计划到港</div><div class="metric">9/26<small>ETA</small></div><div class="submetric">以实际船期及承运信息为准</div></article>
+        <article class="card"><div class="card-label">危险品项目</div><div class="metric"><span data-counter="3">3</span><small>× 40HQ</small></div><div class="submetric">MDGF、标签、SI、VGM联动控制</div></article>
+      </div>
+      <div class="grid-main spot-grid" style="margin-top:13px">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">RISK CONTROL</div><div class="card-title">九月已执行的风险控制动作</div></div><span class="status gold">持续控制</span></div>
+          <ul class="list"><li>完成泰国至上海3个40HQ锂电池项目MDGF提交和危险品标签提醒。</li><li>装柜后发现SI毛重差异，操作方已提交修订版SI。</li><li>持续跟踪SI、VGM及MDGF截止时间。</li><li>泰国海关临时要求补充公司董事身份证明后，调整当地报关操作安排。</li><li>石墨项目继续执行“许可未完成不安排装运”。</li></ul>
+          <div class="flow" data-peers><div class="flow-step" data-peer><b>标签</b><span>危险品标签提醒</span></div><div class="flow-step" data-peer><b>MDGF</b><span>已提交</span></div><div class="flow-step" data-peer><b>SI / VGM</b><span>重量与数据复核</span></div><div class="flow-step" data-peer><b>船期</b><span>动态跟踪</span></div><div class="flow-step" data-peer><b>异常升级</b><span>责任人闭环</span></div></div>
+        </article>
+        <article class="card">
+          <h3 class="block-title risk">风险矩阵</h3>
+          <div class="risk-matrix" data-peers>
+            <div class="risk-cell" data-peer><b><span class="risk-dot red"></span>许可阻断</b><span>石墨出口许可未完成</span></div>
+            <div class="risk-cell" data-peer><b><span class="risk-dot red"></span>单证一致性</b><span>标签、MDGF、SI、VGM、实装数据</span></div>
+            <div class="risk-cell" data-peer><b><span class="risk-dot"></span>操作切换</b><span>临时更换报关方的衔接与责任</span></div>
+            <div class="risk-cell" data-peer><b><span class="risk-dot"></span>多段路线</b><span>欧洲任一段条件不匹配影响全程</span></div>
+            <div class="risk-cell" data-peer><b><span class="risk-dot blue"></span>日期口径</b><span>“7/10船期”仍需统一解释</span></div>
+            <div class="risk-cell" data-peer><b><span class="risk-dot blue"></span>截止时间</b><span>SI、VGM、MDGF节点协同</span></div>
+          </div>
+        </article>
+      </div>
+      <div class="grid-2 spot-grid" style="margin-top:13px">
+        <article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>危险品标签与多套运输数据存在不一致风险。</li><li>更换报关操作方可能造成节点和责任边界不清。</li><li>欧洲多段路线文件或承运条件不匹配会影响全程。</li></ul></article>
+        <article class="card"><h3 class="block-title plan">十月计划</h3><ul class="list plan"><li>建立铜粉、石墨、黑粉发运前文件核对表。</li><li>逐项复核标签、重量、件数、品名与申报文件。</li><li>统一跟踪船期、截止时间、Free Time与责任人。</li><li>对欧洲多段方案开展路线与单证风险复核。</li></ul></article>
+      </div>
+    </section>
+
+    <section class="source-box" aria-label="数据口径与待确认事项">
+      <div class="source-grid">
+        <div><strong>数据口径</strong><br>九月视图按原报告的六项KPI结构制作，恢复自该PPT的本地生成记录与最终KPI展开大纲。九月状态采用当时最新项目口径；邮件只作为“已沟通/已计划”的证据，不自动证明注册、许可、开航、到港、清关或项目完成。财务收款、历史发票、银行水单及付款催办均未纳入。</div>
+        <div><strong>仍待确认</strong><ol class="pending"><li>“7/10船期”的准确日期口径</li><li>MSK的具体指代与服务边界</li><li>刘虹东在欧洲项目中的正式职责</li><li>匈牙利Kft与斯洛伐克项目的正式关系</li></ol></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ 十月 ============ -->
+  <div class="month-panel" data-month="oct" hidden>
+    <section class="section" id="oct-overview" data-section="kpi-overview" aria-labelledby="oct-overview-title">
+      <div class="section-head">
+        <div><div class="section-kicker">KPI Navigator · 10月</div><h2 id="oct-overview-title">十月六项KPI计划视图</h2></div>
+        <p>十月内容来自九月报告中的“十月计划”逐项展开；每项给出计划动作与判定标准，未设数值目标，以交付件为口径。</p>
+      </div>
+      <div class="grid-6" data-peers>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="oct-kpi-1"><span class="no">KPI 01 <span class="arrow">↗</span></span><div><h3>部门架构搭建与流程体系</h3><p>分工表、文件目录与双节点汇报</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="oct-kpi-2"><span class="no">KPI 02 <span class="arrow">↗</span></span><div><h3>海外供应商与仓储体系</h3><p>服务范围比对与书面承运确认</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="oct-kpi-3"><span class="no">KPI 03 <span class="arrow">↗</span></span><div><h3>全球端到端业务落地执行</h3><p>铜粉锁定、石墨依许可、欧洲闭环</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="oct-kpi-4"><span class="no">KPI 04 <span class="arrow">↗</span></span><div><h3>政策法规研判与跨境合规</h3><p>预申报结论与许可文件清单</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="oct-kpi-5"><span class="no">KPI 05 <span class="arrow">↗</span></span><div><h3>物流成本管控与降本增效</h3><p>同口径比价与费用拆分</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="oct-kpi-6"><span class="no">KPI 06 <span class="arrow">↗</span></span><div><h3>规避风险、合规与时效</h3><p>发运前核对表与节点跟踪</p></div></button>
+        </article>
+      </div>
+
+      <div class="overview-banner">
+        <div><strong>十月关键词：把口头推进变成书面交付</strong><p>六项KPI共24项计划动作，统一落到“书面结论 / 可交付文件 / 明确责任人”三类产出上，避免以沟通记录代替闭环。</p></div>
+        <div class="stage-line" aria-label="月度推进阶段">
+          <div class="stage done">7月<br>搭建基础</div><div class="stage done">8月<br>方案准备</div><div class="stage done">9月<br>落地执行</div><div class="stage now">10月<br>闭环优化</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="oct-kpi-1" data-section="kpi-1" aria-labelledby="oct-kpi1-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">01</div><div><div class="section-kicker">KPI 01 · 十月目标</div><h2 id="oct-kpi1-title">部门架构搭建与流程体系</h2></div></div>
+        <button class="back-btn" data-go="oct-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">OCTOBER TARGET</div><div class="card-title">分工、目录与汇报机制在同一月内落地</div></div><span class="status blue">机制书面化</span></div>
+          <div class="mini-stats"><div class="mini-stat"><b data-counter="4">4</b><span>交付件</span></div><div class="mini-stat"><b>1 / 16</b><span>月度汇报节点</span></div><div class="mini-stat"><b data-counter="4">4</b><span>文件目录类别</span></div></div>
+          <p class="scope">以交付件为判定口径：分工表、目录体系、汇报模板、升级路径，四项需在同一月内形成书面版本并启用。</p>
+          <div class="note">九月遗留：新成员职责边界、授权事项与汇报内容尚未书面明确；欧洲资料分散在邮件、合同与不同合作方之间。</div>
+        </article>
+        <div class="grid-2">
+          <article class="card"><h3 class="block-title plan">十月计划动作</h3><ul class="list plan"><li>完成欧洲项目岗位分工表与联系人清单，含职责、授权与汇报关系。</li><li>建立公司注册、许可、物流、业务开发四类文件目录并统一命名。</li><li>固化每月1日和16日物流情况总结，明确模板与提交人。</li><li>明确项目责任及异常升级路径，落实到具体岗位。</li></ul></article>
+          <article class="card"><h3 class="block-title risk">判定标准与卡点</h3><ul class="list risk"><li>分工表须书面确认，并覆盖授权事项与汇报内容。</li><li>目录须收纳欧洲项目分散资料（邮件、合同、合作方）。</li><li>分工细则与九月实际配置的差异须在十月对齐。</li><li>异常升级路径须给出第一、第二责任人与时限。</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="oct-kpi-2" data-section="kpi-2" aria-labelledby="oct-kpi2-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">02</div><div><div class="section-kicker">KPI 02 · 十月目标</div><h2 id="oct-kpi2-title">海外物流供应商与仓储体系</h2></div></div>
+        <button class="back-btn" data-go="oct-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">OCTOBER TARGET</div><div class="card-title">从“资源接触”走向“书面确认与边界清晰”</div></div><span class="status blue">边界确认</span></div>
+          <div class="mini-stats"><div class="mini-stat"><b>2+</b><span>供应商服务范围比对</span></div><div class="mini-stat"><b>1</b><span>份书面承运确认</span></div><div class="mini-stat"><b>1</b><span>张欧洲分段清单</span></div></div>
+          <div class="supplier-list" data-peers>
+            <div class="supplier" data-peer><b>MSK</b><span>服务范围、路线节点、时效与责任边界对比</span><em>十月比对</em></div>
+            <div class="supplier" data-peer><b>CTS Germany</b><span>ADR车辆与危险品陆运安排确认</span><em>危险品</em></div>
+            <div class="supplier" data-peer><b>Kine-Reach</b><span>确认一般货物报价是否适用铜粉、石墨</span><em>书面确认</em></div>
+            <div class="supplier" data-peer><b>仓储资源</b><span>危险品仓储、临时堆存与应急资源补充</span><em>空白项</em></div>
+          </div>
+          <div class="note">一般货物报价不得默认适用于铜粉、石墨或危险品；仓储仍是空白项，十月至少形成候选清单与资质条件。</div>
+        </article>
+        <article class="card">
+          <h3 class="block-title plan">十月计划动作</h3>
+          <ul class="list plan"><li>完成MSK、CTS Germany等供应商服务范围对比。</li><li>取得铜粉、石墨书面承运确认。</li><li>建立欧洲分段供应商与责任人清单。</li><li>补充危险品仓储、临时堆存与应急资源。</li></ul>
+          <h3 class="block-title risk" style="margin-top:16px">判定标准与卡点</h3>
+          <ul class="list risk"><li>多段路线须明确每段承运人及货权交接方式。</li><li>危险品仓储须具备资质与应急方案，而非仅口头资源。</li><li>报价适用范围须由船公司书面确认。</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="oct-kpi-3" data-section="kpi-3" aria-labelledby="oct-kpi3-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">03</div><div><div class="section-kicker">KPI 03 · 十月目标</div><h2 id="oct-kpi3-title">全球端到端业务落地执行</h2></div></div>
+        <button class="back-btn" data-go="oct-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-4 spot-grid">
+        <article class="card"><div class="card-label">铜粉柜</div><div class="metric"><span data-counter="2">2</span><small>× 40HQ</small></div><div class="submetric">锁定船期、舱位与操作安排</div></article>
+        <article class="card"><div class="card-label">石墨柜</div><div class="metric"><span data-counter="1">1</span><small>× 40HQ</small></div><div class="submetric">依许可结果决定是否装运</div></article>
+        <article class="card"><div class="card-label">新增机会</div><div class="metric"><span data-counter="2">2</span><small>个</small></div><div class="submetric">厦钨新能服务范围、Elewout招标文件</div></article>
+        <article class="card"><div class="card-label">欧洲闭环</div><div class="metric">EWC<small>+运输文件</small></div><div class="submetric">ALTEO责任分工与文件闭环</div></article>
+      </div>
+      <article class="card" style="margin-top:13px">
+        <div class="card-top"><div><div class="card-label">OCTOBER ACTIONS</div><div class="card-title">十月端到端四项主攻方向</div></div><span class="status gold">4条主线</span></div>
+        <div class="project-strip" data-peers>
+          <div class="project" data-peer><div class="flag">THAILAND</div><b>铜粉锁定</b><span>船期、舱位、操作方三项同步确认</span></div>
+          <div class="project" data-peer><div class="flag">THAILAND</div><b>石墨决策</b><span>许可到手即装运，未到手继续等待</span></div>
+          <div class="project" data-peer><div class="flag">CHINA</div><b>厦钨新能</b><span>明确全链条或单环节服务范围</span></div>
+          <div class="project" data-peer><div class="flag">POLAND</div><b>Elewout</b><span>取得招标文件并完成属性审查</span></div>
+          <div class="project" data-peer><div class="flag">EUROPE</div><b>欧洲闭环</b><span>责任分工、EWC与运输文件闭环</span></div>
+        </div>
+      </article>
+      <div class="grid-2 spot-grid" style="margin-top:13px">
+        <article class="card"><h3 class="block-title plan">十月计划动作</h3><ul class="list plan"><li>锁定2个铜粉柜船期、舱位与操作安排。</li><li>根据许可结果决定石墨是否进入装运。</li><li>明确厦钨新能服务范围；取得Elewout招标文件。</li><li>完成欧洲责任分工、EWC及运输文件闭环。</li></ul></article>
+        <article class="card"><h3 class="block-title risk">判定标准与卡点</h3><ul class="list risk"><li>铜粉柜须有确认船期、舱位与操作方，不接受口头预留。</li><li>石墨柜无许可不装运，不得与铜粉柜并表推进。</li><li>欧洲多段路线的时效、成本、货损责任须完成验证。</li><li>匈牙利Kft与斯洛伐克业务方向不可混为一谈。</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="oct-kpi-4" data-section="kpi-4" aria-labelledby="oct-kpi4-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">04</div><div><div class="section-kicker">KPI 04 · 十月目标</div><h2 id="oct-kpi4-title">进出口政策法规研判与跨境合规</h2></div></div>
+        <button class="back-btn" data-go="oct-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">OCTOBER TARGET</div><div class="card-title">三条路径收敛为一个书面结论</div></div><span class="status amber">结论待出</span></div>
+          <div class="flow" data-peers>
+            <div class="flow-step" data-peer><b>汇总</b><span>三条路径书面反馈</span></div>
+            <div class="flow-step" data-peer><b>统一</b><span>主体、品名、HS编码</span></div>
+            <div class="flow-step" data-peer><b>定案</b><span>确定最终申报方案</span></div>
+            <div class="flow-step" data-peer><b>归档</b><span>形成可复用口径</span></div>
+          </div>
+          <div class="mini-stats"><div class="mini-stat"><b>3 → 1</b><span>预申报路径收敛</span></div><div class="mini-stat"><b>1</b><span>套石墨许可文件清单</span></div><div class="mini-stat"><b>1</b><span>套ALTEO EWC文件</span></div></div>
+        </article>
+        <article class="card">
+          <h3 class="block-title plan">十月计划动作</h3>
+          <ul class="list plan"><li>汇总三条路径书面反馈并确定最终方案。</li><li>完成石墨申报、检测及许可文件清单。</li><li>核验ALTEO的EWC及跨境运输资料。</li><li>投标前完成Elewout货物属性与运输条件审查。</li></ul>
+          <h3 class="block-title risk" style="margin-top:16px">判定标准与卡点</h3>
+          <ul class="list risk"><li>预申报须统一主体、品名、HS编码口径。</li><li>石墨许可、进口属性、承运口径三者必须一致。</li><li>未取得书面结论前不得进入实质性发运。</li><li>Elewout资料不齐不参与投标。</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="oct-kpi-5" data-section="kpi-5" aria-labelledby="oct-kpi5-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">05</div><div><div class="section-kicker">KPI 05 · 十月目标</div><h2 id="oct-kpi5-title">物流成本管控与降本增效</h2></div></div>
+        <button class="back-btn" data-go="oct-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-main spot-grid">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">OCTOBER TARGET</div><div class="card-title">从单一首轮报价走向同口径比价</div></div><span class="status gold">比价中</span></div>
+          <div class="cost-hero"><div><div class="price"><small>USD</small> <span data-counter="385">385</span><small>/40HQ</small></div><div class="submetric">九月首轮海运费基线；两端与附加费另计</div></div><div class="time"><b>2-3</b><span>目标书面报价家数</span></div></div>
+          <div class="bar-row" data-peer><span class="k">书面报价覆盖</span><div class="bar-track"><div class="bar-fill" style="--w:34%"></div></div><span class="v">1 / 3</span></div>
+          <div class="bar-row" data-peer><span class="k">费用拆分完整度</span><div class="bar-track"><div class="bar-fill" style="--w:48%"></div></div><span class="v">待补</span></div>
+          <div class="bar-row" data-peer><span class="k">货物适用确认</span><div class="bar-track"><div class="bar-fill" style="--w:28%"></div></div><span class="v">待书面</span></div>
+          <div class="note">进度条仅表示材料准备阶段，不代表降本完成度；十月目标是把三项分别推到100%、100%、书面确认。</div>
+        </article>
+        <article class="card">
+          <h3 class="block-title plan">十月计划动作</h3>
+          <ul class="list plan"><li>补充备选供应商并统一口径比价。</li><li>分拆海运、两端、拖车和申报费用。</li><li>核对MSK欧洲路线各段费用与附加条件。</li><li>订舱前确认取消费、改期费和Free Time。</li></ul>
+          <h3 class="block-title risk" style="margin-top:16px">判定标准与卡点</h3>
+          <ul class="list risk"><li>比价须同口径：币种、箱型、有效期、附加费范围。</li><li>危险品与特殊货附加费须书面确认。</li><li>Free Time与改期/取消费须在订舱前锁定。</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="oct-kpi-6" data-section="kpi-6" aria-labelledby="oct-kpi6-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">06</div><div><div class="section-kicker">KPI 06 · 十月目标</div><h2 id="oct-kpi6-title">规避风险、保证合规与提升时效</h2></div></div>
+        <button class="back-btn" data-go="oct-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-4 spot-grid">
+        <article class="card"><div class="card-label">核对表</div><div class="metric"><span data-counter="3">3</span><small>类货物</small></div><div class="submetric">铜粉、石墨、黑粉发运前核对</div></article>
+        <article class="card"><div class="card-label">关键节点</div><div class="metric"><span data-counter="5">5</span><small>个</small></div><div class="submetric">标签、MDGF、SI、VGM、船期</div></article>
+        <article class="card"><div class="card-label">升级路径</div><div class="metric">1<small>条</small></div><div class="submetric">第一、第二责任人与时限</div></article>
+        <article class="card"><div class="card-label">欧洲复核</div><div class="metric">逐段<small>复核</small></div><div class="submetric">路线与单证风险复核</div></article>
+      </div>
+      <div class="grid-main spot-grid" style="margin-top:13px">
+        <article class="card">
+          <div class="card-top"><div><div class="card-label">OCTOBER TARGET</div><div class="card-title">把已执行的动作固化为可复用流程</div></div><span class="status gold">持续控制</span></div>
+          <ul class="list"><li>建立铜粉、石墨、黑粉发运前文件核对表。</li><li>逐项复核标签、重量、件数、品名与申报文件。</li><li>统一跟踪船期、截止时间、Free Time与责任人。</li><li>对欧洲多段方案开展路线与单证风险复核。</li></ul>
+          <div class="flow" data-peers><div class="flow-step" data-peer><b>核对表</b><span>发运前逐项勾选</span></div><div class="flow-step" data-peer><b>数据一致</b><span>标签/MDGF/SI/VGM</span></div><div class="flow-step" data-peer><b>节点跟踪</b><span>截止时间与船期</span></div><div class="flow-step" data-peer><b>升级</b><span>异常到责任人</span></div><div class="flow-step" data-peer><b>复核</b><span>欧洲逐段</span></div></div>
+        </article>
+        <article class="card">
+          <h3 class="block-title risk">判定标准与卡点</h3>
+          <div class="risk-list" data-peers>
+            <div class="risk-row" data-peer><b>单证一致</b><span>标签、MDGF、SI、VGM与实装数据须一致</span><em>高优先</em></div>
+            <div class="risk-row" data-peer><b>报关切换</b><span>更换操作方须同步节点与责任边界</span><em>衔接风险</em></div>
+            <div class="risk-row" data-peer><b>多段路线</b><span>任一段条件不匹配即影响全程</span><em>逐段复核</em></div>
+            <div class="risk-row" data-peer><b>日期口径</b><span>“7/10船期”须在十月统一解释</span><em>口径项</em></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="source-box" aria-label="十月视图说明">
+      <div class="source-grid">
+        <div><strong>十月视图口径</strong><br>本视图逐项整理自九月报告中的“十月计划”，未新增或改动原定动作；每项补充“判定标准与卡点”，用于月度复盘时判断是否真正闭环。原报告未给出KPI数值目标，因此不虚构完成率或降本金额。</div>
+        <div><strong>需管理层确认</strong><ol class="pending"><li>六项KPI是否设定数值目标（如准时率、单证准确率）</li><li>月度汇报模板与提交人</li><li>异常升级路径的第一、第二责任人</li><li>比价的家数要求与有效期口径</li></ol></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ 十一月 ============ -->
+  <div class="month-panel" data-month="nov" hidden>
+    <section class="section" id="nov-overview" data-section="kpi-overview" aria-labelledby="nov-overview-title">
+      <div class="section-head">
+        <div><div class="section-kicker">KPI Navigator · 11月</div><h2 id="nov-overview-title">十一月六项KPI展望</h2></div>
+        <p>展望按十月计划的顺延逻辑整理，属提前排布而非既定事实；每项标注前置条件，十月未闭环的事项十一月无法自动推进。</p>
+      </div>
+      <div class="grid-6" data-peers>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="nov-kpi-1"><span class="no">KPI 01 <span class="arrow">↗</span></span><div><h3>部门架构搭建与流程体系</h3><p>机制运行与首次复盘</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="nov-kpi-2"><span class="no">KPI 02 <span class="arrow">↗</span></span><div><h3>海外供应商与仓储体系</h3><p>从比选走向协议与台账</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="nov-kpi-3"><span class="no">KPI 03 <span class="arrow">↗</span></span><div><h3>全球端到端业务落地执行</h3><p>发运复盘与投标推进</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="nov-kpi-4"><span class="no">KPI 04 <span class="arrow">↗</span></span><div><h3>政策法规研判与跨境合规</h3><p>申报口径固化与归档</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="nov-kpi-5"><span class="no">KPI 05 <span class="arrow">↗</span></span><div><h3>物流成本管控与降本增效</h3><p>单箱成本基线与比价台账</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="nov-kpi-6"><span class="no">KPI 06 <span class="arrow">↗</span></span><div><h3>规避风险、合规与时效</h3><p>核对表SOP化与看板跟踪</p></div></button>
+        </article>
+      </div>
+
+      <div class="overview-banner">
+        <div><strong>十一月关键词：从“建起来”到“跑起来”</strong><p>十月形成的文件、口径与机制，在十一月进入运行与复盘；每一项展望都依赖十月对应事项真正闭环。</p></div>
+        <div class="stage-line" aria-label="月度推进阶段">
+          <div class="stage done">9月<br>落地执行</div><div class="stage done">10月<br>闭环优化</div><div class="stage now">11月<br>运行复盘</div><div class="stage">12月<br>年度收口</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="nov-kpi-1" data-section="kpi-1" aria-labelledby="nov-kpi1-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">01</div><div><div class="section-kicker">KPI 01 · 十一月展望</div><h2 id="nov-kpi1-title">部门架构搭建与流程体系</h2></div></div>
+        <button class="back-btn" data-go="nov-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">NOVEMBER OUTLOOK</div><div class="card-title">机制运行与首次复盘</div></div><span class="status blue">展望</span></div>
+          <ul class="list plan"><li>每月1日、16日双节点汇报首次完整运行。</li><li>岗位分工表试运行复盘，修订职责与授权。</li><li>检查四类文件目录启用情况并补全归档。</li><li>欧洲项目资料按统一目录集中管理。</li></ul></article>
+        <article class="card"><h3 class="block-title risk">前置条件（十月须闭环）</h3><ul class="list risk"><li>岗位分工表与联系人清单已书面确认。</li><li>四类文件目录已建立并统一命名。</li><li>汇报模板与提交人已确定。</li><li>异常升级路径已落实到具体岗位。</li></ul>
+          <div class="note">若十月分工表未落地，十一月只能继续补建，无法进入复盘阶段。</div></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="nov-kpi-2" data-section="kpi-2" aria-labelledby="nov-kpi2-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">02</div><div><div class="section-kicker">KPI 02 · 十一月展望</div><h2 id="nov-kpi2-title">海外物流供应商与仓储体系</h2></div></div>
+        <button class="back-btn" data-go="nov-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">NOVEMBER OUTLOOK</div><div class="card-title">从比选走向协议与台账</div></div><span class="status blue">展望</span></div>
+          <ul class="list plan"><li>服务范围对比结果转为协议或费率确认。</li><li>危险品仓储与应急资源落地并明确联系人。</li><li>建立供应商KPI：准时率、单证准确率、异常响应时效。</li><li>欧洲分段供应商清单升级为常态化维护台账。</li></ul></article>
+        <article class="card"><h3 class="block-title risk">前置条件（十月须闭环）</h3><ul class="list risk"><li>铜粉、石墨书面承运确认已取得。</li><li>MSK等服务范围与责任边界已比对完成。</li><li>危险品仓储候选清单与资质条件已形成。</li><li>欧洲分段责任人与交接方式已明确。</li></ul>
+          <div class="note">仓储若十月仍停留在口头资源，十一月不具备签署条件。</div></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="nov-kpi-3" data-section="kpi-3" aria-labelledby="nov-kpi3-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">03</div><div><div class="section-kicker">KPI 03 · 十一月展望</div><h2 id="nov-kpi3-title">全球端到端业务落地执行</h2></div></div>
+        <button class="back-btn" data-go="nov-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">NOVEMBER OUTLOOK</div><div class="card-title">发运复盘与投标推进</div></div><span class="status gold">展望</span></div>
+          <ul class="list plan"><li>2个铜粉柜发运后复盘：船期、舱位、到港、单证。</li><li>石墨依许可结果进入装运或明确延期安排。</li><li>厦钨新能进入方案报价与范围确认。</li><li>Elewout完成投标；ALTEO首批量执行准备。</li></ul></article>
+        <article class="card"><h3 class="block-title risk">前置条件（十月须闭环）</h3><ul class="list risk"><li>铜粉柜船期、舱位与操作方已确认。</li><li>石墨许可结论已明确（放行或继续等待）。</li><li>Elewout招标文件与完整货物资料已取得。</li><li>ALTEO责任分工、EWC与运输文件已闭环。</li></ul>
+          <div class="note">石墨柜在许可未明前，十一月不预设装运或取消，按许可结果分叉处理。</div></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="nov-kpi-4" data-section="kpi-4" aria-labelledby="nov-kpi4-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">04</div><div><div class="section-kicker">KPI 04 · 十一月展望</div><h2 id="nov-kpi4-title">进出口政策法规研判与跨境合规</h2></div></div>
+        <button class="back-btn" data-go="nov-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">NOVEMBER OUTLOOK</div><div class="card-title">申报口径固化与归档</div></div><span class="status amber">展望</span></div>
+          <ul class="list plan"><li>预申报结论转为固定申报口径并写入操作指引。</li><li>石墨许可文件归档，形成可复用申报资料包。</li><li>ALTEO的EWC与跨境运输文件归档备查。</li><li>形成“货物属性—文件清单”对照表，供新项目直接套用。</li></ul></article>
+        <article class="card"><h3 class="block-title risk">前置条件（十月须闭环）</h3><ul class="list risk"><li>三条预申报路径已有书面结论并统一口径。</li><li>石墨申报、检测及许可文件清单已完成。</li><li>ALTEO的EWC与跨境资料已核验通过。</li><li>Elewout货物属性与运输条件审查已完成。</li></ul>
+          <div class="note">口径未固化前，新项目仍需逐案研判，无法复用。</div></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="nov-kpi-5" data-section="kpi-5" aria-labelledby="nov-kpi5-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">05</div><div><div class="section-kicker">KPI 05 · 十一月展望</div><h2 id="nov-kpi5-title">物流成本管控与降本增效</h2></div></div>
+        <button class="back-btn" data-go="nov-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">NOVEMBER OUTLOOK</div><div class="card-title">单箱成本基线与比价台账</div></div><span class="status gold">展望</span></div>
+          <ul class="list plan"><li>建立单箱成本基线：USD/40HQ全包口径（海运+两端+申报）。</li><li>形成比价台账，保留2至3家同口径书面报价。</li><li>建立异常费用台账，记录取消、改期、滞期与Free Time占用。</li><li>按月回顾成本偏差并归因到具体环节。</li></ul></article>
+        <article class="card"><h3 class="block-title risk">前置条件（十月须闭环）</h3><ul class="list risk"><li>海运、两端、拖车、申报费用已拆分到同一口径。</li><li>备选供应商报价已补齐至2至3家。</li><li>危险品与特殊货附加费已书面确认。</li><li>取消费、改期费与Free Time已订舱前锁定。</li></ul>
+          <div class="note">费用未拆分前，基线只能停留在海运费口径，不能称全包成本。</div></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="nov-kpi-6" data-section="kpi-6" aria-labelledby="nov-kpi6-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">06</div><div><div class="section-kicker">KPI 06 · 十一月展望</div><h2 id="nov-kpi6-title">规避风险、保证合规与提升时效</h2></div></div>
+        <button class="back-btn" data-go="nov-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">NOVEMBER OUTLOOK</div><div class="card-title">核对表SOP化与看板跟踪</div></div><span class="status gold">展望</span></div>
+          <ul class="list plan"><li>发运前核对表固化为SOP，逐票留存记录。</li><li>船期与截止时间看板化，责任人与节点同屏。</li><li>异常升级路径演练，确认第一、第二责任人可达。</li><li>欧洲多段路线风险复核纳入常规动作。</li></ul></article>
+        <article class="card"><h3 class="block-title risk">前置条件（十月须闭环）</h3><ul class="list risk"><li>三类货物发运前核对表已建立并试用。</li><li>标签、重量、件数、品名与申报文件已逐项复核。</li><li>船期、截止时间、Free Time与责任人已统一跟踪。</li><li>欧洲多段方案的路线与单证复核已完成首次。</li></ul>
+          <div class="note">SOP化前需至少完成一轮真实发运检验，否则流程停留在纸面。</div></article>
+      </div>
+    </section>
+
+    <section class="source-box" aria-label="十一月视图说明">
+      <div class="source-grid">
+        <div><strong>十一月视图口径</strong><br>本视图为滚动展望，依据十月计划的顺延逻辑整理，未经管理层确认，也不作为承诺或考核依据。所有条目均标注前置条件，十月未闭环事项在十一月无法自动推进，需在十月复盘后重新校准。</div>
+        <div><strong>建议在十月复盘时明确</strong><ol class="pending"><li>十一月是否设定数值KPI与考核口径</li><li>供应商KPI的指标定义与数据来源</li><li>单箱成本基线的统计范围</li><li>异常升级演练的时间与参与人</li></ol></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ 十二月（待补充） ============ -->
+  <div class="month-panel" data-month="dec" hidden>
+    <section class="section" id="dec-overview" data-section="kpi-overview" aria-labelledby="dec-overview-title">
+      <div class="section-head">
+        <div><div class="section-kicker">KPI Navigator · 12月</div><h2 id="dec-overview-title">十二月结构已预留，等待报告</h2></div>
+        <p>六项KPI的展示位置与段落结构已经建好；收到十二月工作报告PPT后，按同样的三段式口径填入即可。</p>
+      </div>
+      <div class="grid-6" data-peers>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="dec-kpi-1"><span class="no">KPI 01 <span class="arrow">↗</span></span><div><h3>部门架构搭建与流程体系</h3><p>待十二月报告填充</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="dec-kpi-2"><span class="no">KPI 02 <span class="arrow">↗</span></span><div><h3>海外供应商与仓储体系</h3><p>待十二月报告填充</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="dec-kpi-3"><span class="no">KPI 03 <span class="arrow">↗</span></span><div><h3>全球端到端业务落地执行</h3><p>待十二月报告填充</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="dec-kpi-4"><span class="no">KPI 04 <span class="arrow">↗</span></span><div><h3>政策法规研判与跨境合规</h3><p>待十二月报告填充</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="dec-kpi-5"><span class="no">KPI 05 <span class="arrow">↗</span></span><div><h3>物流成本管控与降本增效</h3><p>待十二月报告填充</p></div></button>
+        </article>
+        <article class="kpi-button-card" data-peer>
+          <button class="kpi-jump" data-go="dec-kpi-6"><span class="no">KPI 06 <span class="arrow">↗</span></span><div><h3>规避风险、合规与时效</h3><p>待十二月报告填充</p></div></button>
+        </article>
+      </div>
+
+      <div class="overview-banner">
+        <div><strong>等待十二月工作报告 PPT</strong><p>填充口径与前三个月一致：只呈现报告中有明确数量或节点依据的内容；未闭环事项保留“待确认”，不虚构完成率或降本金额。</p></div>
+        <div class="stage-line" aria-label="月度推进阶段">
+          <div class="stage done">10月<br>闭环优化</div><div class="stage done">11月<br>运行复盘</div><div class="stage now">12月<br>年度收口</div><div class="stage">次年<br>新周期</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="dec-kpi-1" data-section="kpi-1" aria-labelledby="dec-kpi1-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">01</div><div><div class="section-kicker">KPI 01 · 待补充</div><h2 id="dec-kpi1-title">部门架构搭建与流程体系</h2></div></div>
+        <button class="back-btn" data-go="dec-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">DECEMBER · 待填充</div><div class="card-title">等待十二月报告内容</div></div><span class="status amber">待补充</span></div>
+          <ul class="list"><li>人员配置与岗位分工的最新状态</li><li>月度汇报机制运行情况</li><li>文件目录与资料归档情况</li></ul></article>
+        <article class="card"><h3 class="block-title">将展示的维度</h3><ul class="list"><li>十二月完成情况</li><li>当前问题</li><li>次年一月计划</li><li>关键数字卡片与责任人口径</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="dec-kpi-2" data-section="kpi-2" aria-labelledby="dec-kpi2-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">02</div><div><div class="section-kicker">KPI 02 · 待补充</div><h2 id="dec-kpi2-title">海外物流供应商与仓储体系</h2></div></div>
+        <button class="back-btn" data-go="dec-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">DECEMBER · 待填充</div><div class="card-title">等待十二月报告内容</div></div><span class="status amber">待补充</span></div>
+          <ul class="list"><li>供应商服务范围与协议状态</li><li>危险品仓储与应急资源落地情况</li><li>欧洲分段供应商与责任人清单</li></ul></article>
+        <article class="card"><h3 class="block-title">将展示的维度</h3><ul class="list"><li>十二月完成情况</li><li>当前问题</li><li>次年一月计划</li><li>供应商KPI：准时率、单证准确率、异常响应</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="dec-kpi-3" data-section="kpi-3" aria-labelledby="dec-kpi3-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">03</div><div><div class="section-kicker">KPI 03 · 待补充</div><h2 id="dec-kpi3-title">全球端到端业务落地执行</h2></div></div>
+        <button class="back-btn" data-go="dec-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">DECEMBER · 待填充</div><div class="card-title">等待十二月报告内容</div></div><span class="status amber">待补充</span></div>
+          <ul class="list"><li>泰国发运：铜粉、石墨、锂电池进度</li><li>欧洲项目：ALTEO、匈牙利Kft、SK On</li><li>新增机会：厦钨新能、Elewout</li></ul></article>
+        <article class="card"><h3 class="block-title">将展示的维度</h3><ul class="list"><li>十二月完成情况</li><li>当前问题</li><li>次年一月计划</li><li>箱量、船期、批次与项目节点</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="dec-kpi-4" data-section="kpi-4" aria-labelledby="dec-kpi4-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">04</div><div><div class="section-kicker">KPI 04 · 待补充</div><h2 id="dec-kpi4-title">进出口政策法规研判与跨境合规</h2></div></div>
+        <button class="back-btn" data-go="dec-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">DECEMBER · 待填充</div><div class="card-title">等待十二月报告内容</div></div><span class="status amber">待补充</span></div>
+          <ul class="list"><li>预申报结论与固定申报口径</li><li>石墨许可文件与归档状态</li><li>ALTEO的EWC及跨境运输文件</li></ul></article>
+        <article class="card"><h3 class="block-title">将展示的维度</h3><ul class="list"><li>十二月完成情况</li><li>当前问题</li><li>次年一月计划</li><li>货物属性与文件清单对照</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="dec-kpi-5" data-section="kpi-5" aria-labelledby="dec-kpi5-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">05</div><div><div class="section-kicker">KPI 05 · 待补充</div><h2 id="dec-kpi5-title">物流成本管控与降本增效</h2></div></div>
+        <button class="back-btn" data-go="dec-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">DECEMBER · 待填充</div><div class="card-title">等待十二月报告内容</div></div><span class="status amber">待补充</span></div>
+          <ul class="list"><li>单箱成本基线与全包口径</li><li>比价台账与书面报价家数</li><li>异常费用与Free Time占用</li></ul></article>
+        <article class="card"><h3 class="block-title">将展示的维度</h3><ul class="list"><li>十二月完成情况</li><li>当前问题</li><li>次年一月计划</li><li>成本偏差归因与降本动作</li></ul></article>
+      </div>
+    </section>
+
+    <section class="kpi-section" id="dec-kpi-6" data-section="kpi-6" aria-labelledby="dec-kpi6-title">
+      <div class="section-head">
+        <div class="kpi-title-wrap"><div class="kpi-badge">06</div><div><div class="section-kicker">KPI 06 · 待补充</div><h2 id="dec-kpi6-title">规避风险、保证合规与提升时效</h2></div></div>
+        <button class="back-btn" data-go="dec-overview">返回KPI按钮区 ↑</button>
+      </div>
+      <div class="grid-2 spot-grid">
+        <article class="card"><div class="card-top"><div><div class="card-label">DECEMBER · 待填充</div><div class="card-title">等待十二月报告内容</div></div><span class="status amber">待补充</span></div>
+          <ul class="list"><li>发运前核对表SOP执行情况</li><li>船期、截止时间与节点看板</li><li>异常升级路径与责任人</li></ul></article>
+        <article class="card"><h3 class="block-title">将展示的维度</h3><ul class="list"><li>十二月完成情况</li><li>当前问题</li><li>次年一月计划</li><li>危险品单证一致性与风险复核</li></ul></article>
+      </div>
+    </section>
+
+    <section class="source-box" aria-label="十二月视图说明">
+      <div class="source-grid">
+        <div><strong>十二月视图口径</strong><br>本视图为占位结构，不含任何十二月数据。收到十二月工作报告PPT后，将按与前三个月完全一致的口径生成：六项KPI逐项展开“当月完成情况 → 当前问题 → 次月计划”，并保留原报告中的关键数字与待确认事项。</div>
+        <div><strong>建议随PPT一并提供</strong><ol class="pending"><li>十二月各项KPI的完成口径与判定标准</li><li>关键数字：箱量、吨数、船期、节点</li><li>年度收口需要说明的未完成事项</li><li>次年一月计划的初步安排</li></ol></div>
+      </div>
+    </section>
+  </div>
+
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    <div class="shell footer-inner">
+      <svg class="footer-logo" viewBox="0 0 141 52" role="img" aria-label="锦源晟LOGO"><use href="#jy-logo"/></svg>
+      <div>锦源晟国际物流部 · 2026年 9 / 10 / 11 / 12月工作Dashboard · 六项KPI管理视图<br>数据来源：部门月度工作报告 · 单文件离线看板</div>
+    </div>
+  </footer>
+
+  <div class="settings" id="settings">
+    <button class="settings-toggle" id="settingsToggle" aria-label="打开显示设置" aria-expanded="false">Aa</button>
+    <div class="settings-panel" role="dialog" aria-label="显示设置">
+      <h3>悬停聚光强度</h3><p>鼠标停留时突出当前信息，设置会保存在本机。</p>
+      <div class="chips"><button class="chip" data-spot-value="off">关闭</button><button class="chip" data-spot-value="soft">微弱</button><button class="chip" data-spot-value="std">标准</button><button class="chip" data-spot-value="hard">强烈</button></div>
+    </div>
+  </div>
+
+  <div class="palette-overlay" id="paletteOverlay" aria-hidden="true">
+    <div class="palette" role="dialog" aria-modal="true" aria-label="月份与KPI快速导航">
+      <input id="commandInput" type="search" placeholder="输入月份、KPI、供应商、合规或风险…" autocomplete="off">
+      <div class="cmd-list" id="commandList"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      "use strict";
+      const root=document.documentElement;
+      const content=document.getElementById("content");
+      const kpiNav=document.getElementById("kpiNav");
+      const monthSwitch=document.getElementById("monthSwitch");
+      const toastEl=document.getElementById("toast");
+      const brandSub=document.getElementById("brandSub");
+      const SPOT_NAME={off:"已关闭",soft:"微弱",std:"标准",hard:"强烈"};
+      const MONTH_NAME={sep:"9月",oct:"10月",nov:"11月",dec:"12月"};
+      const MONTH_TAG={sep:"实绩",oct:"计划",nov:"展望",dec:"待补充"};
+      const MONTH_SUB={sep:"September 2026 Performance Dashboard",oct:"October 2026 Plan Dashboard",nov:"November 2026 Outlook Dashboard",dec:"December 2026 · Pending Source"};
+      const KPI_SUB={
+        sep:["正在完善","正在推进","重点推进","尚待闭环","正在比选","持续控制"],
+        oct:["分工表落地","书面承运确认","船期与文件","预申报结论","同口径比价","SOP固化"],
+        nov:["机制运行","协议与台账","发运复盘","口径固化","成本基线","SOP运行"],
+        dec:["待补充","待补充","待补充","待补充","待补充","待补充"]
+      };
+      const KPI_TITLE=["部门架构搭建与流程体系","海外物流供应商与仓储体系","全球端到端业务落地执行","进出口政策法规研判与跨境合规","物流成本管控与降本增效","规避风险、合规与提升时效"];
+      const S={spot:"std",theme:"light",month:"sep",active:"kpi-1"};
+      try{
+        S.spot=localStorage.getItem("jayson.dashboard.spot")||"std";
+        S.theme=localStorage.getItem("jayson.dashboard.theme")||"light";
+        S.month=localStorage.getItem("jayson.dashboard.month")||"sep";
+      }catch(e){}
+      if(!MONTH_NAME[S.month])S.month="sep";
+      root.dataset.spot=S.spot; root.dataset.theme=S.theme;
+
+      function toast(msg){
+        toastEl.textContent=msg;toastEl.classList.remove("out","show");
+        void toastEl.offsetWidth;toastEl.classList.add("show");
+        clearTimeout(toastEl._t);toastEl._t=setTimeout(()=>{toastEl.classList.add("out");setTimeout(()=>toastEl.classList.remove("show","out"),260)},1500);
+      }
+      function panel(m){return content.querySelector('.month-panel[data-month="'+m+'"]')}
+      function goTo(id){
+        const el=document.getElementById(id);if(!el)return;
+        el.scrollIntoView({behavior:"smooth",block:"start"});
+        if(id.indexOf("-kpi-")>-1)setActive(id.split("-kpi-")[1]);
+      }
+      document.addEventListener("click",e=>{
+        const btn=e.target.closest("[data-go]");if(!btn)return;
+        e.preventDefault();goTo(btn.dataset.go);
+      });
+
+      function setActive(n){
+        S.active="kpi-"+n;
+        kpiNav.querySelectorAll(".side-kpi").forEach(b=>b.classList.toggle("active",b.dataset.kpi===String(n)));
+      }
+      function refreshKpiLabels(m){
+        const subs=KPI_SUB[m]||KPI_SUB.sep;
+        kpiNav.querySelectorAll(".side-kpi").forEach(b=>{
+          const i=Number(b.dataset.kpi)-1,sub=b.querySelector(".sk-sub");
+          if(sub)sub.textContent=subs[i]||"";
+        });
+      }
+      const observer=new IntersectionObserver(entries=>{
+        const visible=entries.filter(x=>x.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+        if(visible){
+          const sec=visible.target.dataset.section||"";
+          if(sec.indexOf("kpi-")===0&&sec!=="kpi-overview")setActive(sec.split("-")[1]);
+        }
+      },{rootMargin:"-26% 0px -58% 0px",threshold:[0,.12,.28,.5]});
+      function observeSections(m){
+        observer.disconnect();
+        const p=panel(m);if(!p)return;
+        p.querySelectorAll("[data-section]").forEach(s=>observer.observe(s));
+      }
+
+      function animateNumber(el,target){
+        const prev=Number(el.dataset.current||0),dur=900,start=performance.now();
+        el.classList.add("rolling");
+        function tick(now){
+          const p=Math.min(1,(now-start)/dur),ease=1-Math.pow(1-p,4),v=prev+(target-prev)*ease;
+          el.textContent=Math.round(v).toLocaleString("zh-CN");
+          if(p<1)requestAnimationFrame(tick);else{el.dataset.current=String(target);el.classList.remove("rolling")}
+        }
+        requestAnimationFrame(tick);
+      }
+      const counterObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+        if(!entry.isIntersecting||entry.target.dataset.done)return;
+        entry.target.dataset.done="1";animateNumber(entry.target,Number(entry.target.dataset.counter));
+      }),{threshold:.55});
+      function armCounters(m){
+        const p=panel(m);if(!p)return;
+        p.querySelectorAll("[data-counter]").forEach(el=>{
+          delete el.dataset.done;
+          if(!el.dataset.observed){el.dataset.observed="1";counterObserver.observe(el)}
+        });
+        setTimeout(()=>{
+          p.querySelectorAll("[data-counter]").forEach(el=>{
+            if(el.dataset.done)return;
+            const r=el.getBoundingClientRect();
+            if(r.top<window.innerHeight&&r.bottom>0){el.dataset.done="1";animateNumber(el,Number(el.dataset.counter))}
+          });
+        },120);
+      }
+      function playCards(m){
+        const p=panel(m);if(!p)return;
+        p.querySelectorAll(".card").forEach((card,i)=>{
+          card.classList.remove("enter");card.style.animationDelay="";void card.offsetWidth;
+          card.classList.add("enter");card.style.animationDelay=Math.min(i,12)*45+"ms";
+          card.addEventListener("animationend",()=>{card.classList.remove("enter");card.style.animationDelay=""},{once:true});
+        });
+      }
+      function growBars(m){
+        const p=panel(m);if(!p)return;
+        p.querySelectorAll(".bar-fill").forEach(f=>{
+          const w=getComputedStyle(f).getPropertyValue("--w");
+          f.style.width="0";requestAnimationFrame(()=>{f.style.width=w});
+        });
+      }
+      function setMonth(m){
+        if(!MONTH_NAME[m])return;
+        S.month=m;
+        try{localStorage.setItem("jayson.dashboard.month",m)}catch(e){}
+        content.querySelectorAll(".month-panel").forEach(p=>{p.hidden=p.dataset.month!==m});
+        document.querySelectorAll("[data-hero]").forEach(h=>{h.hidden=h.dataset.hero!==m});
+        monthSwitch.querySelectorAll(".month-btn").forEach(b=>{
+          const on=b.dataset.monthBtn===m;b.classList.toggle("active",on);b.setAttribute("aria-selected",String(on));
+        });
+        brandSub.textContent=MONTH_SUB[m];
+        refreshKpiLabels(m);observeSections(m);armCounters(m);playCards(m);growBars(m);
+        document.title="锦源晟｜国际物流部 "+MONTH_NAME[m]+"工作Dashboard";
+        buildCommands();
+      }
+      monthSwitch.querySelectorAll(".month-btn").forEach(b=>b.addEventListener("click",()=>{
+        if(b.dataset.monthBtn===S.month)return;
+        setMonth(b.dataset.monthBtn);toast("已切换到 "+MONTH_NAME[S.month]+" · "+MONTH_TAG[S.month]);
+      }));
+      kpiNav.querySelectorAll(".side-kpi").forEach(b=>b.addEventListener("click",()=>{
+        goTo(S.month+"-kpi-"+b.dataset.kpi);setActive(b.dataset.kpi);
+      }));
+
+      function clearCardSpot(){
+        document.querySelectorAll(".spot-grid.spot").forEach(g=>g.classList.remove("spot"));
+        document.querySelectorAll(".card.lit").forEach(c=>c.classList.remove("lit"));
+      }
+      content.addEventListener("mouseover",e=>{
+        if(S.spot==="off")return;
+        const card=e.target.closest(".card"),group=card&&card.closest(".spot-grid");
+        if(!card||!group){clearCardSpot();return}
+        if(card.classList.contains("lit"))return;
+        clearCardSpot();group.classList.add("spot");group.querySelectorAll(":scope .card").forEach(c=>c.classList.toggle("lit",c===card));
+      });
+      content.addEventListener("mouseleave",clearCardSpot);
+      content.addEventListener("mousemove",e=>{
+        const lit=content.querySelector(".card.lit");if(!lit)return;
+        const r=lit.getBoundingClientRect();lit.style.setProperty("--mx",((e.clientX-r.left)/r.width*100).toFixed(1)+"%");lit.style.setProperty("--my",((e.clientY-r.top)/r.height*100).toFixed(1)+"%");
+      },{passive:true});
+
+      let curLit=[],curGroups=[];
+      function clearPeers(){curLit.forEach(n=>n.classList.remove("lit"));curGroups.forEach(g=>g&&g.classList.remove("spot"));curLit=[];curGroups=[]}
+      function focusPeer(el){
+        if(S.spot==="off")return;clearPeers();
+        const nodes=[el],gs=new Set();
+        nodes.forEach(n=>{n.classList.add("lit");gs.add(n.closest("[data-peers]")||n.parentElement)});
+        gs.forEach(g=>g&&g.classList.add("spot"));curLit=nodes;curGroups=[...gs];
+      }
+      document.addEventListener("mouseover",e=>{const el=e.target.closest("[data-peer]");if(!el){clearPeers();return}if(!el.classList.contains("lit"))focusPeer(el)});
+      document.addEventListener("mouseleave",clearPeers);
+
+      function setSpot(v){
+        S.spot=v;root.dataset.spot=v;try{localStorage.setItem("jayson.dashboard.spot",v)}catch(e){}
+        document.querySelectorAll("[data-spot-value]").forEach(b=>b.classList.toggle("on",b.dataset.spotValue===v));
+        if(v==="off"){clearCardSpot();clearPeers()}toast("悬停聚光 · "+SPOT_NAME[v]);
+      }
+      document.querySelectorAll("[data-spot-value]").forEach(b=>b.addEventListener("click",()=>setSpot(b.dataset.spotValue)));
+      document.querySelectorAll("[data-spot-value]").forEach(b=>b.classList.toggle("on",b.dataset.spotValue===S.spot));
+
+      const settings=document.getElementById("settings"),settingsToggle=document.getElementById("settingsToggle");
+      settingsToggle.addEventListener("click",()=>{const open=settings.classList.toggle("open");settingsToggle.setAttribute("aria-expanded",String(open))});
+      document.addEventListener("click",e=>{if(!settings.contains(e.target))settings.classList.remove("open")});
+      document.getElementById("themeBtn").addEventListener("click",()=>{
+        S.theme=S.theme==="light"?"dark":"light";root.dataset.theme=S.theme;try{localStorage.setItem("jayson.dashboard.theme",S.theme)}catch(e){}
+        toast(S.theme==="light"?"已切换浅色主题":"已切换深色主题");
+      });
+      document.getElementById("printBtn").addEventListener("click",()=>window.print());
+
+      const overlay=document.getElementById("paletteOverlay"),cmdInput=document.getElementById("commandInput"),cmdList=document.getElementById("commandList");
+      let selected=0,filtered=[];
+      function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+      function buildCommands(){
+        filtered=[];
+        ["sep","oct","nov","dec"].forEach(m=>filtered.push({id:"__month__"+m,title:MONTH_NAME[m]+"视图 · "+MONTH_TAG[m],sub:"切换月份"}));
+        filtered.push({id:S.month+"-overview",title:MONTH_NAME[S.month]+" · KPI按钮总览",sub:"返回导航区"});
+        for(let i=1;i<=6;i++)filtered.push({id:S.month+"-kpi-"+i,title:MONTH_NAME[S.month]+" · KPI "+i+" "+KPI_TITLE[i-1],sub:KPI_SUB[S.month][i-1]});
+      }
+      function renderCommands(){
+        const q=cmdInput.value.trim().toLowerCase();
+        const list=q?filtered.filter(c=>(c.title+" "+c.sub).toLowerCase().includes(q)):filtered;
+        selected=Math.min(selected,Math.max(0,list.length-1));
+        cmdList.innerHTML=list.map((c,i)=>'<button class="cmd '+(i===selected?"selected":"")+'" data-cmd="'+c.id+'"><span><b>'+escapeHtml(c.title)+'</b><span>'+escapeHtml(c.sub)+'</span></span><span>Enter</span></button>').join("")||'<div class="cmd"><span><b>没有匹配结果</b><span>换个关键词试试</span></span></div>';
+      }
+      function openPalette(){buildCommands();overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");cmdInput.value="";selected=0;renderCommands();setTimeout(()=>cmdInput.focus(),40)}
+      function closePalette(){overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true")}
+      document.getElementById("commandBtn").addEventListener("click",openPalette);
+      cmdInput.addEventListener("input",()=>{selected=0;renderCommands()});
+      cmdList.addEventListener("click",e=>{
+        const b=e.target.closest("[data-cmd]");if(!b)return;
+        const id=b.dataset.cmd;
+        if(id.indexOf("__month__")===0){setMonth(id.slice(9));closePalette();return}
+        goTo(id);closePalette();
+      });
+      overlay.addEventListener("click",e=>{if(e.target===overlay)closePalette()});
+      document.addEventListener("keydown",e=>{
+        if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openPalette();return}
+        if(!overlay.classList.contains("open"))return;
+        if(e.key==="Escape")closePalette();
+        if(e.key==="ArrowDown"){e.preventDefault();selected=Math.min(selected+1,filtered.length-1);renderCommands()}
+        if(e.key==="ArrowUp"){e.preventDefault();selected=Math.max(selected-1,0);renderCommands()}
+        if(e.key==="Enter"&&filtered[selected]){
+          e.preventDefault();const id=filtered[selected].id;
+          if(id.indexOf("__month__")===0){setMonth(id.slice(9));closePalette();return}
+          goTo(id);closePalette();
+        }
+      });
+
+      setMonth(S.month);
+      document.querySelectorAll("[data-counter]").forEach(el=>{el.dataset.observed="1";counterObserver.observe(el)});
+      requestAnimationFrame(()=>growBars(S.month));
+      buildCommands();
+      document.body.dataset.dashboardReady="true";
+    })();
+  </script>
+</body>
+</html>
