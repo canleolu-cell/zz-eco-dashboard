@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欧洲项目｜10月工作 Dashboard</title>
+<style>
+:root{--bg:#f4f6fa;--panel:#fff;--panel-2:#f7f9fd;--text:#14213a;--muted:#6b7891;--line:#e3e8f0;--navy:#0e3a78;--primary:#1a56c4;--primary-2:#3f83f1;--primary-soft:#eaf1ff;--gold:#e79a06;--gold-2:#ffc93c;--gold-soft:#fff4da;--red:#e0483d;--green:#17a673;--amber:#dd8a10;--r-xl:24px;--r-l:16px;--r-m:12px;--header-h:74px;--side-w:252px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 0 0,rgba(26,86,196,.08),transparent 28%),radial-gradient(circle at 100% 14%,rgba(231,154,6,.09),transparent 25%),var(--bg);font-size:14px;line-height:1.6}
+button{border:0;color:inherit;cursor:pointer;font:inherit}
+.shell{width:min(1480px,calc(100% - 32px));margin:0 auto}
+.topbar{position:sticky;top:0;z-index:60;height:var(--header-h);display:flex;align-items:center;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;width:min(1480px,calc(100% - 32px));margin:0 auto}
+.brand strong{display:block;font-size:15px}.brand span{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.badge{padding:7px 11px;border-radius:9px;border:1px solid var(--line);background:var(--panel);font-size:11px}
+.badge.red{border-color:#f3c2bf;background:#fff1f0;color:#b3261e}
+.hero{padding:26px 0 18px}.hero-panel{position:relative;overflow:hidden;padding:30px;border-radius:var(--r-xl);background:linear-gradient(126deg,#0e3a78 0%,#1a56c4 56%,#2f86d8 100%);color:#fff;box-shadow:0 28px 70px rgba(14,58,120,.26)}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);gap:28px;align-items:end}
+.eyebrow{display:flex;gap:9px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2)}
+h1{font-size:clamp(28px,3.6vw,50px);line-height:1.08;margin:16px 0 12px}
+.hero-lead{max-width:840px;margin:0;color:rgba(255,255,255,.84);font-size:15px}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.hero-chip{padding:7px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.10);font-size:11px}
+.hero-insight{border:1px solid rgba(255,201,60,.34);background:rgba(7,31,68,.32);border-radius:18px;padding:20px}.hero-insight .label{font-size:11px;color:var(--gold-2);letter-spacing:.08em}.hero-insight strong{display:block;font-size:19px;line-height:1.45;margin:8px 0 10px}.hero-insight p{margin:0;color:rgba(255,255,255,.72);font-size:12px}
+.layout{display:grid;grid-template-columns:var(--side-w) minmax(0,1fr);gap:18px;align-items:start;padding-bottom:70px}
+.sidebar{position:sticky;top:calc(var(--header-h) + 14px);display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - var(--header-h) - 28px);overflow:auto;padding-right:2px}
+.side-block{padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-l);box-shadow:0 1px 2px rgba(16,24,40,.06)}
+.side-label{font-size:11px;color:var(--muted);letter-spacing:.08em;margin:0 0 10px}
+.side-kpi{width:100%;display:flex;gap:10px;align-items:flex-start;text-align:left;background:transparent;padding:9px 10px;border-radius:10px}.side-kpi:hover,.side-kpi.active{background:var(--primary-soft)}
+.sk-no{font-weight:700;color:var(--primary)}.sk-text strong{display:block;font-size:13px}.sk-text span{display:block;color:var(--muted);font-size:11px}
+.side-tip{color:var(--muted);font-size:12px;margin:10px 0 0}
+.month-switch{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.month-btn{padding:9px 4px;border:1px solid var(--line);background:var(--panel-2);border-radius:10px;text-align:center}.month-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}.month-btn b{display:block;font-size:13px}.month-btn span{display:block;font-size:11px;color:var(--muted)}.month-btn.active span{color:rgba(255,255,255,.75)}
+.section{margin-bottom:18px}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:14px}.section-head p{color:var(--muted);font-size:12px;max-width:420px}
+.section-kicker{font-size:11px;letter-spacing:.1em;color:var(--primary);font-weight:700}.section-head h2{margin:4px 0 0;font-size:22px}
+.grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-l);padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+.card-label{font-size:11px;color:var(--muted);letter-spacing:.06em}.card-title{font-weight:700;font-size:15px;margin-top:2px}.metric{font-size:26px;font-weight:800;margin-top:8px}.metric small{font-size:12px;color:var(--muted);font-weight:400}.submetric{color:var(--muted);font-size:12px;margin-top:4px}
+.status{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;background:var(--primary-soft);color:var(--primary);white-space:nowrap}.status.gold{background:var(--gold-soft);color:#8a5a00}.status.amber{background:#fff1da;color:#8a5a00}.status.red{background:#fff1f0;color:#b3261e}.status.green{background:#e6f6ef;color:#0e7a52}
+.kpi-section{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xl);padding:22px;margin-bottom:18px}
+.kpi-title-wrap{display:flex;gap:14px;align-items:center}.kpi-badge{width:44px;height:44px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px;flex:0 0 auto}
+.mini-stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}.mini-stat b{display:block;font-size:20px}.mini-stat span{color:var(--muted);font-size:11px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}
+.block-title{font-size:14px;margin:0 0 8px}.block-title.plan{color:var(--primary)}.block-title.risk{color:#b3261e}
+.list{margin:0;padding-left:18px}.list li{margin-bottom:6px}.list.risk li::marker{color:#b3261e}
+.note{margin-top:12px;padding:10px 12px;background:var(--panel-2);border-radius:10px;font-size:12px;color:var(--muted)}
+.source-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xl);padding:20px}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.redline{display:flex;gap:12px;flex-wrap:wrap;background:#fff1f0;border:1px solid #f3c2bf;border-radius:16px;padding:14px 16px;margin-bottom:18px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static;max-height:none}.hero-grid{grid-template-columns:1fr}.grid-6{grid-template-columns:1fr 1fr}.grid-2,.source-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.grid-6{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner"><div class="brand"><strong>欧洲项目 · 月度报告</strong><span>Europe Project Monthly Dashboard</span></div><div><a class="badge" href="../jinyuansheng-dashboard/">← 返回物流部报告</a> <span class="badge">2026.10 · 进行中</span></div></div></header>
+<div class="shell"><section class="hero"><div class="hero-panel"><div class="hero-grid"><div>
+<div class="eyebrow">Monthly Report · 2026.10 · 进行中（截至10月26日）</div>
+<h1>欧洲项目<br>十月工作 Dashboard</h1>
+<p class="hero-lead">按孙昊10月24日任命要求，以推进链条7项KPI呈现十月进展。十月主旋律：主体转让推进、欧洲统筹任命、第一张PIC启动、斯洛伐克项目公司启动但三方会顺延。未满月，不按整月实绩算。</p>
+<div class="hero-meta"><span class="hero-chip">汇报人：卢剑辉（Leo）</span><span class="hero-chip">统计期间：2026.10.01–10.26</span><span class="hero-chip">7项KPI按链条顺序</span><span class="hero-chip">财务收款事项已排除</span></div>
+</div><aside class="hero-insight"><div class="label">MANAGEMENT INSIGHT</div><strong>主体是起点，牌照是核心壁垒，交付是结果。</strong><p>ECOMET转让没收口、合资协议没审完，斯洛伐克项目公司设立和collector牌照就没法往下走。10月下旬最紧的是：邵帆审阅、Mentrans报价、约10月28日的三方会时间确认，以及11月6日欧盟黑粉新规。</p></aside></div></div></section></div>
+<div class="shell"><div class="layout">
+<aside class="sidebar" aria-label="KPI导航">
+<div class="side-block"><p class="side-label">红线置顶</p><p style="margin:0;font-size:13px">无证转移 <b>0起</b> · 安全生产事故 <b>0起</b> · 监管处罚 <b>0起</b><br><span style="color:var(--muted);font-size:12px">截至10月26日跟踪未见相关事件。</span></p></div>
+<div class="side-block"><p class="side-label">切换月份</p><div class="month-switch" role="tablist" aria-label="月份切换">
+<button class="month-btn active" data-month="oct" role="tab" aria-selected="true"><b>10月</b><span>进行中</span></button>
+<button class="month-btn" data-month="nov" role="tab" aria-selected="false"><b>11月</b><span>展望</span></button>
+<button class="month-btn" data-month="dec" role="tab" aria-selected="false"><b>12月</b><span>待补充</span></button>
+</div><p class="side-tip">11月是展望，不是实绩；12月结构已预留，内容待12月报告。</p></div>
+<div class="side-block"><p class="side-label">7项KPI导航 · 按链条顺序</p><nav>
+<button class="side-kpi active" data-go="kpi-1"><span class="sk-no">01</span><span class="sk-text"><strong>主体落地</strong><span>转让推进中，合资签署受阻</span></span></button>
+<button class="side-kpi" data-go="kpi-2"><span class="sk-no">02</span><span class="sk-text"><strong>团队与闭环管理</strong><span>任命已下，交接倒排中</span></span></button>
+<button class="side-kpi" data-go="kpi-3"><span class="sk-no">03</span><span class="sk-text"><strong>PIC合规闭环</strong><span>第一张PIC已启动</span></span></button>
+<button class="side-kpi" data-go="kpi-4"><span class="sk-no">04</span><span class="sk-text"><strong>货源准入与仓储合规</strong><span>EWC已扩，仓库未签</span></span></button>
+<button class="side-kpi" data-go="kpi-5"><span class="sk-no">05</span><span class="sk-text"><strong>供应商与成本基线</strong><span>基线建设中，不设降本率</span></span></button>
+<button class="side-kpi" data-go="kpi-6"><span class="sk-no">06</span><span class="sk-text"><strong>跨境物流管控</strong><span>海运路线已定，铁路待报价</span></span></button>
+<button class="side-kpi" data-go="kpi-7"><span class="sk-no">07</span><span class="sk-text"><strong>常态化交付</strong><span>阶段：申报初期，交付0吨</span></span></button>
+</nav></div>
+<div class="side-block"><p class="side-label">欧洲项目月度报告</p><p class="side-tip">顺序是推进链条，不是权重；交付放最后是结果位，不是降优先级。每月更新，11月展望、12月待补充已在月份切换中预留。</p><p style="margin-top:10px"><a href="../jinyuansheng-dashboard/">← 返回锦源晟国际物流部报告</a></p></div>
+</aside>
+<main>
+<div id="panel-oct"><div class="redline"><strong>红线</strong><span>无证转移 0起</span><span>安全生产事故 0起</span><span>监管处罚 0起</span><span style="color:var(--muted)">任一出现即红灯。collector获批前不放货是既定原则，不作为议题。</span></div>
+<section class="section"><div class="section-head"><div><div class="section-kicker">October Pulse · 10月核心脉冲</div><h2>十月一眼看懂</h2></div><p>只列有明确依据的数据，不对未闭环事项虚构完成率。</p></div>
+<div class="grid-6">
+<article class="card"><div class="card-label">主体落地</div><div class="card-title">ECOMET转让推进中</div><div class="metric">17<small>天 · 邵帆审阅未回</small></div><div class="submetric">并购OA 10月23日已提交；签名式样＋护照待备</div></article>
+<article class="card"><div class="card-label">团队</div><div class="card-title">欧洲统筹任命已下</div><div class="metric">10/23<small> · 任命</small></div><div class="submetric">孙昊邮件10月24日，试用至12月31日，日常向林睿汇报</div></article>
+<article class="card"><div class="card-label">第一张PIC</div><div class="card-title">Alteo＋CarbonX</div><div class="metric">5,000<small>吨 · 8国申报</small></div><div class="submetric">目标2027年1月获批；CarbonX DIWASS注册10月20日完成</div></article>
+<article class="card"><div class="card-label">斯洛伐克项目公司</div><div class="card-title">三方会顺延</div><div class="metric">约10/28<small> · 未确认</small></div><div class="submetric">10月26日会没开成，斯方未准备好；问题清单发斯方待明昊确认</div></article>
+<article class="card"><div class="card-label">供应商基线</div><div class="card-title">Mentrans报价待回</div><div class="metric">5<small>天 · 距10月31日上限</small></div><div class="submetric">Budapest→Bremerhaven铁路 vs 卡车比选进行中</div></article>
+<article class="card"><div class="card-label">常态化交付</div><div class="card-title">欧洲PIC路线</div><div class="metric">0<small>吨 · 申报初期</small></div><div class="submetric">不是失败，是前置关卡未过；项目目标2026年3000吨探路</div></article>
+</div></section>
+<!-- KPI 1 -->
+<section class="kpi-section" id="kpi-1"><div class="section-head"><div class="kpi-title-wrap"><div class="kpi-badge">01</div><div><div class="section-kicker">KPI 01 · 起点关卡</div><h2>主体落地</h2></div></div><span class="status gold">转让推进中 · 合资签署受阻</span></div>
+<div class="mini-stats"><div class="mini-stat"><b>1</b><span>ECOMET注册成立</span></div><div class="mini-stat"><b>70 / 30</b><span>ECOMET×360股比</span></div><div class="mini-stat"><b>3</b><span>合资候选名可核名</span></div><div class="mini-stat"><b>17天</b><span>邵帆审阅未回</span></div></div>
+<p>EcoMet Recovery Ltd. 注册成立，登记号 Cg.01-09-471265，注册资本 3,000,000 HUF，2026年10月9日生效（来源：物流部十月报告）；香港绿动将并购该公司。银行账户已开，会计 EUR 500 含税10月22日已接受，哲豪定为外派总经理／法人。</p>
+<div class="grid-2"><article class="card"><h3 class="block-title plan">十月完成情况</h3><ul class="list plan"><li>ECOMET注册、银行开户、会计聘任三项落地</li><li>并购OA由钊宇10月23日正式提交；CI／BR原件加海牙认证已发给Zoltan</li><li>三个合资候选名确认可核名：ReCell Europe KFT、EcoCell Europe Kft、Voltrade Trading Kft；章程未定先设立后改，10月23日内部会同意</li></ul></article>
+<article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>代表人签名式样＋股东护照待备；OA单号、当前审批人、预计节点待交接补齐</li><li>发给Zoltan的正式函10月26日早上核对仍在草稿箱，未发送</li><li>合资协议V0.95请邵帆审阅17天未回，合资签署窗口受阻；宋总权责协议未定；合资公司GM人选未定；子公司名称待林睿选定</li></ul><h3 class="block-title plan" style="margin-top:14px">下月计划</h3><ul class="list plan"><li>备齐转让文件，OA收口；催复或决策邵帆审阅意见</li><li>选定子公司名称，推进匈牙利合资公司签署</li></ul></article></div></section>
+
+<!-- KPI 2 -->
+<section class="kpi-section" id="kpi-2"><div class="section-head"><div class="kpi-title-wrap"><div class="kpi-badge">02</div><div><div class="section-kicker">KPI 02</div><h2>团队与闭环管理</h2></div></div><span class="status blue">任命已下 · 交接倒排中</span></div>
+<div class="mini-stats"><div class="mini-stat"><b>10/23</b><span>Leo任命为项目负责人</span></div><div class="mini-stat"><b>11/16</b><span>交接第一版</span></div><div class="mini-stat"><b>11/23</b><span>交接签字确认前</span></div></div>
+<p>孙昊10月24日邮件任命Leo为绿动未来（香港）欧洲区域项目负责人，试用期至2026年12月31日，日常向林睿汇报，重大事项向总经理报批。小组：Leo统筹，哲豪接欧洲文件，施粤康分斯洛伐克会务；钊宇交接中，孙昊任投资法务／集团对接过渡backup。</p>
+<div class="grid-2"><article class="card"><h3 class="block-title plan">十月完成情况</h3><ul class="list plan"><li>欧洲统筹任命落地；小组分工已定，合资协议审阅由哲豪跟进、孙昊backup</li><li>钊宇交接清单已出，8项在办事项逐项交接，验收标准为接手人能独立讲清现状、下一步和卡点</li><li>新人JD已定为文秘输出型总助，主力档30–40万年薪，外招为主，投资法务为加分项</li></ul></article>
+<article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>钊宇11月底离职，与11月底赴欧撞期，是近期关键风险</li><li>任命邮件无量化指标、无激励三选一、无授权清单，考核仍可能落入主观评价；角色边界、授权、考核标准未书面化</li><li>会议纪要48小时确认机制需固化执行</li></ul><h3 class="block-title plan" style="margin-top:14px">下月计划</h3><ul class="list plan"><li>11月16日出交接第一版，11月23日前签字确认，赶赴欧前收口</li><li>恢复每月1日、16日双节点汇报；书面化分工、授权与考核口径</li></ul></article></div>
+<div class="note">团队指标只认可验证事实：任命文件、交接签字、角色清单、培训完成记录。不认“责任心够不够”这类态度词。</div></section>
+
+<!-- KPI 3 -->
+<section class="kpi-section" id="kpi-3"><div class="section-head"><div class="kpi-title-wrap"><div class="kpi-badge">03</div><div><div class="section-kicker">KPI 03 · 核心壁垒</div><h2>PIC合规闭环</h2></div></div><span class="status amber">申报已启动 · 未获批</span></div>
+<div class="mini-stats"><div class="mini-stat"><b>1</b><span>张PIC已启动</span></div><div class="mini-stat"><b>8</b><span>申报国家</span></div><div class="mini-stat"><b>2027-01</b><span>目标获批</span></div></div>
+<p>HANS委托ALTEO申请第一张PIC，申报范围8国：HU／SK／CZ／DE／NL／ES／MY／KR。CarbonX完成匈牙利DIWASS注册（10月20日），授权书PoA 10月14日已签回。建议申报代码 100821*，品名 lithium battery recycling waste residue（containing hazardous substances）。</p>
+<div class="grid-2"><article class="card"><h3 class="block-title plan">十月完成情况</h3><ul class="list plan"><li>第一张PIC正式启动，8国申报范围明确</li><li>CarbonX DIWASS注册完成，PoA签回</li><li>10月25日Hans提议新增阳极废料EWC 160625，待Tünde确认</li></ul></article>
+<article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>一张PIC能否覆盖多个EWC，待HANS答复</li><li>160625新增待Tünde确认；四国过境（HU／SK／CZ／DE）须在首次通知中一并申报，缺漏影响全程</li><li>财务担保、卷宗补件须待DIWASS编号后推进</li></ul><h3 class="block-title plan" style="margin-top:14px">下月计划</h3><ul class="list plan"><li>配合ALTEO完成8国首次通知文件与配套材料</li><li>确认一张PIC可覆盖的EWC范围，推进2027年1月获批</li></ul></article></div></section>
+
+<!-- KPI 4 -->
+<section class="kpi-section" id="kpi-4"><div class="section-head"><div class="kpi-title-wrap"><div class="kpi-badge">04</div><div><div class="section-kicker">KPI 04</div><h2>货源准入与仓储合规</h2></div></div><span class="status amber">EWC已扩 · 仓库未签</span></div>
+<div class="mini-stats"><div class="mini-stat"><b>1</b><span>斯方仓库EWC已扩电池品类</span></div><div class="mini-stat"><b>4,500吨</b><span>仓库未签</span></div></div>
+<p>牌照顺序10月21日会议已明确：collector先行，再研究repurpose，最后recycling两张（粗破碎、除氟，配合产线投入）。进驻资金将给到欧洲律师团队，分批拨款。</p>
+<div class="grid-2"><article class="card"><h3 class="block-title plan">十月完成情况</h3><ul class="list plan"><li>斯洛伐克方仓库EWC已加上废旧电池品类，斯洛伐克项目公司成立后可据此拿collector牌照</li><li>牌照顺序与依赖关系已清；匈牙利拟租LOFT作办公＋员工住宿，已讨论</li></ul></article>
+<article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>斯洛伐克项目公司未设立，collector牌照未启动申请</li><li>4500吨仓库未签，要等斯洛伐克项目公司成立时再跟斯方敲定</li><li>LOFT未落定；货源准入审查的完整清单未在本月材料中闭环，不虚构合格率</li></ul><h3 class="block-title plan" style="margin-top:14px">下月计划</h3><ul class="list plan"><li>斯洛伐克项目公司设立后启动collector申请；敲定4500吨仓库</li><li>落定LOFT，补齐货源准入审查表</li></ul></article></div></section>
+
+<!-- KPI 5 -->
+<section class="kpi-section" id="kpi-5"><div class="section-head"><div class="kpi-title-wrap"><div class="kpi-badge">05</div><div><div class="section-kicker">KPI 05 · 基线建设中</div><h2>供应商与成本基线</h2></div></div><span class="status">不设降本率 · 不设吨均成本目标</span></div>
+<p>本项已按10月26日确认降级：现阶段只做基线，不考核降本。深圳通道时效快约5天、成本下降是泰国石墨线，不计入欧洲基线。</p>
+<div class="grid-2"><article class="card"><h3 class="block-title plan">十月现状</h3><ul class="list plan"><li>欧洲内陆：Budapest→Bremerhaven铁路 vs 卡车比选进行中</li><li>属地费用：匈牙利会计 EUR 500 含税已落实，费用可控</li><li>海运路线：Bremerhaven出运、Maersk、至Busan的卡车＋海运方案已定（Hans线）</li></ul></article>
+<article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>Mentrans铁路报价待回，距10月31日上限剩5天；欧洲内陆成本明显上涨</li><li>MSK服务范围、路线节点、时效与责任边界待明确</li><li>未建立USD／40HQ全包成本基线，需补齐2–3家同口径书面报价；费用拆分完整度待补</li></ul><h3 class="block-title plan" style="margin-top:14px">下月计划</h3><ul class="list plan"><li>跟踪Mentrans报价，对抗内陆涨价；补齐同口径报价，建立全包基线</li><li>基线建立后，再讨论是否升回主指标</li></ul></article></div></section>
+
+<!-- KPI 6 -->
+<section class="kpi-section" id="kpi-6"><div class="section-head"><div class="kpi-title-wrap"><div class="kpi-badge">06</div><div><div class="section-kicker">KPI 06</div><h2>跨境物流管控</h2></div></div><span class="status blue">路线已定 · 铁路方案待定</span></div>
+<div class="mini-stats"><div class="mini-stat"><b>11天</b><span>距11月6日欧盟黑粉新规（截至10月26日）</span></div></div>
+<p>路线：匈牙利 → Bremerhaven → MYTPP → Gwangyang → Busan。Revomet（中伟欧洲参股合资公司）是客户／货源方，PIC申报是欧洲律动为其提供的主要服务；Revomet黑粉航线船公司为MSK，有效期至2027年4月30日。</p>
+<div class="grid-2"><article class="card"><h3 class="block-title plan">十月完成情况</h3><ul class="list plan"><li>卡车＋海运路线已定；多段路线节点已列出</li><li>Revomet货源关系已明确：客户方，不是斯洛伐克对接方</li></ul></article>
+<article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>铁路＋卡车替代方案未定，等Mentrans报价</li><li>多段承运人、货权交接、时效、货损责任尚未完成验证</li><li>11月6日起欧盟内黑粉按危险废物管理，出口必须走PIC，单证风险复核须在新规前完成</li></ul><h3 class="block-title plan" style="margin-top:14px">下月计划</h3><ul class="list plan"><li>落定铁路 vs 卡车；完成多段供应商与责任人清单</li><li>对欧洲多段方案开展路线与单证风险复核</li></ul></article></div></section>
+
+<!-- KPI 7 -->
+<section class="kpi-section" id="kpi-7"><div class="section-head"><div class="kpi-title-wrap"><div class="kpi-badge">07</div><div><div class="section-kicker">KPI 07 · 结果位</div><h2>常态化交付</h2></div></div><span class="status amber">申报初期 · 未交付</span></div>
+<div class="mini-stats"><div class="mini-stat"><b>0吨</b><span>欧洲PIC路线10月交付</span></div><div class="mini-stat"><b>3,000吨</b><span>项目2026年探路目标</span></div><div class="mini-stat"><b>10,000–12,000吨</b><span>项目2027年目标</span></div></div>
+<p>孙昊任命的核心目标是：向韩国工厂、东南亚加工基地完成合格废电池及废料的常态化交付。10月欧洲线尚未到交付阶段，0吨是阶段事实，不是执行失败。泰国铜粉、石墨柜的闭环／破局属于物流部泰国线，不计入本欧洲交付指标，避免两票混算。</p>
+<div class="grid-2"><article class="card"><h3 class="block-title plan">十月完成情况</h3><ul class="list plan"><li>交付前置条件已推进：主体、PIC启动、斯洛伐克项目公司启动三项在走</li><li>交付口径已定：只算有交付凭证的合格废电池及废料，不算在谈货量</li></ul></article>
+<article class="card"><h3 class="block-title risk">当前问题</h3><ul class="list risk"><li>无PIC批文则无常态化交付；斯洛伐克项目公司＋collector未落地</li><li>交付指标无基线，10月不设交付吨数目标</li></ul><h3 class="block-title plan" style="margin-top:14px">下月计划</h3><ul class="list plan"><li>以PIC推进和斯洛伐克项目公司设立为交付前置；11月底赴欧部署斯洛伐克子公司运作</li><li>首批交付基线建立后，再设月度交付目标</li></ul></article></div></section>
+
+<section class="source-box"><div class="source-grid"><div><strong>十月视图口径</strong><br>本页为欧洲项目10月进行中视图，数据截至2026年10月26日，未满月；10月27–31日待补拉更新。结构参照物流部十月Dashboard（KPI导航、完成／问题／下月计划三段式、阶段线、待确认清单），内容只取欧洲项目线，不把泰国铜粉、石墨、深圳通道、Maersk索赔等物流部泰国线数字计入欧洲指标。只呈现有明确依据的节点，不虚构完成率或降本金额，未闭环事项保留“待确认”。</div>
+<div><strong>仍待确认</strong><ol><li>约10月28日三方会的具体时间、链接（仅为估计，未确认）</li><li>明昊是否已把我方问题清单发给斯方</li><li>邵帆V0.95审阅意见、宋总权责协议、合资公司GM人选、子公司名称</li><li>Mentrans报价、ECOMET并购OA审批节点、4500吨仓库</li><li>一张PIC能否覆盖多个EWC、160625新增是否获Tünde确认</li></ol></div></div>
+<p style="color:var(--muted);font-size:12px;margin:16px 0 0">欧洲项目月度报告 · 2026年10月进行中视图，数据截至2026年10月26日，10月27–31日待补。每月更新，11月为展望、12月待补充。</p></section></div>
+<div id="panel-nov" hidden>
+<section class="kpi-section"><div class="section-head"><div><div class="section-kicker">Rolling Outlook · 2026.11 · 展望</div><h2>十一月展望 Dashboard</h2></div><span class="status gold">展望 · 非既定事实</span></div>
+<p>十一月是十月闭环后的运行期展望，每一项都标注了前置条件：十月未闭环的事项，十一月无法自动推进。以下展望按十月下月计划的顺延逻辑整理，尚未经确认，需以十月结果校准。</p>
+<ul class="list plan">
+<li><b>主体落地：</b>三方会后推进斯洛伐克项目公司设立；邵帆审阅收口、选定子公司名称、推进合资签署（前置：邵帆意见、转让文件齐备）</li>
+<li><b>团队：</b>11月16日交接第一版、11月23日前签字确认，赶赴欧前收口；11月底林睿、哲豪、Leo赴欧部署（前置：交接收口）</li>
+<li><b>PIC：</b>配合ALTEO完成8国首次通知文件，确认EWC覆盖范围（前置：160625是否获Tünde确认、一张PIC覆盖范围是否获HANS答复）</li>
+<li><b>仓储：</b>斯洛伐克项目公司设立后启动collector申请，敲定4500吨仓库（前置：斯洛伐克项目公司成立）</li>
+<li><b>供应商基线：</b>Mentrans报价落定后建立USD／40HQ全包基线（前置：报价到、2–3家同口径报价）</li>
+<li><b>物流与交付：</b>11月6日新规后全部走PIC；交付仍以前置关卡为准，不设11月交付吨数目标</li>
+</ul><div class="note">点左侧“10月”可回到本月详情；11月KPI详情待11月报告补充。</div></section>
+</div>
+<div id="panel-dec" hidden>
+<section class="kpi-section"><div class="section-head"><div><div class="section-kicker">Pending Source · 2026.12 · 待补充</div><h2>十二月工作 Dashboard</h2></div><span class="status">待补充</span></div>
+<p>十二月视图的结构已按7项KPI预置完成，等待十二月工作报告提供后自动填充：完成情况、当前问题、次月计划三段式展开。年度收口月，试用期评估节点为12月31日，考核口径以书面确认的量化指标为准，不以本页展望代替。</p>
+<div class="grid-6">
+<article class="card"><div class="card-label">01</div><div class="card-title">主体落地</div><div class="submetric">待补充</div></article>
+<article class="card"><div class="card-label">02</div><div class="card-title">团队与闭环管理</div><div class="submetric">待补充</div></article>
+<article class="card"><div class="card-label">03</div><div class="card-title">PIC合规闭环</div><div class="submetric">待补充</div></article>
+<article class="card"><div class="card-label">04</div><div class="card-title">货源准入与仓储合规</div><div class="submetric">待补充</div></article>
+<article class="card"><div class="card-label">05</div><div class="card-title">供应商与成本基线</div><div class="submetric">待补充</div></article>
+<article class="card"><div class="card-label">06</div><div class="card-title">跨境物流管控</div><div class="submetric">待补充</div></article>
+</div>
+<p style="margin-top:12px">07 常态化交付：待补充。把十二月报告发来即可生成。</p></section>
+</div>
+</main></div></div>
+<script>
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{const t=document.getElementById(b.dataset.go);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}));
+const secs=[...document.querySelectorAll('.kpi-section')];
+const nav=[...document.querySelectorAll('.side-kpi')];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){nav.forEach(n=>n.classList.toggle('active',n.dataset.go===e.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});
+secs.forEach(s=>io.observe(s));
+document.querySelectorAll('.month-btn').forEach(b=>b.addEventListener('click',()=>{
+document.querySelectorAll('.month-btn').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-selected',x===b)});
+['oct','nov','dec'].forEach(m=>{const el=document.getElementById('panel-'+m);if(el)el.hidden=(m!==b.dataset.month)});
+window.scrollTo({top:0,behavior:'smooth'});
+}));
+</script>
+</body></html>
